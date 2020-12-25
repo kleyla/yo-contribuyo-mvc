@@ -16,6 +16,8 @@
 
     <!-- <script src="<?= media(); ?>js/functions_roles.js"></script> -->
     <script src="<?= media(); ?>js/functions_usuarios.js"></script>
+    <script src="<?= media(); ?>js/functions_lenguajes.js"></script>
+
     <script src="<?= media(); ?>js/functions_admin.js"></script>
 
     </body>

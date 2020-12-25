@@ -1,21 +1,20 @@
-var tableUsuarios;
+var tableLenguajes;
 document.addEventListener("DOMContentLoaded", function () {
-  tableUsuarios = $("#tableUsuarios").dataTable({
+  tableLenguajes = $("#tableLenguajes").dataTable({
     aProcessing: true,
     aServerSide: true,
     language: {
       url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
     },
     ajax: {
-      url: " " + base_url + "usuarios/getUsuarios",
+      url: " " + base_url + "lenguajes/getLenguajes",
       dataSrc: "",
     },
     columns: [
       { data: "id" },
-      { data: "nick" },
-      { data: "email" },
+      { data: "nombre" },
+      { data: "link" },
       { data: "fecha" },
-      { data: "rol" },
       { data: "estado" },
       { data: "opciones" },
     ],
@@ -24,17 +23,16 @@ document.addEventListener("DOMContentLoaded", function () {
     iDisplayLength: 10,
     order: [[0, "desc"]],
   });
-  // NUEVO USUARIO
-  var formUsuario = document.querySelector("#formUsuario");
-  formUsuario.onsubmit = function (e) {
+  // NUEVO LENGUAJE
+  var formLenguaje = document.querySelector("#formLenguaje");
+  formLenguaje.onsubmit = function (e) {
     // console.log("IN...");
     e.preventDefault();
-    var intIdUsuario = document.querySelector("#idUsuario").value;
-    var strNick = document.querySelector("#txtNick").value;
-    var strEmail = document.querySelector("#txtEmail").value;
+    var intIdLenguaje = document.querySelector("#idLenguaje").value;
+    var strNombre = document.querySelector("#txtNombre").value;
+    var strLink = document.querySelector("#txtLink").value;
     var intEstado = document.querySelector("#listaEstado").value;
-    var strRol = document.querySelector("#listaRol").value;
-    if (strNick == "" || strEmail == "" || intEstado == "" || strRol == "") {
+    if (strNombre == "" || strLink == "" || intEstado == "") {
       swal("Atencion", "Todos los campos son obligatorios", "error");
       // alert("daji");
       return false;
@@ -42,8 +40,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var request = window.XMLHttpRequest
       ? new XMLHttpRequest()
       : new ActiveXObject("Microsoft.XMLHTTP");
-    var ajaxUrl = base_url + "usuarios/setUsuario";
-    var formData = new FormData(formUsuario);
+    var ajaxUrl = base_url + "lenguajes/setLenguaje";
+    var formData = new FormData(formLenguaje);
     request.open("POST", ajaxUrl, true);
     request.send(formData);
     // console.log(request);
@@ -52,12 +50,12 @@ document.addEventListener("DOMContentLoaded", function () {
         // console.log(request.responseText);
         var objData = JSON.parse(request.responseText);
         if (objData.status) {
-          $("#modalFormUsuario").modal("hide");
-          formUsuario.reset();
-          swal("Usuario", objData.msg, "success");
-          tableUsuarios.api().ajax.reload(function () {
-            EditarUsuario();
-            DeleteUsuario();
+          $("#modalFormLenguaje").modal("hide");
+          formLenguaje.reset();
+          swal("Lenguaje", objData.msg, "success");
+          tableLenguajes.api().ajax.reload(function () {
+            EditarLenguaje();
+            DeleteLenguaje();
           });
         } else {
           swal("Error", objData.msg, "error");
@@ -67,27 +65,29 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 
-$("#tableUsuarios").DataTable();
+$("#tableLenguajes").DataTable();
 
-function openModalUsuario() {
-  console.log("open Modal Usuario");
-  stylesFromUpdateToRegister();
-  document.querySelector("#formUsuario").reset();
-  $("#modalFormUsuario").modal("show");
+function openModalLenguaje() {
+  console.log("open Modal Lenguaje");
+  stylesFromUpdateToRegisterLenguaje();
+  document.querySelector("#formLenguaje").reset();
+  $("#modalFormLenguaje").modal("show");
 }
-function stylesFromUpdateToRegister() {
-  document.querySelector("#idUsuario").value = "";
+
+function stylesFromUpdateToRegisterLenguaje() {
+  document.querySelector("#idLenguaje").value = "";
   document
     .querySelector(".modal-header")
     .classList.replace("headerUpdate", "headerRegister");
   document
     .querySelector("#btnActionForm")
     .classList.replace("btn-info", "btn-primary");
-  document.querySelector("#titleModalUsuario").innerHTML = "Nuevo Usuario";
+  document.querySelector("#titleModalLenguaje").innerHTML = "Nuevo Lenguaje";
   document.querySelector("#btnText").innerHTML = "Guardar";
 }
-function stylesFromRegisterToUpdate() {
-  document.querySelector("#titleModalUsuario").innerHTML = "Actualizar Usuario";
+function stylesFromRegisterToUpdateLenguaje() {
+  document.querySelector("#titleModalLenguaje").innerHTML =
+    "Actualizar Lenguaje";
   document
     .querySelector(".modal-header")
     .classList.replace("headerRegister", "headerUpdate");
@@ -100,24 +100,23 @@ function stylesFromRegisterToUpdate() {
 window.addEventListener(
   "load",
   function () {
-    EditarUsuario();
-    DeleteUsuario();
+    EditarLenguaje();
+    DeleteLenguaje();
   },
   false
 );
-function EditarUsuario() {
-  //   console.log("Editing..");
-  var btnEditUsuario = document.querySelectorAll(".btnEditUsuario");
+function EditarLenguaje() {
+  var btnEditUsuario = document.querySelectorAll(".btnEditLenguaje");
   btnEditUsuario.forEach(function (btn) {
     btn.addEventListener("click", function () {
-      //   console.log("Editando");
-      stylesFromRegisterToUpdate();
+      // console.log("Editando");
+      stylesFromRegisterToUpdateLenguaje();
 
-      var idUsuario = this.getAttribute("rl");
+      var idLenguaje = this.getAttribute("rl");
       var request = window.XMLHttpRequest
         ? new XMLHttpRequest()
         : new ActiveXObject("Microsoft.XMLHTTP");
-      var ajaxUrl = base_url + "usuarios/getUsuario/" + idUsuario;
+      var ajaxUrl = base_url + "lenguajes/getLenguaje/" + idLenguaje;
       request.open("GET", ajaxUrl, true);
       request.send();
 
@@ -126,9 +125,9 @@ function EditarUsuario() {
           //   console.log(request.responseText);
           var objData = JSON.parse(request.responseText);
           if (objData.status) {
-            document.querySelector("#idUsuario").value = objData.data.id;
-            document.querySelector("#txtNick").value = objData.data.nick;
-            document.querySelector("#txtEmail").value = objData.data.email;
+            document.querySelector("#idLenguaje").value = objData.data.id;
+            document.querySelector("#txtNombre").value = objData.data.nombre;
+            document.querySelector("#txtLink").value = objData.data.link;
             if (objData.data.estado == 1) {
               var optionSelect =
                 '<option value="1" selected class="notBlock">Activo</option>';
@@ -137,21 +136,11 @@ function EditarUsuario() {
                 '<option value="2" selected class="notBlock">Inactivo</option>';
             }
             var htmlSelect = `${optionSelect}
-                                <option value="1">Activo</option>
-                                <option value="2">Inactivo</option>`;
+                                  <option value="1">Activo</option>
+                                  <option value="2">Inactivo</option>`;
             document.querySelector("#listaEstado").innerHTML = htmlSelect;
-            if (objData.data.rol == "Administrador") {
-              var optionSelect =
-                '<option value="Administrador" selected class="notBlock">Administrador</option>';
-            } else {
-              var optionSelect =
-                '<option value="Contribuidor" selected class="notBlock">Contribuidor</option>';
-            }
-            var htmlSelect = `${optionSelect}
-                                <option value="Administrador">Administrador</option>
-                                <option value="Contribuidor">Contribuidor</option>`;
-            document.querySelector("#listaRol").innerHTML = htmlSelect;
-            $("#modalFormUsuario").modal("show");
+
+            $("#modalFormLenguaje").modal("show");
           } else {
             swal("Error", objData.msg, "error");
           }
@@ -161,16 +150,16 @@ function EditarUsuario() {
   });
 }
 
-function DeleteUsuario() {
-  var btnDelUsuario = document.querySelectorAll(".btnDelUsuario");
-  btnDelUsuario.forEach(function (btn) {
+function DeleteLenguaje() {
+  var btnDelLenguaje = document.querySelectorAll(".btnDelLenguaje");
+  btnDelLenguaje.forEach(function (btn) {
     btn.addEventListener("click", function () {
-      var idUsuario = this.getAttribute("rl");
-      // alert(idUsuario);
+      var idLenguaje = this.getAttribute("rl");
+      // alert(idLenguaje);
       swal(
         {
-          title: "Eliminar Usuario",
-          text: "Realmente quiere eliminar el Usuario?",
+          title: "Eliminar Lenguaje",
+          text: "Realmente quiere eliminar el Lenguaje?",
           type: "warning",
           showCancelButton: true,
           confirmButtonText: "Si, eliminar",
@@ -183,23 +172,22 @@ function DeleteUsuario() {
             var request = window.XMLHttpRequest
               ? new XMLHttpRequest()
               : new ActiveXObject("Microsoft.XMLHTTP");
-            var ajaxUrl = base_url + "usuarios/deleteUsuario";
-            var strData = "idusuario=" + idUsuario;
+            var ajaxUrl = base_url + "lenguajes/deleteUsuario";
+            var strData = "idlenguaje=" + idLenguaje;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader(
               "Content-type",
               "application/x-www-form-urlencoded"
             );
             request.send(strData);
-            console.log(request);
             request.onreadystatechange = function () {
               if (request.readyState == 4 && request.status == 200) {
                 var objData = JSON.parse(request.responseText);
                 if (objData.status) {
                   swal("Eliminar!", objData.msg, "success");
-                  tableUsuarios.api().ajax.reload(function () {
-                    EditarUsuario();
-                    DeleteUsuario();
+                  tableLenguajes.api().ajax.reload(function () {
+                    EditarLenguaje();
+                    DeleteLenguaje();
                   });
                 } else {
                   swal("Atencion!", objData.msg, "error");
@@ -212,3 +200,4 @@ function DeleteUsuario() {
     });
   });
 }
+

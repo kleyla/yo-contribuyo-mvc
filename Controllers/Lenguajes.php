@@ -1,22 +1,22 @@
 <?php
 
-class Usuarios extends Controllers
+class Lenguajes extends Controllers
 {
-
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
-    public function usuarios()
+
+    public function lenguajes()
     {
-        // echo "Usuarios";
+        // echo "mensaje desde el controlador";
         $data["page_id"] = 1;
-        $data["page_tag"] = "Usuarios";
-        $data["page_title"] = "Usuarios - Yo contribuyo";
-        $data["page_name"] = "usuarios";
-        $this->views->getView($this, "usuarios", $data);
+        $data["page_tag"] = "Lenguajes";
+        $data["page_title"] = "Lenguajes - Yo contribuyo";
+        $data["page_name"] = "lenguajes";
+        $this->views->getView($this, "lenguajes", $data);
     }
-    public function getUsuarios()
+    public function getLenguajes()
     {
         $arrData = $this->model->all();
         // dep($arrData);
@@ -28,8 +28,8 @@ class Usuarios extends Controllers
             }
             $arrData[$i]["opciones"] = '<div class="text-center">
                 <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
-                <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-danger btn-sm btnDelUsuario" rl="' . $arrData[$i]['id'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-danger btn-sm btnDelLenguaje" rl="' . $arrData[$i]['id'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
             </div>';
         }
         // dep($arrData);
@@ -37,29 +37,27 @@ class Usuarios extends Controllers
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         die();
     }
-    public function setUsuario()
+    public function setLenguaje()
     {
-        $intIdUsuario = intval($_POST['idUsuario']);
-        $strNick = strClean($_POST["txtNick"]);
-        $strEmail = strClean($_POST["txtEmail"]);
-        $strPass = strClean($_POST["txtPass"]);
+        $intIdLenguaje = intval($_POST['idLenguaje']);
+        $strNombre = strClean($_POST["txtNombre"]);
+        $strLink = strClean($_POST["txtLink"]);
         $intEstado = strClean($_POST["listaEstado"]);
-        $strRol = strClean($_POST["listaRol"]);
 
-        if ($intIdUsuario == 0) {
+        if ($intIdLenguaje == 0) {
             // Crear
-            $request_usuario = $this->model->insertUsuario($strNick, $strEmail, $strPass, $intEstado, $strRol);
+            $request_lenguaje = $this->model->insertLenguaje($strNombre, $strLink, $intEstado);
             $option = 1;
-            // echo json_encode($request_usuario);
+            // echo json_encode($request_lenguaje);
         } else {
             // Update
-            $request_usuario = $this->model->updateUsuario($intIdUsuario, $strNick, $strEmail, $strPass, $intEstado, $strRol);
+            $request_lenguaje = $this->model->updateLenguaje($intIdLenguaje, $strNombre, $strLink, $intEstado);
             $option = 2;
         }
         // dep($_POST);
-        if ($request_usuario === "exist") {
-            $arrResponse = array('status' => false, 'msg' => "Atencion! El usuario ya existe");
-        } else if ($request_usuario > 0) {
+        if ($request_lenguaje === "exist") {
+            $arrResponse = array('status' => false, 'msg' => "Atencion! El lenguaje ya existe");
+        } else if ($request_lenguaje > 0) {
             if ($option == 1) {
                 $arrResponse = array('status' => true, 'msg' => "Datos guardados correctamente");
             } else {
@@ -71,11 +69,11 @@ class Usuarios extends Controllers
         echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         die();
     }
-    public function getUsuario(int $id)
+    public function getLenguaje(int $id)
     {
-        $intIdUsuario = intval(strClean($id));
-        if ($intIdUsuario > 0) {
-            $arrData = $this->model->selectUsuario($intIdUsuario);
+        $intIdLenguaje = intval(strClean($id));
+        if ($intIdLenguaje > 0) {
+            $arrData = $this->model->selectLenguaje($intIdLenguaje);
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => "Datos no encontrados.");
             } else {
@@ -88,12 +86,12 @@ class Usuarios extends Controllers
     public function deleteUsuario()
     {
         if ($_POST) {
-            $intIdUsuario = intval($_POST["idusuario"]);
-            $requestDelete = $this->model->disableUsuario($intIdUsuario);
+            $intId = intval($_POST["idlenguaje"]);
+            $requestDelete = $this->model->disableLenguaje($intId);
             if ($requestDelete === "ok") {
-                $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Usuario");
+                $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Lenguaje");
             } else {
-                $arrResponse = array('status' => false, 'msg' => "Error al eliminar el Usuario.");
+                $arrResponse = array('status' => false, 'msg' => "Error al eliminar el Lenguaje.");
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }
