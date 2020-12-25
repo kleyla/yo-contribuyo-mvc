@@ -14,6 +14,7 @@ class Lenguajes extends Controllers
         $data["page_tag"] = "Lenguajes";
         $data["page_title"] = "Lenguajes - Yo contribuyo";
         $data["page_name"] = "lenguajes";
+        $data["script"] = "js/functions_lenguajes.js";
         $this->views->getView($this, "lenguajes", $data);
     }
     public function getLenguajes()
@@ -27,9 +28,9 @@ class Lenguajes extends Controllers
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
             }
             $arrData[$i]["opciones"] = '<div class="text-center">
-                <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
-                <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-danger btn-sm btnDelLenguaje" rl="' . $arrData[$i]['id'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
+                <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-danger btn-sm btnDelLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
             </div>';
         }
         // dep($arrData);

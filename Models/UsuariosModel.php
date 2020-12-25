@@ -48,7 +48,7 @@ class UsuariosModel extends Mysql
     public function selectUsuario(int $id)
     {
         $this->intId = $id;
-        $sql = "SELECT * FROM usuarios WHERE id = $this->intId";
+        $sql = "SELECT * FROM usuarios WHERE id_usuario = $this->intId";
         $request = $this->select($sql);
         return $request;
     }
@@ -61,10 +61,10 @@ class UsuariosModel extends Mysql
             $this->strPassword = $pass;
             $this->intEstado = $estado;
             $this->strRol = $rol;
-            $sql = "SELECT * FROM usuarios WHERE (nick = '$this->strNick' OR email = '$this->strEmail') AND id != $this->intId";
+            $sql = "SELECT * FROM usuarios WHERE (nick = '$this->strNick' OR email = '$this->strEmail') AND id_usuario != $this->intId";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $sql = "UPDATE usuarios SET nick = ?, email = ?, pass = ?, estado = ?, rol = ? WHERE id = $this->intId";
+                $sql = "UPDATE usuarios SET nick = ?, email = ?, pass = ?, estado = ?, rol = ? WHERE id_usuario = $this->intId";
                 $arrData = array($this->strNick, $this->strEmail, $this->strPassword, $this->intEstado, $this->strRol);
                 $request = $this->update($sql, $arrData);
                 return $request;
@@ -79,7 +79,7 @@ class UsuariosModel extends Mysql
     {
         try {
             $this->intId = $id;
-            $sql = "UPDATE usuarios SET estado = ? WHERE id = $this->intId";
+            $sql = "UPDATE usuarios SET estado = ? WHERE id_usuario = $this->intId";
             $arrData = array(0);
             $request = $this->update($sql, $arrData);
             if ($request) {

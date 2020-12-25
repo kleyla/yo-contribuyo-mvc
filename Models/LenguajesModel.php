@@ -44,7 +44,7 @@ class LenguajesModel extends Mysql
     public function selectLenguaje(int $id)
     {
         $this->intId = $id;
-        $sql = "SELECT * FROM lenguajes WHERE id = $this->intId";
+        $sql = "SELECT * FROM lenguajes WHERE id_lenguaje = $this->intId";
         $request = $this->select($sql);
         return $request;
     }
@@ -55,10 +55,10 @@ class LenguajesModel extends Mysql
             $this->strNombre = $nombre;
             $this->strLink = $link;
             $this->intEstado = $estado;
-            $sql = "SELECT * FROM lenguajes WHERE nombre = '$this->strNombre' AND id != $this->intId";
+            $sql = "SELECT * FROM lenguajes WHERE nombre = '$this->strNombre' AND id_lenguaje != $this->intId";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $sql = "UPDATE lenguajes SET nombre = ?, link = ?, estado = ? WHERE id = $this->intId";
+                $sql = "UPDATE lenguajes SET nombre = ?, link = ?, estado = ? WHERE id_lenguaje = $this->intId";
                 $arrData = array($this->strNombre, $this->strLink, $this->intEstado);
                 $request = $this->update($sql, $arrData);
                 return $request;
@@ -74,7 +74,7 @@ class LenguajesModel extends Mysql
     {
         try {
             $this->intId = $id;
-            $sql = "UPDATE lenguajes SET estado = ? WHERE id = $this->intId";
+            $sql = "UPDATE lenguajes SET estado = ? WHERE id_lenguaje = $this->intId";
             $arrData = array(0);
             $request = $this->update($sql, $arrData);
             if ($request) {

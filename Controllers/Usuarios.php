@@ -14,6 +14,7 @@ class Usuarios extends Controllers
         $data["page_tag"] = "Usuarios";
         $data["page_title"] = "Usuarios - Yo contribuyo";
         $data["page_name"] = "usuarios";
+        $data["script"] = "js/functions_usuarios.js";
         $this->views->getView($this, "usuarios", $data);
     }
     public function getUsuarios()
@@ -27,9 +28,9 @@ class Usuarios extends Controllers
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
             }
             $arrData[$i]["opciones"] = '<div class="text-center">
-                <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
-                <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-danger btn-sm btnDelUsuario" rl="' . $arrData[$i]['id'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id_usuario'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
+                <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-danger btn-sm btnDelUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
             </div>';
         }
         // dep($arrData);

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dataSrc: "",
     },
     columns: [
-      { data: "id" },
+      { data: "id_lenguaje" },
       { data: "nombre" },
       { data: "link" },
       { data: "fecha" },
@@ -125,7 +125,7 @@ function EditarLenguaje() {
           //   console.log(request.responseText);
           var objData = JSON.parse(request.responseText);
           if (objData.status) {
-            document.querySelector("#idLenguaje").value = objData.data.id;
+            document.querySelector("#idLenguaje").value = objData.data.id_lenguaje;
             document.querySelector("#txtNombre").value = objData.data.nombre;
             document.querySelector("#txtLink").value = objData.data.link;
             if (objData.data.estado == 1) {

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
       dataSrc: "",
     },
     columns: [
-      { data: "id" },
+      { data: "id_usuario" },
       { data: "nick" },
       { data: "email" },
       { data: "fecha" },
@@ -126,7 +126,7 @@ function EditarUsuario() {
           //   console.log(request.responseText);
           var objData = JSON.parse(request.responseText);
           if (objData.status) {
-            document.querySelector("#idUsuario").value = objData.data.id;
+            document.querySelector("#idUsuario").value = objData.data.id_usuario;
             document.querySelector("#txtNick").value = objData.data.nick;
             document.querySelector("#txtEmail").value = objData.data.email;
             if (objData.data.estado == 1) {
