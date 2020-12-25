@@ -1,11 +1,10 @@
-INSERT INTO usuarios(nick, email, pass, estado, rol) VALUES ("kiki","kiki@live.com","123123",1,"Administrador")
 
 CREATE DATABASE yo_contribuyo
 DEFAULT CHARACTER  SET utf8;
 USE yo_contribuyo;
 CREATE TABLE usuarios (
   id int NOT NULL UNIQUE AUTO_INCREMENT,
-  nick VARCHAR(25) NOT NULL UNIQUE,
+  nick VARCHAR(50) NOT NULL UNIQUE,
   email VARCHAR(255) NOT NULL UNIQUE,
   pass VARCHAR(255) NOT NULL,
   rol VARCHAR(20) NOT NULL,

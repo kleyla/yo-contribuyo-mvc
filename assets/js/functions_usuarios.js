@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var strNick = document.querySelector("#txtNick").value;
     var strEmail = document.querySelector("#txtEmail").value;
     var intEstado = document.querySelector("#listaEstado").value;
-    var strRol = document.querySelector('#listaRol').value;
+    var strRol = document.querySelector("#listaRol").value;
     if (strNick == "" || strEmail == "" || intEstado == "" || strRol == "") {
       swal("Atencion", "Todos los campos son obligatorios", "error");
       // alert("daji");
@@ -57,8 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
           formUsuario.reset();
           swal("Usuario", objData.msg, "success");
           tableUsuarios.api().ajax.reload(function () {
-            // fntEditRol();
-            // fntDelRol();
+            EditarUsuario();
+            // DeleteUsuario();
             // ftnPermisos();
           });
         } else {
@@ -87,4 +87,128 @@ function stylesFromUpdateToRegister() {
     .classList.replace("btn-info", "btn-primary");
   document.querySelector("#titleModalUsuario").innerHTML = "Nuevo Usuario";
   document.querySelector("#btnText").innerHTML = "Guardar";
+}
+
+window.addEventListener(
+  "load",
+  function () {
+    EditarUsuario();
+    DeleteUsuario();
+  },
+  false
+);
+function EditarUsuario() {
+  //   console.log("Editing..");
+  var btnEditUsuario = document.querySelectorAll(".btnEditUsuario");
+  btnEditUsuario.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      //   console.log("Editando");
+      document.querySelector("#titleModalUsuario").innerHTML =
+        "Actualizar Usuario";
+      document
+        .querySelector(".modal-header")
+        .classList.replace("headerRegister", "headerUpdate");
+      document
+        .querySelector("#btnActionForm")
+        .classList.replace("btn-primary", "btn-info");
+      document.querySelector("#btnText").innerHTML = "Actualizar";
+
+      var idUsuario = this.getAttribute("rl");
+      var request = window.XMLHttpRequest
+        ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
+      var ajaxUrl = base_url + "usuarios/getUsuario/" + idUsuario;
+      request.open("GET", ajaxUrl, true);
+      request.send();
+
+      request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+          //   console.log(request.responseText);
+          var objData = JSON.parse(request.responseText);
+          if (objData.status) {
+            document.querySelector("#idUsuario").value = objData.data.id;
+            document.querySelector("#txtNick").value = objData.data.nick;
+            document.querySelector("#txtEmail").value = objData.data.email;
+            if (objData.data.estado == 1) {
+              var optionSelect =
+                '<option value="1" selected class="notBlock">Activo</option>';
+            } else {
+              var optionSelect =
+                '<option value="2" selected class="notBlock">Inactivo</option>';
+            }
+            var htmlSelect = `${optionSelect}
+                                <option value="1">Activo</option>
+                                <option value="2">Inactivo</option>`;
+            document.querySelector("#listaEstado").innerHTML = htmlSelect;
+            if (objData.data.rol == "Administrador") {
+              var optionSelect =
+                '<option value="Administrador" selected class="notBlock">Administrador</option>';
+            } else {
+              var optionSelect =
+                '<option value="Contribuidor" selected class="notBlock">Contribuidor</option>';
+            }
+            var htmlSelect = `${optionSelect}
+                                <option value="Administrador">Administrador</option>
+                                <option value="Contribuidor">Contribuidor</option>`;
+            document.querySelector("#listaRol").innerHTML = htmlSelect;
+            $("#modalFormUsuario").modal("show");
+          } else {
+            swal("Error", objData.msg, "error");
+          }
+        }
+      };
+    });
+  });
+}
+
+function DeleteUsuario() {
+  var btnDelUsuario = document.querySelectorAll(".btnDelUsuario");
+  btnDelUsuario.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var idUsuario = this.getAttribute("rl");
+      // alert(idUsuario);
+      swal(
+        {
+          title: "Eliminar Usuario",
+          text: "Realmente quiere eliminar el Usuario?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, eliminar",
+          cancelButtonText: "No, cancelar",
+          closeOnConfirm: false,
+          closeOnCancel: true,
+        },
+        function (isConfirm) {
+          if (isConfirm) {
+            var request = window.XMLHttpRequest
+              ? new XMLHttpRequest()
+              : new ActiveXObject("Microsoft.XMLHTTP");
+            var ajaxUrl = base_url + "usuarios/deleteUsuario";
+            var strData = "idusuario=" + idUsuario;
+            request.open("POST", ajaxUrl, true);
+            request.setRequestHeader(
+              "Content-type",
+              "application/x-www-form-urlencoded"
+            );
+            request.send(strData);
+            console.log(request);
+            request.onreadystatechange = function () {
+              if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                  swal("Eliminar!", objData.msg, "success");
+                  tableUsuarios.api().ajax.reload(function () {
+                    EditarUsuario();
+                    DeleteUsuario();
+                  });
+                } else {
+                  swal("Atencion!", objData.msg, "error");
+                }
+              }
+            };
+          }
+        }
+      );
+    });
+  });
 }

@@ -28,8 +28,8 @@ class Usuarios extends Controllers
             }
             $arrData[$i]["opciones"] = '<div class="text-center">
                 <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
-                <button class="btn btn-primary btn-sm btnEditRol" rl="' . $arrData[$i]['id'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-danger btn-sm btnDelRol" rl="' . $arrData[$i]['id'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                <button class="btn btn-danger btn-sm btnDelUsuario" rl="' . $arrData[$i]['id'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
             </div>';
         }
         // dep($arrData);
@@ -53,8 +53,8 @@ class Usuarios extends Controllers
             // echo json_encode($request_usuario);
         } else {
             // Update
-            // $request_usuario = $this->model->updateRol($intIdRol, $strRol, $strDescripcion, $intStatus);
-            // $option = 2;
+            $request_usuario = $this->model->updateUsuario($intIdUsuario, $strNick, $strEmail, $strPass, $intEstado, $strRol);
+            $option = 2;
         }
         // dep($_POST);
         if ($request_usuario === "exist") {
@@ -69,6 +69,34 @@ class Usuarios extends Controllers
             $arrResponse = array('status' => false, 'msg' => "No es posible almacenar datos");
         }
         echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+    public function getUsuario(int $id)
+    {
+        $intIdUsuario = intval(strClean($id));
+        if ($intIdUsuario > 0) {
+            $arrData = $this->model->selectUsuario($intIdUsuario);
+            if (empty($arrData)) {
+                $arrResponse = array('status' => false, 'msg' => "Datos no encontrados.");
+            } else {
+                $arrResponse = array('status' => true, 'data' => $arrData);
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+    public function deleteUsuario()
+    {
+        if ($_POST) {
+            $intIdUsuario = intval($_POST["idusuario"]);
+            $requestDelete = $this->model->disableUsuario($intIdUsuario);
+            if ($requestDelete === "ok") {
+                $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Usuario");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => "Error al eliminar el Usuario.");
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
         die();
     }
 }
