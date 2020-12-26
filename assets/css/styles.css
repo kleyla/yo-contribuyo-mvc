@@ -1,6 +1,6 @@
 .app-sidebar__user-avatar {
   width: 48px;
-  background: gray;
+  background: #fff;
   padding: 6px;
 }
 .headerRegister {
@@ -13,4 +13,13 @@
 }
 .notBlock {
   display: none !important;
+}
+.user-img {
+  background: #fff;
+  padding: 6px;
+}
+.required {
+  color: red;
+  font-size: 13px;
+  font-weight: bold;
 }

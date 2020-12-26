@@ -16,9 +16,9 @@ class Home extends Controllers
         $data["page_content"] = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse exercitationem ratione obcaecati voluptatibus. Quidem minus iste totam id recusandae, sapiente, consequatur at hic eius repudiandae soluta deserunt commodi ab voluptate?";
         $this->views->getView($this, "home", $data);
     }
-    public function getDatet()
+    public function pass(string $pass)
     {
-        $fecha = date('Format String', time());
-        echo $fecha;
+        $dato = hash("SHA256", $pass);
+        echo $dato;
     }
 }

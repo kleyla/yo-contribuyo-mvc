@@ -5,6 +5,10 @@ class Usuarios extends Controllers
 
     function __construct()
     {
+        session_start();
+        if (empty($_SESSION['login'])) {
+            header('Location: ' . base_url() . 'login');
+        }
         parent::__construct();
     }
     public function usuarios()
@@ -116,5 +120,13 @@ class Usuarios extends Controllers
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }
         die();
+    }
+    public function perfil()
+    {
+        $data["page_tag"] = "Perfil";
+        $data["page_title"] = "Perfil de usuario";
+        $data["page_name"] = "perfil";
+        $data["script"] = "js/functions_perfil.js";
+        $this->views->getView($this, "perfil", $data);
     }
 }
