@@ -16,8 +16,10 @@
                   <?php } ?>
                   <li><a class="app-menu__item" href="<?= base_url(); ?>proyectos"><i class="app-menu__icon fa fa-archive"></i>
                                   <span class="app-menu__label">Proyectos</span></a></li>
-                  <li><a class="app-menu__item" href="<?= base_url(); ?>lenguajes"><i class="app-menu__icon fa fa-code"></i>
-                                  <span class="app-menu__label">Lenguajes</span></a></li>
+                  <?php if ($_SESSION['userData']['rol'] == "Administrador") { ?>
+                          <li><a class="app-menu__item" href="<?= base_url(); ?>lenguajes"><i class="app-menu__icon fa fa-code"></i>
+                                          <span class="app-menu__label">Lenguajes</span></a></li>
+                  <?php } ?>
                   <li><a class="app-menu__item" href="<?= base_url(); ?>articulos"><i class="app-menu__icon fa fa-newspaper-o"></i>
                                   <span class="app-menu__label">Articulos</span></a></li>
                   <li><a class="app-menu__item" href="<?= base_url(); ?>dashboard"><i class="app-menu__icon fa fa-file-code-o"></i>

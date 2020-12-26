@@ -13,13 +13,17 @@ class Lenguajes extends Controllers
 
     public function lenguajes()
     {
-        // echo "mensaje desde el controlador";
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Lenguajes";
-        $data["page_title"] = "Lenguajes - Yo contribuyo";
-        $data["page_name"] = "lenguajes";
-        $data["script"] = "js/functions_lenguajes.js";
-        $this->views->getView($this, "lenguajes", $data);
+        if ($_SESSION['userData']['rol'] == "Administrador") {
+            // echo "mensaje desde el controlador";
+            $data["page_id"] = 1;
+            $data["page_tag"] = "Lenguajes";
+            $data["page_title"] = "Lenguajes - Yo contribuyo";
+            $data["page_name"] = "lenguajes";
+            $data["script"] = "js/functions_lenguajes.js";
+            $this->views->getView($this, "lenguajes", $data);
+        } else {
+            header('Location: ' . base_url() . 'dashboard');
+        }
     }
     public function getLenguajes()
     {

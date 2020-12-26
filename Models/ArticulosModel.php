@@ -19,6 +19,13 @@ class ArticulosModel extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
+    public function allByUser()
+    {
+        $this->intUsuarioId = $_SESSION['idUser'];
+        $sql = "SELECT articulos.*, usuarios.nick FROM articulos, usuarios WHERE articulos.usuario_id = usuarios.id_usuario AND usuarios.id_usuario = $this->intUsuarioId";
+        $request = $this->select_all($sql);
+        return $request;
+    }
     public function insertArticulo(string $titulo, string $contenido)
     {
         try {

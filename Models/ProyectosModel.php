@@ -22,6 +22,13 @@ class ProyectosModel extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
+    public function allByUser()
+    {
+        $this->intUsuarioId = $_SESSION['idUser'];
+        $sql = "SELECT proyectos.*, usuarios.nick FROM proyectos, usuarios WHERE proyectos.usuario_id = usuarios.id_usuario AND usuarios.id_usuario = $this->intUsuarioId";
+        $request = $this->select_all($sql);
+        return $request;
+    }
     public function allActive()
     {
         $sql = "SELECT * FROM lenguajes WHERE estado = 1";

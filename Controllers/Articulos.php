@@ -23,7 +23,11 @@ class Articulos extends Controllers
     }
     public function getArticulos()
     {
-        $arrData = $this->model->all();
+        if ($_SESSION['userData']['rol'] == "Administrador") {
+            $arrData = $this->model->all();
+        } else {
+            $arrData = $this->model->allByUser();
+        }
         // dep($arrData);
         for ($i = 0; $i < count($arrData); $i++) {
             if ($arrData[$i]["estado"] == 1) {
