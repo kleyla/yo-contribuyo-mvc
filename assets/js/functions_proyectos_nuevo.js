@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     var strNombre = document.querySelector("#txtNombre").value;
     var strDescripcion = document.querySelector("#txtDescripcion").value;
     var strRepositorio = document.querySelector("#txtRepositorio").value;
-    var intEstado = document.querySelector("#listaEstado").value;
     var strTags = document.querySelector("#txtTags").value;
     // var arrayLenguajes = document.querySelector("#listaEstado").value;
     var arrayLenguajes = document.querySelectorAll(
@@ -18,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (
       strNombre == "" ||
       strDescripcion == "" ||
-      intEstado == "" ||
       strRepositorio == "" ||
       arrayLenguajes.length == 0 ||
       strTags == ""
@@ -88,17 +86,6 @@ function editProyecto(idProyecto) {
           objData.data.repositorio;
         document.querySelector("#txtTags").value = objData.data.tags;
         // console.log(objData.data);
-        if (objData.data.estado == 1) {
-          var optionSelect =
-            '<option value="1" selected class="notBlock">Activo</option>';
-        } else {
-          var optionSelect =
-            '<option value="2" selected class="notBlock">Inactivo</option>';
-        }
-        var htmlSelect = `${optionSelect}
-                          <option value="1">Activo</option>
-                          <option value="2">Inactivo</option>`;
-        document.querySelector("#listaEstado").innerHTML = htmlSelect;
 
         var arrayIdLanguajes = [];
         objData.data.lenguajes.forEach(function (lenguaje) {

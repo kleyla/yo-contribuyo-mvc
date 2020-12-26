@@ -102,6 +102,7 @@ window.addEventListener(
   function () {
     EditarLenguaje();
     DeleteLenguaje();
+    enableLenguaje();
   },
   false
 );
@@ -125,7 +126,8 @@ function EditarLenguaje() {
           //   console.log(request.responseText);
           var objData = JSON.parse(request.responseText);
           if (objData.status) {
-            document.querySelector("#idLenguaje").value = objData.data.id_lenguaje;
+            document.querySelector("#idLenguaje").value =
+              objData.data.id_lenguaje;
             document.querySelector("#txtNombre").value = objData.data.nombre;
             document.querySelector("#txtLink").value = objData.data.link;
             if (objData.data.estado == 1) {
@@ -172,7 +174,7 @@ function DeleteLenguaje() {
             var request = window.XMLHttpRequest
               ? new XMLHttpRequest()
               : new ActiveXObject("Microsoft.XMLHTTP");
-            var ajaxUrl = base_url + "lenguajes/deleteUsuario";
+            var ajaxUrl = base_url + "lenguajes/deleteLenguaje";
             var strData = "idlenguaje=" + idLenguaje;
             request.open("POST", ajaxUrl, true);
             request.setRequestHeader(
@@ -188,6 +190,7 @@ function DeleteLenguaje() {
                   tableLenguajes.api().ajax.reload(function () {
                     EditarLenguaje();
                     DeleteLenguaje();
+                    enableLenguaje();
                   });
                 } else {
                   swal("Atencion!", objData.msg, "error");
@@ -200,4 +203,54 @@ function DeleteLenguaje() {
     });
   });
 }
-
+function enableLenguaje() {
+  var btnEnableLenguaje = document.querySelectorAll(".btnEnableLenguaje");
+  btnEnableLenguaje.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var idLenguaje = this.getAttribute("rl");
+      // alert(idLenguaje);
+      swal(
+        {
+          title: "Habilitar Lenguaje",
+          text: "Realmente quiere habilitar el Lenguaje?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, habilitar",
+          cancelButtonText: "No, cancelar",
+          closeOnConfirm: false,
+          closeOnCancel: true,
+        },
+        function (isConfirm) {
+          if (isConfirm) {
+            var request = window.XMLHttpRequest
+              ? new XMLHttpRequest()
+              : new ActiveXObject("Microsoft.XMLHTTP");
+            var ajaxUrl = base_url + "lenguajes/habilitarLenguaje";
+            var strData = "idlenguaje=" + idLenguaje;
+            request.open("POST", ajaxUrl, true);
+            request.setRequestHeader(
+              "Content-type",
+              "application/x-www-form-urlencoded"
+            );
+            request.send(strData);
+            request.onreadystatechange = function () {
+              if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                  swal("Habilitar!", objData.msg, "success");
+                  tableLenguajes.api().ajax.reload(function () {
+                    EditarLenguaje();
+                    DeleteLenguaje();
+                    enableLenguaje();
+                  });
+                } else {
+                  swal("Atencion!", objData.msg, "error");
+                }
+              }
+            };
+          }
+        }
+      );
+    });
+  });
+}

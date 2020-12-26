@@ -24,14 +24,19 @@ class Lenguajes extends Controllers
         for ($i = 0; $i < count($arrData); $i++) {
             if ($arrData[$i]["estado"] == 1) {
                 $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
+                        <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-danger btn-sm btnDelLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                    </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
+                        <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-warning btn-sm btnEnableLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                    </div>';
             }
-            $arrData[$i]["opciones"] = '<div class="text-center">
-                <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
-                <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-danger btn-sm btnDelLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
-            </div>';
         }
         // dep($arrData);
         // FORMATO JSON
@@ -84,7 +89,7 @@ class Lenguajes extends Controllers
         }
         die();
     }
-    public function deleteUsuario()
+    public function deleteLenguaje()
     {
         if ($_POST) {
             $intId = intval($_POST["idlenguaje"]);
@@ -93,6 +98,20 @@ class Lenguajes extends Controllers
                 $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Lenguaje");
             } else {
                 $arrResponse = array('status' => false, 'msg' => "Error al eliminar el Lenguaje.");
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+    public function habilitarLenguaje()
+    {
+        if ($_POST) {
+            $intId = intval($_POST["idlenguaje"]);
+            $requestDelete = $this->model->enableLenguaje($intId);
+            if ($requestDelete === "ok") {
+                $arrResponse = array('status' => true, 'msg' => "Se ha habilitado el Lenguaje");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => "Error al habilitar el Lenguaje.");
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }

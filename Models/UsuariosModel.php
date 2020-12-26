@@ -91,4 +91,20 @@ class UsuariosModel extends Mysql
             return $request = "error";
         }
     }
+    public function enableUsuario(int $id)
+    {
+        try {
+            $this->intId = $id;
+            $sql = "UPDATE usuarios SET estado = ? WHERE id_usuario = $this->intId";
+            $arrData = array(1);
+            $request = $this->update($sql, $arrData);
+            if ($request) {
+                return $request = "ok";
+            } else {
+                throw new Exception("error");
+            }
+        } catch (Exception $e) {
+            return $request = "error";
+        }
+    }
 }

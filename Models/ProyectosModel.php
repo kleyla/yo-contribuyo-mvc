@@ -27,14 +27,14 @@ class ProyectosModel extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
-    public function insertProyecto(string $nombre, string $descripcion, string $repositorio, int $estado, array $lenguajes, string $tags)
+    public function insertProyecto(string $nombre, string $descripcion, string $repositorio, array $lenguajes, string $tags)
     {
         try {
             $return = "";
             $this->strNombre = $nombre;
             $this->strDescripcion = $descripcion;
             $this->strRepositorio = $repositorio;
-            $this->intEstado = $estado;
+            $this->intEstado = 1;
             $this->arrayLenguajes = $lenguajes;
             // $this->arrayTags = explode(" ", $tags);
             $this->strTags = $tags;
@@ -68,7 +68,7 @@ class ProyectosModel extends Mysql
         $request["lenguajes"] = $request_lenguajes;
         return $request;
     }
-    public function updateProyecto(int $id, string $nombre, string $descripcion, string $repositorio, int $estado, array $lenguajes, string $tags)
+    public function updateProyecto(int $id, string $nombre, string $descripcion, string $repositorio, array $lenguajes, string $tags)
     {
         try {
             $this->intId = $id;
@@ -77,7 +77,7 @@ class ProyectosModel extends Mysql
             $this->strRepositorio = $repositorio;
             $this->strTags = $tags;
             $this->arrayLenguajes = $lenguajes;
-            $this->intEstado = $estado;
+            $this->intEstado = 1;
             $sql = "SELECT * FROM proyectos WHERE repositorio = '$this->strRepositorio' AND id_proyecto != $this->intId";
             $request = $this->select_all($sql);
             if (empty($request)) {
@@ -107,6 +107,22 @@ class ProyectosModel extends Mysql
             $this->intId = $id;
             $sql = "UPDATE proyectos SET estado = ? WHERE id_proyecto = $this->intId";
             $arrData = array(0);
+            $request = $this->update($sql, $arrData);
+            if ($request) {
+                return $request = "ok";
+            } else {
+                throw new Exception("error");
+            }
+        } catch (Exception $e) {
+            return $request = "error";
+        }
+    }
+    public function enableProyecto(int $id)
+    {
+        try {
+            $this->intId = $id;
+            $sql = "UPDATE proyectos SET estado = ? WHERE id_proyecto = $this->intId";
+            $arrData = array(1);
             $request = $this->update($sql, $arrData);
             if ($request) {
                 return $request = "ok";

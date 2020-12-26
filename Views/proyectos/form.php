@@ -18,7 +18,7 @@ headerAdmin($data);
             <div class="tile">
                 <div class="tile-body">
                     <form id="formProyecto" name="formProyecto">
-                        <input type="hidden" id="idProyecto" name="idProyecto" value="<?= $data["id_proyecto"]?>">
+                        <input type="hidden" id="idProyecto" name="idProyecto" value="<?= $data["id_proyecto"] ?>">
                         <div class="tile-body">
                             <div class="row">
                                 <div class="form-group col-md-12 col-lg-4">
@@ -32,14 +32,6 @@ headerAdmin($data);
                                 <div class="form-group col-md-12 col-lg-4">
                                     <label class="control-label">Repositorio oficial</label>
                                     <input class="form-control" id="txtRepositorio" name="txtRepositorio" type="text" placeholder="Link" required>
-                                </div>
-
-                                <div class="form-group col-md-12 col-lg-4">
-                                    <label for="listaEstado">Estado</label>
-                                    <select class="form-control " id="listaEstado" name="listaEstado" required>
-                                        <option value="1">Activo</option>
-                                        <option value="2">Inactivo</option>
-                                    </select>
                                 </div>
                                 <div class="form-group col-md-12 col-md-8">
                                     <label class="control-label">Tags <span>(Separar por comas)</span></label>

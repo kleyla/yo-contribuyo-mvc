@@ -24,14 +24,19 @@ class Proyectos extends Controllers
         for ($i = 0; $i < count($arrData); $i++) {
             if ($arrData[$i]["estado"] == 1) {
                 $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-secondary btn-sm btnShowProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyectos/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                    </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-secondary btn-sm btnShowProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyectos/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-warning btn-sm btnEnableProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                    </div>';
             }
-            $arrData[$i]["opciones"] = '<div class="text-center">
-                <button class="btn btn-secondary btn-sm btnShowProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
-                <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyectos/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
-            </div>';
         }
         // dep($arrData);
         // FORMATO JSON
@@ -58,17 +63,16 @@ class Proyectos extends Controllers
         $strDescripcion = strClean($_POST["txtDescripcion"]);
         $strRepositorio = strClean($_POST["txtRepositorio"]);
         $strTags = strClean($_POST["txtTags"]);
-        $intEstado = strClean($_POST["listaEstado"]);
         $arrayLenguajes = $_POST["lenguajes"];
 
         if ($intIdProyecto == 0) {
             // Crear
-            $request_proyecto = $this->model->insertProyecto($strNombre, $strDescripcion, $strRepositorio, $intEstado, $arrayLenguajes, $strTags);
+            $request_proyecto = $this->model->insertProyecto($strNombre, $strDescripcion, $strRepositorio, $arrayLenguajes, $strTags);
             $option = 1;
             // echo json_encode($request_proyecto);
         } else {
             // Update
-            $request_proyecto = $this->model->updateProyecto($intIdProyecto, $strNombre, $strDescripcion, $strRepositorio, $intEstado, $arrayLenguajes, $strTags);
+            $request_proyecto = $this->model->updateProyecto($intIdProyecto, $strNombre, $strDescripcion, $strRepositorio, $arrayLenguajes, $strTags);
             $option = 2;
         }
         // dep($_POST);
@@ -110,6 +114,20 @@ class Proyectos extends Controllers
                 $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Proyecto");
             } else {
                 $arrResponse = array('status' => false, 'msg' => "Error al eliminar el Proyecto.");
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+    public function habilitarProyecto()
+    {
+        if ($_POST) {
+            $intId = intval($_POST["idProyecto"]);
+            $requestDelete = $this->model->enableProyecto($intId);
+            if ($requestDelete === "ok") {
+                $arrResponse = array('status' => true, 'msg' => "Se ha habilitado el Proyecto");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => "Error al habilitado el Proyecto.");
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }

@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
           tableUsuarios.api().ajax.reload(function () {
             EditarUsuario();
             DeleteUsuario();
+            enableUsuario();
           });
         } else {
           swal("Error", objData.msg, "error");
@@ -102,6 +103,7 @@ window.addEventListener(
   function () {
     EditarUsuario();
     DeleteUsuario();
+    enableUsuario();
   },
   false
 );
@@ -126,7 +128,8 @@ function EditarUsuario() {
           //   console.log(request.responseText);
           var objData = JSON.parse(request.responseText);
           if (objData.status) {
-            document.querySelector("#idUsuario").value = objData.data.id_usuario;
+            document.querySelector("#idUsuario").value =
+              objData.data.id_usuario;
             document.querySelector("#txtNick").value = objData.data.nick;
             document.querySelector("#txtEmail").value = objData.data.email;
             if (objData.data.estado == 1) {
@@ -200,6 +203,60 @@ function DeleteUsuario() {
                   tableUsuarios.api().ajax.reload(function () {
                     EditarUsuario();
                     DeleteUsuario();
+                    enableUsuario();
+                  });
+                } else {
+                  swal("Atencion!", objData.msg, "error");
+                }
+              }
+            };
+          }
+        }
+      );
+    });
+  });
+}
+
+function enableUsuario() {
+  var btnEnableUsuario = document.querySelectorAll(".btnEnableUsuario");
+  btnEnableUsuario.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var idUsuario = this.getAttribute("rl");
+      // alert(idUsuario);
+      swal(
+        {
+          title: "Habilitar Usuario",
+          text: "Realmente quiere habilitar el Usuario?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, habilitar",
+          cancelButtonText: "No, cancelar",
+          closeOnConfirm: false,
+          closeOnCancel: true,
+        },
+        function (isConfirm) {
+          if (isConfirm) {
+            var request = window.XMLHttpRequest
+              ? new XMLHttpRequest()
+              : new ActiveXObject("Microsoft.XMLHTTP");
+            var ajaxUrl = base_url + "usuarios/habilitarUsuario";
+            var strData = "idusuario=" + idUsuario;
+            request.open("POST", ajaxUrl, true);
+            request.setRequestHeader(
+              "Content-type",
+              "application/x-www-form-urlencoded"
+            );
+            request.send(strData);
+            console.log(request);
+            request.onreadystatechange = function () {
+              if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                  swal("Habilitar!", objData.msg, "success");
+                  tableUsuarios.api().ajax.reload(function () {
+                    EditarUsuario();
+                    DeleteUsuario();
+                    enableUsuario();
                   });
                 } else {
                   swal("Atencion!", objData.msg, "error");

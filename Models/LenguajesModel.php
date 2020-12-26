@@ -86,4 +86,20 @@ class LenguajesModel extends Mysql
             return $request = "error";
         }
     }
+    public function enableLenguaje(int $id)
+    {
+        try {
+            $this->intId = $id;
+            $sql = "UPDATE lenguajes SET estado = ? WHERE id_lenguaje = $this->intId";
+            $arrData = array(1);
+            $request = $this->update($sql, $arrData);
+            if ($request) {
+                return $request = "ok";
+            } else {
+                throw new Exception("error");
+            }
+        } catch (Exception $e) {
+            return $request = "error";
+        }
+    }
 }

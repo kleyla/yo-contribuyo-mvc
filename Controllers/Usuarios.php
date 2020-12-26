@@ -24,14 +24,17 @@ class Usuarios extends Controllers
         for ($i = 0; $i < count($arrData); $i++) {
             if ($arrData[$i]["estado"] == 1) {
                 $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-danger btn-sm btnDelUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                    </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-warning btn-sm btnEnableUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                    </div>';
             }
-            $arrData[$i]["opciones"] = '<div class="text-center">
-                <button class="btn btn-secondary btn-sm btnPermisosRol" rl="' . $arrData[$i]['id_usuario'] . '" title="Permisos" ><i class="fa fa-key"></i></button>
-                <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                <button class="btn btn-danger btn-sm btnDelUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
-            </div>';
         }
         // dep($arrData);
         // FORMATO JSON
@@ -95,6 +98,20 @@ class Usuarios extends Controllers
                 $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Usuario");
             } else {
                 $arrResponse = array('status' => false, 'msg' => "Error al eliminar el Usuario.");
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+    public function habilitarUsuario()
+    {
+        if ($_POST) {
+            $intId = intval($_POST["idusuario"]);
+            $request = $this->model->enableUsuario($intId);
+            if ($request === "ok") {
+                $arrResponse = array('status' => true, 'msg' => "Se ha habilitado el Usuario");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => "Error al habilitar el Usuario.");
             }
             echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
         }
