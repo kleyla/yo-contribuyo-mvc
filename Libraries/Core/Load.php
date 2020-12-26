@@ -1,7 +1,7 @@
 <?php
 $controller = ucwords($controller);
 $controllerFile = "Controllers/".$controller.".php";
-// echo $method;
+// echo $controller;
 if(file_exists($controllerFile)){
     require_once($controllerFile);
     $controller = new $controller();

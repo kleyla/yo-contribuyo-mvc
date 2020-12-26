@@ -1,15 +1,14 @@
 <?php
 headerAdmin($data);
-getModal("modalProyectos", $data);
 ?>
 
 <main class="app-content">
     <div class="app-title">
         <div>
             <h1><i class="fa fa-users"></i> <?php echo $data["page_title"]; ?>
-                <button class="btn btn-primary" type="button" onclick="openModalProyecto();">
+                <a class="btn btn-primary" type="button" href="<?= base_url(); ?>proyectos/form">
                     <i class="fa fa-plus"></i>
-                    Nuevo</button>
+                    Nuevo</a>
             </h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
@@ -28,7 +27,8 @@ getModal("modalProyectos", $data);
                                 <tr>
                                     <th>ID</th>
                                     <th>Nombre</th>
-                                    <th>Link</th>
+                                    <th>Usuario</th>
+                                    <th>Repositorio</th>
                                     <th>Fecha</th>
                                     <th>Estado</th>
                                     <th>Acciones</th>

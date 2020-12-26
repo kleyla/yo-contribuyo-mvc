@@ -13,15 +13,15 @@ CREATE TABLE usuarios (
   PRIMARY KEY (id_usuario)
 );
 
-
 CREATE TABLE proyectos (
   id_proyecto int NOT NULL UNIQUE AUTO_INCREMENT,
   usuario_id INT NOT NULL,
   nombre VARCHAR(255) NOT NULL,
   descripcion TEXT CHARACTER SET utf8 NOT NULL,
-  repositorio VARCHAR(255) NOT NULL,
+  repositorio VARCHAR(255) NOT NULL UNIQUE,
   estado TINYINT NOT NULL,
   fecha DATETIME NOT NULL,
+  tags TEXT CHARACTER SET utf8,
   PRIMARY KEY (id_proyecto),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -32,13 +32,6 @@ CREATE TABLE lenguajes (
   estado TINYINT NOT NULL,
   fecha DATETIME NOT NULL,
   PRIMARY KEY (id_lenguaje)
-);
-CREATE TABLE tags (
-  id_tag int NOT NULL UNIQUE AUTO_INCREMENT,
-  nombre VARCHAR(255) NOT NULL,
-  estado TINYINT NOT NULL,
-  fecha DATETIME NOT NULL,
-  PRIMARY KEY (id_tag)
 );
 CREATE TABLE proyecto_lenguaje (
   proyecto_id INT NOT NULL,

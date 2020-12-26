@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     columns: [
       { data: "id_proyecto" },
       { data: "nombre" },
-      { data: "descripcion" },
+      { data: "nick" },
       { data: "repositorio" },
       { data: "fecha" },
       { data: "estado" },
@@ -24,77 +24,66 @@ document.addEventListener("DOMContentLoaded", function () {
     iDisplayLength: 10,
     order: [[0, "desc"]],
   });
-  // NUEVO LENGUAJE
-  var formProyecto = document.querySelector("#formProyecto");
-  formProyecto.onsubmit = function (e) {
-    // console.log("IN...");
-    e.preventDefault();
-    var intIdProyecto = document.querySelector("#idProyecto").value;
-    var strNombre = document.querySelector("#txtNombre").value;
-    var strDescripcion = document.querySelector("#txtDescripcion").value;
-    var strRepositorio = document.querySelector("#txtRepositorio").value;
-    var intEstado = document.querySelector("#listaEstado").value;
-    if (strNombre == "" || strDescripcion == "" || intEstado == "" || strRepositorio == "") {
-      swal("Atencion", "Todos los campos son obligatorios", "error");
-      // alert("daji");
-      return false;
-    }
-    var request = window.XMLHttpRequest
-      ? new XMLHttpRequest()
-      : new ActiveXObject("Microsoft.XMLHTTP");
-    var ajaxUrl = base_url + "lenguajes/setLenguaje";
-    var formData = new FormData(formProyecto);
-    request.open("POST", ajaxUrl, true);
-    request.send(formData);
-    // console.log(request);
-    request.onreadystatechange = function () {
-      if (request.readyState == 4 && request.status == 200) {
-        // console.log(request.responseText);
-        var objData = JSON.parse(request.responseText);
-        if (objData.status) {
-          $("#modalFormProyecto").modal("hide");
-          formProyecto.reset();
-          swal("Lenguaje", objData.msg, "success");
-          tableProyectos.api().ajax.reload(function () {
-            EditarLenguaje();
-            DeleteLenguaje();
-          });
-        } else {
-          swal("Error", objData.msg, "error");
-        }
-      }
-    };
-  };
+
 });
 
 $("#tableProyectos").DataTable();
 
-function openModalProyecto() {
-  console.log("open Modal Proyecto");
-  stylesFromUpdateToRegisterLenguaje();
-  document.querySelector("#formProyecto").reset();
-  $("#modalFormProyecto").modal("show");
-}
+window.addEventListener(
+  "load",
+  function () {
+    deleteProyecto();
+  },
+  false
+);
 
-function stylesFromUpdateToRegisterLenguaje() {
-  document.querySelector("#idProyecto").value = "";
-  document
-    .querySelector(".modal-header")
-    .classList.replace("headerUpdate", "headerRegister");
-  document
-    .querySelector("#btnActionForm")
-    .classList.replace("btn-info", "btn-primary");
-  document.querySelector("#titleModalProyecto").innerHTML = "Nuevo Proyecto";
-  document.querySelector("#btnText").innerHTML = "Guardar";
-}
-function stylesFromRegisterToUpdateLenguaje() {
-  document.querySelector("#titleModalLenguaje").innerHTML =
-    "Actualizar Lenguaje";
-  document
-    .querySelector(".modal-header")
-    .classList.replace("headerRegister", "headerUpdate");
-  document
-    .querySelector("#btnActionForm")
-    .classList.replace("btn-primary", "btn-info");
-  document.querySelector("#btnText").innerHTML = "Actualizar";
+function deleteProyecto() {
+  var btnDelProyecto = document.querySelectorAll(".btnDelProyecto");
+  btnDelProyecto.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      console.log("Deleting");
+      var idProyecto = this.getAttribute("rl");
+      // alert(idProyecto);
+      swal(
+        {
+          title: "Eliminar Proyecto",
+          text: "Realmente quiere eliminar el Proyecto?",
+          type: "warning",
+          showCancelButton: true,
+          confirmButtonText: "Si, eliminar",
+          cancelButtonText: "No, cancelar",
+          closeOnConfirm: false,
+          closeOnCancel: true,
+        },
+        function (isConfirm) {
+          if (isConfirm) {
+            var request = window.XMLHttpRequest
+              ? new XMLHttpRequest()
+              : new ActiveXObject("Microsoft.XMLHTTP");
+            var ajaxUrl = base_url + "proyectos/deleteProyecto";
+            var strData = "idProyecto=" + idProyecto;
+            request.open("POST", ajaxUrl, true);
+            request.setRequestHeader(
+              "Content-type",
+              "application/x-www-form-urlencoded"
+            );
+            request.send(strData);
+            request.onreadystatechange = function () {
+              if (request.readyState == 4 && request.status == 200) {
+                var objData = JSON.parse(request.responseText);
+                if (objData.status) {
+                  swal("Eliminar!", objData.msg, "success");
+                  tableProyectos.api().ajax.reload(function () {
+                    deleteProyecto();
+                  });
+                } else {
+                  swal("Atencion!", objData.msg, "error");
+                }
+              }
+            };
+          }
+        }
+      );
+    });
+  });
 }

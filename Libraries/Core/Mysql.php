@@ -57,4 +57,11 @@ class Mysql extends Conexion
         $del = $result->execute();
         return $del;
     }
+    public function drop(string $query)
+    {
+        $this->strquery = $query;
+        $result = $this->conexion->prepare($this->strquery);
+        $drop = $result->execute();
+        return $drop;
+    }
 }
