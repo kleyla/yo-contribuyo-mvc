@@ -23,3 +23,7 @@
   font-size: 13px;
   font-weight: bold;
 }
+.register-box {
+  min-height: 500px !important;
+  min-width: 450px !important;
+}

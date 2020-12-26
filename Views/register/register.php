@@ -24,37 +24,27 @@
         <div class="logo">
             <h1>Yo contribuyo</h1>
         </div>
-        <div class="login-box" style="min-width: 450px;">
-            <form class="login-form" action="" id="formLogin" name="formLogin">
+        <div class="login-box register-box">
+            <form class="login-form" action="" id="formRegister" name="formRegister">
                 <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i><?= $data["page_title"]; ?></h3>
                 <div class="form-group">
                     <label class="control-label">EMAIL</label>
                     <input class="form-control" id="txtEmail" name="txtEmail" type="email" placeholder="Email" autofocus>
                 </div>
                 <div class="form-group">
+                    <label class="control-label">NICK</label>
+                    <input class="form-control" id="txtNick" name="txtNick" type="text" placeholder="Nick" autofocus>
+                </div>
+                <div class="form-group">
                     <label class="control-label">CONTRASENA</label>
                     <input class="form-control" id="txtPass" name="txtPass" type="password" placeholder="Contrasena">
                 </div>
                 <div class="form-group">
-                    <div class="utility">
-                        <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Olvidaste tu contrasena?</a></p>
-                    </div>
+                    <label class="control-label">CONFIRMAR CONTRASENA</label>
+                    <input class="form-control" id="txtPassConfirm" name="txtPassConfirm" type="password" placeholder="Contrasena">
                 </div>
                 <div class="form-group btn-container">
-                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>INICIAR SESION</button>
-                </div>
-            </form>
-            <form class="forget-form" action="" id="" name="">
-                <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Olvidaste tu contrasena?</h3>
-                <div class="form-group">
-                    <label class="control-label">EMAIL</label>
-                    <input class="form-control" id="txtEmailReset" name="txtEmailReset" type="text" placeholder="Email">
-                </div>
-                <div class="form-group btn-container">
-                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>CAMBIAR</button>
-                </div>
-                <div class="form-group mt-3">
-                    <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i>Volver a Login</a></p>
+                    <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>REGISTRAR</button>
                 </div>
             </form>
         </div>

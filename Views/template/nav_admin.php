@@ -10,8 +10,10 @@
           <ul class="app-menu">
                   <li><a class="app-menu__item" href="<?= base_url(); ?>dashboard"><i class="app-menu__icon fa fa-dashboard"></i>
                                   <span class="app-menu__label">Dashboard</span></a></li>
-                  <li><a class="app-menu__item" href="<?= base_url(); ?>usuarios"><i class="app-menu__icon fa fa-user"></i>
-                                  <span class="app-menu__label">Usuarios</span></a></li>
+                  <?php if ($_SESSION['userData']['rol'] == "Administrador") { ?>
+                          <li><a class="app-menu__item" href="<?= base_url(); ?>usuarios"><i class="app-menu__icon fa fa-user"></i>
+                                          <span class="app-menu__label">Usuarios</span></a></li>
+                  <?php } ?>
                   <li><a class="app-menu__item" href="<?= base_url(); ?>proyectos"><i class="app-menu__icon fa fa-archive"></i>
                                   <span class="app-menu__label">Proyectos</span></a></li>
                   <li><a class="app-menu__item" href="<?= base_url(); ?>lenguajes"><i class="app-menu__icon fa fa-code"></i>
