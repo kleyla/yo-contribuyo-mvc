@@ -48,6 +48,7 @@ CREATE TABLE articulos (
   titulo VARCHAR(255) NOT NULL UNIQUE,
   contenido TEXT CHARACTER SET utf8 NOT NULL,
   estado TINYINT NOT NULL,
+  fecha DATETIME NOT NULL,
   PRIMARY KEY (id_articulo),
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -85,3 +86,6 @@ INSERT INTO lenguajes(nombre, link, estado, fecha) VALUES ("Go",'https://golang.
 
 -- PROYECTOS
 INSERT INTO proyectos(nombre, descripcion, repositorio, estado, fecha, usuario_id) VALUES ("Octocat", 'Proyecto de Octocats', 'https://golang.org/',1, now(), 1);
+
+-- ARTICULOS
+INSERT INTO articulos(titulo, contenido, estado, fecha, usuario_id) VALUES ("Octocat", 'Articulo de Octocats', 1, now(), 1);

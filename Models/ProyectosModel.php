@@ -68,7 +68,7 @@ class ProyectosModel extends Mysql
         $request["lenguajes"] = $request_lenguajes;
         return $request;
     }
-    public function updateLenguaje(int $id, string $nombre, string $descripcion, string $repositorio, int $estado, array $lenguajes, string $tags)
+    public function updateProyecto(int $id, string $nombre, string $descripcion, string $repositorio, int $estado, array $lenguajes, string $tags)
     {
         try {
             $this->intId = $id;

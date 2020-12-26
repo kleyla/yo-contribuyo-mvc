@@ -68,7 +68,7 @@ class Proyectos extends Controllers
             // echo json_encode($request_proyecto);
         } else {
             // Update
-            $request_proyecto = $this->model->updateLenguaje($intIdProyecto, $strNombre, $strDescripcion, $strRepositorio, $intEstado, $arrayLenguajes, $strTags);
+            $request_proyecto = $this->model->updateProyecto($intIdProyecto, $strNombre, $strDescripcion, $strRepositorio, $intEstado, $arrayLenguajes, $strTags);
             $option = 2;
         }
         // dep($_POST);

@@ -1,29 +1,4 @@
-var tableProyectos;
 document.addEventListener("DOMContentLoaded", function () {
-  tableProyectos = $("#tableProyectos").dataTable({
-    aProcessing: true,
-    aServerSide: true,
-    language: {
-      url: "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json",
-    },
-    ajax: {
-      url: " " + base_url + "proyectos/getProyectos",
-      dataSrc: "",
-    },
-    columns: [
-      { data: "id_proyecto" },
-      { data: "nombre" },
-      { data: "descripcion" },
-      { data: "repositorio" },
-      { data: "fecha" },
-      { data: "estado" },
-      { data: "opciones" },
-    ],
-    resonsieve: "true",
-    bDestroy: true,
-    iDisplayLength: 10,
-    order: [[0, "desc"]],
-  });
   // NUEVO LENGUAJE
   var formProyecto = document.querySelector("#formProyecto");
   formProyecto.onsubmit = function (e) {
@@ -91,8 +66,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // console.log("Nuevo");
   }
 });
-
-$("#tableProyectos").DataTable();
 
 function editProyecto(idProyecto) {
   var request = window.XMLHttpRequest
@@ -179,4 +152,3 @@ function stylesFromRegisterToUpdateLenguaje() {
     .classList.replace("btn-primary", "btn-info");
   document.querySelector("#btnText").innerHTML = "Actualizar";
 }
-
