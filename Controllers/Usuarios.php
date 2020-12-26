@@ -13,13 +13,17 @@ class Usuarios extends Controllers
     }
     public function usuarios()
     {
-        // echo "Usuarios";
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Usuarios";
-        $data["page_title"] = "Usuarios - Yo contribuyo";
-        $data["page_name"] = "usuarios";
-        $data["script"] = "js/functions_usuarios.js";
-        $this->views->getView($this, "usuarios", $data);
+        if ($_SESSION['userData']['rol'] == "Administrador") {
+            // echo "Usuarios";
+            $data["page_id"] = 1;
+            $data["page_tag"] = "Usuarios";
+            $data["page_title"] = "Usuarios - Yo contribuyo";
+            $data["page_name"] = "usuarios";
+            $data["script"] = "js/functions_usuarios.js";
+            $this->views->getView($this, "usuarios", $data);
+        } else {
+            header('Location: ' . base_url() . 'dashboard');
+        }
     }
     public function getUsuarios()
     {

@@ -6,6 +6,7 @@ class ArticulosModel extends Mysql
     public $strTitulo;
     public $strContenido;
     public $intEstado;
+    private $intUsuarioId;
 
     public function __construct()
     {
@@ -25,8 +26,10 @@ class ArticulosModel extends Mysql
             $this->strTitulo = $titulo;
             $this->strContenido = $contenido;
             $this->intEstado = 1;
-            $query_insert = "INSERT INTO articulos(titulo, contenido, estado, fecha, usuario_id) VALUES (?,?,?, now(), 1)";
-            $arrData = array($this->strTitulo, $this->strContenido, $this->intEstado);
+            $this->intUsuarioId = $_SESSION['idUser'];
+
+            $query_insert = "INSERT INTO articulos(titulo, contenido, estado, usuario_id, fecha ) VALUES (?,?,?,?, now() )";
+            $arrData = array($this->strTitulo, $this->strContenido, $this->intEstado, $this->intUsuarioId);
             $request_insert = $this->insert($query_insert, $arrData);
             $return = $request_insert;
             return $return;
@@ -47,7 +50,7 @@ class ArticulosModel extends Mysql
             $this->intId = $id;
             $this->strTitulo = $titulo;
             $this->strContenido = $contenido;
-            
+
             $sql = "UPDATE articulos SET titulo = ?, contenido = ? WHERE id_articulo = $this->intId";
             $arrData = array($this->strTitulo, $this->strContenido);
             $request = $this->update($sql, $arrData);

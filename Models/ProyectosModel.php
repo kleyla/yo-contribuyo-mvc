@@ -9,6 +9,7 @@ class ProyectosModel extends Mysql
     public $intEstado;
     public $strTags;
     public $arrayLenguajes;
+    private $intUsuarioId;
 
     public function __construct()
     {
@@ -36,13 +37,14 @@ class ProyectosModel extends Mysql
             $this->strRepositorio = $repositorio;
             $this->intEstado = 1;
             $this->arrayLenguajes = $lenguajes;
+            $this->intUsuarioId = $_SESSION['idUser'];
             // $this->arrayTags = explode(" ", $tags);
             $this->strTags = $tags;
             $sql = "SELECT * FROM proyectos WHERE repositorio = '$this->strRepositorio'";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $query_insert = "INSERT INTO proyectos(nombre, descripcion, repositorio, estado, tags, fecha, usuario_id) VALUES (?,?,?,?,?, now(), 1)";
-                $arrData = array($this->strNombre, $this->strDescripcion, $this->strRepositorio, $this->intEstado, $this->strTags);
+                $query_insert = "INSERT INTO proyectos(nombre, descripcion, repositorio, estado, tags, usuario_id, fecha) VALUES (?,?,?,?,?,?, now() )";
+                $arrData = array($this->strNombre, $this->strDescripcion, $this->strRepositorio, $this->intEstado, $this->strTags, $this->intUsuarioId);
                 $request_insert = $this->insert($query_insert, $arrData);
                 $return = $request_insert;
                 foreach ($this->arrayLenguajes as $lenguaje => $value) {
