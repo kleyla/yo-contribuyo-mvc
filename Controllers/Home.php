@@ -9,16 +9,25 @@ class Home extends Controllers
 
     public function home($params)
     {
+        session_start();
         // echo "mensaje desde el controlador";
         $data["tag_name"] = "Home";
         $data["page_title"] = "Pagina principal";
         $data["page_name"] = "home";
-        $data["page_content"] = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse exercitationem ratione obcaecati voluptatibus. Quidem minus iste totam id recusandae, sapiente, consequatur at hic eius repudiandae soluta deserunt commodi ab voluptate?";
+        $arrData = $this->model->getActiveProyects();
+        $data["proyectos"] = $arrData;
+        $arrData =$this->model->getActiveArticulos();
+        $data["articulos"] = $arrData;
         $this->views->getView($this, "home", $data);
     }
     public function pass(string $pass)
     {
         $dato = hash("SHA256", $pass);
         echo $dato;
+    }
+    public function proyectos($params)
+    {
+        $arrData = $this->model->getActiveProyects();
+        dep($arrData);
     }
 }

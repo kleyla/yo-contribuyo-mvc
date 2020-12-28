@@ -1,113 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php headerPublic($data); ?>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $data["tag_name"] ?></title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?= media(); ?>images/uploads/logo.png" alt="Logo" style="width: 50px;"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="<?php echo base_url(); ?>productos">Productos</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-            </div>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators">
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+        <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="<?= media(); ?>images/uploads/softwaredevelopment.jpeg" class="d-block w-100" alt="...">
         </div>
-    </nav>
-    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
-            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="http://placeimg.com/1200/400/any" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="http://placeimg.com/1200/400/any" class="d-block w-100" alt="...">
-            </div>
-            <div class="carousel-item">
-                <img src="http://placeimg.com/1200/400/any" class="d-block w-100" alt="...">
-            </div>
+        <div class="carousel-item">
+            <img src="<?= media(); ?>images/uploads/hero-1200x400.jpeg" class="d-block w-100" alt="...">
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </a>
-    </div>
-    <div class="container mt-4">
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-                <div class="card">
-                    <img src="http://placeimg.com/640/300/any" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="http://placeimg.com/640/300/any" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="http://placeimg.com/640/300/any" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="carousel-item">
+            <img src="<?= media(); ?>images/uploads/server_article_003.jpeg" class="d-block w-100" alt="...">
         </div>
     </div>
-    <section id="<?php echo $data["page_name"] ?>">
-        <h1><?php echo $data["page_title"] ?></h1>
-        <p><?php echo $data["page_content"] ?></p>
-    </section>
-    <?php echo formatMoney(52500623.566); ?>
+    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </a>
+</div>
+<div class="container my-2 py-4">
+    <h2 class="text-center mb-4">Proyectos</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <?php foreach ($data["proyectos"] as $item) { ?>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title text-center"><?= $item['nombre'] ?></h4>
+                        <?php foreach ($item['lenguajes'] as $lenguaje) { ?>
+                            <span class="badge bg-dark"><?= $lenguaje['nombre'] ?></span>
+                        <?php } ?>
+                        <div class="my-3">
+                            <h6>Descripcion</h6>
+                            <p class="card-text text-muted"><?= $item['descripcion'] ?></p>
+                        </div>
+                        <a href="<?= $item['repositorio'] ?>" target="_blank" class="btn btn-primary">Repositorio</a>
+                        <a href="<?= base_url(); ?>/home/verProyecto/<?= $item['id_proyecto'] ?> " target="_blank" class="btn btn-info">Ver mas..</a>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-</body>
-
-</html>
+</div>
+<div class="container bg-light my-2 py-4">
+    <div class="row">
+        <h2 class="text-center ">Articulos</h2>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 ">
+        <?php foreach ($data["articulos"] as $item) { ?>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                                <img src="<?= media(); ?>images/uploads/usuario.svg" class="rounded-circle avatar" alt="...">
+                                <p class="text-muted"><?= $item['nick'] ?></p>
+                            </div>
+                            <div class="col-9">
+                                <h4 class="card-title"><?= $item['titulo'] ?></h4>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-2">
+                            <a href="<?= base_url(); ?>/home/verProyecto/<?= $item['id_proyecto'] ?> " target="_blank" class="btn btn-outline-primary">Ver mas..</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+    </div>
+</div>
+<footer>
+    <div class="py-4">
+        <p class="text-center">&copy; Karen Rodriguez</p>
+    </div>
+</footer>
+<?php footerPublic($data); ?>

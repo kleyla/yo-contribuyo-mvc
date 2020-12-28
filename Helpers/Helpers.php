@@ -17,6 +17,16 @@ function footerAdmin($data="")
     $view_footer = "Views/template/footer_admin.php";
     require_once($view_footer);
 }
+function headerPublic($data="")
+{
+    $view_header = "Views/template/header_public.php";
+    require_once($view_header);
+}
+function footerPublic($data="")
+{
+    $view_footer = "Views/template/footer_public.php";
+    require_once($view_footer);
+}
 
 function dep($data)
 {
