@@ -55,17 +55,16 @@ class Usuarios extends Controllers
         $strNick = strClean($_POST["txtNick"]);
         $strEmail = strClean($_POST["txtEmail"]);
         $strPass = strClean($_POST["txtPass"]);
-        $intEstado = strClean($_POST["listaEstado"]);
         $strRol = strClean($_POST["listaRol"]);
 
         if ($intIdUsuario == 0) {
             // Crear
-            $request_usuario = $this->model->insertUsuario($strNick, $strEmail, $strPass, $intEstado, $strRol);
+            $request_usuario = $this->model->insertUsuario($strNick, $strEmail, $strPass, $strRol);
             $option = 1;
             // echo json_encode($request_usuario);
         } else {
             // Update
-            $request_usuario = $this->model->updateUsuario($intIdUsuario, $strNick, $strEmail, $strPass, $intEstado, $strRol);
+            $request_usuario = $this->model->updateUsuario($intIdUsuario, $strNick, $strEmail, $strPass, $strRol);
             $option = 2;
         }
         // dep($_POST);

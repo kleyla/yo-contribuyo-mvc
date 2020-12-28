@@ -31,8 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var intIdLenguaje = document.querySelector("#idLenguaje").value;
     var strNombre = document.querySelector("#txtNombre").value;
     var strLink = document.querySelector("#txtLink").value;
-    var intEstado = document.querySelector("#listaEstado").value;
-    if (strNombre == "" || strLink == "" || intEstado == "") {
+    if (strNombre == "" || strLink == "") {
       swal("Atencion", "Todos los campos son obligatorios", "error");
       // alert("daji");
       return false;
@@ -130,17 +129,6 @@ function EditarLenguaje() {
               objData.data.id_lenguaje;
             document.querySelector("#txtNombre").value = objData.data.nombre;
             document.querySelector("#txtLink").value = objData.data.link;
-            if (objData.data.estado == 1) {
-              var optionSelect =
-                '<option value="1" selected class="notBlock">Activo</option>';
-            } else {
-              var optionSelect =
-                '<option value="2" selected class="notBlock">Inactivo</option>';
-            }
-            var htmlSelect = `${optionSelect}
-                                  <option value="1">Activo</option>
-                                  <option value="2">Inactivo</option>`;
-            document.querySelector("#listaEstado").innerHTML = htmlSelect;
 
             $("#modalFormLenguaje").modal("show");
           } else {

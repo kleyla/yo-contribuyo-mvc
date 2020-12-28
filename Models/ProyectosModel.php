@@ -42,7 +42,6 @@ class ProyectosModel extends Mysql
             $this->strNombre = $nombre;
             $this->strDescripcion = $descripcion;
             $this->strRepositorio = $repositorio;
-            $this->intEstado = 1;
             $this->arrayLenguajes = $lenguajes;
             $this->intUsuarioId = $_SESSION['idUser'];
             // $this->arrayTags = explode(" ", $tags);
@@ -50,8 +49,8 @@ class ProyectosModel extends Mysql
             $sql = "SELECT * FROM proyectos WHERE repositorio = '$this->strRepositorio'";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $query_insert = "INSERT INTO proyectos(nombre, descripcion, repositorio, estado, tags, usuario_id, fecha) VALUES (?,?,?,?,?,?, now() )";
-                $arrData = array($this->strNombre, $this->strDescripcion, $this->strRepositorio, $this->intEstado, $this->strTags, $this->intUsuarioId);
+                $query_insert = "INSERT INTO proyectos(nombre, descripcion, repositorio, tags, usuario_id) VALUES (?,?,?,?,?)";
+                $arrData = array($this->strNombre, $this->strDescripcion, $this->strRepositorio, $this->strTags, $this->intUsuarioId);
                 $request_insert = $this->insert($query_insert, $arrData);
                 $return = $request_insert;
                 foreach ($this->arrayLenguajes as $lenguaje => $value) {
@@ -86,12 +85,12 @@ class ProyectosModel extends Mysql
             $this->strRepositorio = $repositorio;
             $this->strTags = $tags;
             $this->arrayLenguajes = $lenguajes;
-            $this->intEstado = 1;
+
             $sql = "SELECT * FROM proyectos WHERE repositorio = '$this->strRepositorio' AND id_proyecto != $this->intId";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $sql = "UPDATE proyectos SET nombre = ?, descripcion = ?, repositorio = ?, estado = ?, tags = ? WHERE id_proyecto = $this->intId";
-                $arrData = array($this->strNombre, $this->strDescripcion, $this->strRepositorio, $this->intEstado, $this->strTags);
+                $sql = "UPDATE proyectos SET nombre = ?, descripcion = ?, repositorio = ?, tags = ? WHERE id_proyecto = $this->intId";
+                $arrData = array($this->strNombre, $this->strDescripcion, $this->strRepositorio, $this->strTags);
                 $request = $this->update($sql, $arrData);
                 // Eliminando anteriores lengujes
                 $sqlDel = "DELETE FROM proyecto_lenguaje WHERE proyecto_id = $this->intId";

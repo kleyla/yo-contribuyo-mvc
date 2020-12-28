@@ -19,18 +19,17 @@ class LenguajesModel extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
-    public function insertLenguaje(string $nombre, string $link, int $estado)
+    public function insertLenguaje(string $nombre, string $link)
     {
         try {
             $return = "";
             $this->strNombre = $nombre;
             $this->strLink = $link;
-            $this->intEstado = $estado;
             $sql = "SELECT * FROM lenguajes WHERE nombre = '$this->strNombre'";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $query_insert = "INSERT INTO lenguajes(nombre, link, estado, fecha) VALUES (?,?,?, now())";
-                $arrData = array($this->strNombre, $this->strLink, $this->intEstado);
+                $query_insert = "INSERT INTO lenguajes(nombre, link) VALUES (?,?)";
+                $arrData = array($this->strNombre, $this->strLink);
                 $request_insert = $this->insert($query_insert, $arrData);
                 $return = $request_insert;
                 return $return;
@@ -48,18 +47,17 @@ class LenguajesModel extends Mysql
         $request = $this->select($sql);
         return $request;
     }
-    public function updateLenguaje(int $id, string $nombre, string $link, int $estado)
+    public function updateLenguaje(int $id, string $nombre, string $link)
     {
         try {
             $this->intId = $id;
             $this->strNombre = $nombre;
             $this->strLink = $link;
-            $this->intEstado = $estado;
             $sql = "SELECT * FROM lenguajes WHERE nombre = '$this->strNombre' AND id_lenguaje != $this->intId";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $sql = "UPDATE lenguajes SET nombre = ?, link = ?, estado = ? WHERE id_lenguaje = $this->intId";
-                $arrData = array($this->strNombre, $this->strLink, $this->intEstado);
+                $sql = "UPDATE lenguajes SET nombre = ?, link = ? WHERE id_lenguaje = $this->intId";
+                $arrData = array($this->strNombre, $this->strLink);
                 $request = $this->update($sql, $arrData);
                 return $request;
             } else {

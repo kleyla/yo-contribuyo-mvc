@@ -21,13 +21,6 @@
                                 <label class="control-label">Link oficial</label>
                                 <input class="form-control" id="txtLink" name="txtLink" type="text" placeholder="Link" required>
                             </div>
-                            <div class="form-group">
-                                <label for="listaEstado">Estado</label>
-                                <select class="form-control" id="listaEstado" name="listaEstado" required>
-                                    <option value="1">Activo</option>
-                                    <option value="2">Inactivo</option>
-                                </select>
-                            </div>
                         </div>
                         <div class="tile-footer">
                             <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>

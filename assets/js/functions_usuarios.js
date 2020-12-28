@@ -33,9 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
       var intIdUsuario = document.querySelector("#idUsuario").value;
       var strNick = document.querySelector("#txtNick").value;
       var strEmail = document.querySelector("#txtEmail").value;
-      var intEstado = document.querySelector("#listaEstado").value;
       var strRol = document.querySelector("#listaRol").value;
-      if (strNick == "" || strEmail == "" || intEstado == "" || strRol == "") {
+      if (strNick == "" || strEmail == "" || strRol == "") {
         swal("Atencion", "Todos los campos son obligatorios", "error");
         // alert("daji");
         return false;
@@ -134,17 +133,6 @@ function EditarUsuario() {
               objData.data.id_usuario;
             document.querySelector("#txtNick").value = objData.data.nick;
             document.querySelector("#txtEmail").value = objData.data.email;
-            if (objData.data.estado == 1) {
-              var optionSelect =
-                '<option value="1" selected class="notBlock">Activo</option>';
-            } else {
-              var optionSelect =
-                '<option value="2" selected class="notBlock">Inactivo</option>';
-            }
-            var htmlSelect = `${optionSelect}
-                                <option value="1">Activo</option>
-                                <option value="2">Inactivo</option>`;
-            document.querySelector("#listaEstado").innerHTML = htmlSelect;
             if (objData.data.rol == "Administrador") {
               var optionSelect =
                 '<option value="Administrador" selected class="notBlock">Administrador</option>';

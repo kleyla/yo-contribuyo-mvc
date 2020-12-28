@@ -32,11 +32,10 @@ class ArticulosModel extends Mysql
             $return = "";
             $this->strTitulo = $titulo;
             $this->strContenido = $contenido;
-            $this->intEstado = 1;
             $this->intUsuarioId = $_SESSION['idUser'];
 
-            $query_insert = "INSERT INTO articulos(titulo, contenido, estado, usuario_id, fecha ) VALUES (?,?,?,?, now() )";
-            $arrData = array($this->strTitulo, $this->strContenido, $this->intEstado, $this->intUsuarioId);
+            $query_insert = "INSERT INTO articulos(titulo, contenido, usuario_id ) VALUES (?,?,?)";
+            $arrData = array($this->strTitulo, $this->strContenido, $this->intUsuarioId);
             $request_insert = $this->insert($query_insert, $arrData);
             $return = $request_insert;
             return $return;

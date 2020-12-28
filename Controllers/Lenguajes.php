@@ -56,16 +56,15 @@ class Lenguajes extends Controllers
         $intIdLenguaje = intval($_POST['idLenguaje']);
         $strNombre = strClean($_POST["txtNombre"]);
         $strLink = strClean($_POST["txtLink"]);
-        $intEstado = strClean($_POST["listaEstado"]);
 
         if ($intIdLenguaje == 0) {
             // Crear
-            $request_lenguaje = $this->model->insertLenguaje($strNombre, $strLink, $intEstado);
+            $request_lenguaje = $this->model->insertLenguaje($strNombre, $strLink);
             $option = 1;
             // echo json_encode($request_lenguaje);
         } else {
             // Update
-            $request_lenguaje = $this->model->updateLenguaje($intIdLenguaje, $strNombre, $strLink, $intEstado);
+            $request_lenguaje = $this->model->updateLenguaje($intIdLenguaje, $strNombre, $strLink);
             $option = 2;
         }
         // dep($_POST);

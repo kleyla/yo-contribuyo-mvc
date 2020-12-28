@@ -24,7 +24,7 @@ class RegisterModel extends Mysql
             $sql = "SELECT * FROM usuarios WHERE nick = '$this->strNick' OR email = '$this->strEmail'";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $query_insert = "INSERT INTO usuarios(nick, email, pass, rol, estado, fecha) VALUES (?,?,?,?,1, now())";
+                $query_insert = "INSERT INTO usuarios(nick, email, pass, rol) VALUES (?,?,?,?)";
                 $arrData = array($this->strNick, $this->strEmail, $this->strPassword, $this->strRol);
                 $request_insert = $this->insert($query_insert, $arrData);
                 $return = $request_insert;
