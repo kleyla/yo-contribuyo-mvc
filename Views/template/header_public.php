@@ -19,11 +19,16 @@
             background: #ccc;
             padding: 6px;
         }
+        .avatar-big{
+            width: 100px;
+            background: #ccc;
+            padding: 8px;
+        }
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
         <div class="container-fluid">
             <a class="navbar-brand" href="<?php echo base_url(); ?>"><img src="<?= media(); ?>images/uploads/programacion-web.svg" alt="Logo" style="width: 50px;"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

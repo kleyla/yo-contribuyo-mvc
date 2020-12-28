@@ -31,7 +31,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <?php foreach ($data["proyectos"] as $item) { ?>
             <div class="col">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body">
                         <h4 class="card-title text-center"><?= $item['nombre'] ?></h4>
                         <?php foreach ($item['lenguajes'] as $lenguaje) { ?>
@@ -42,7 +42,6 @@
                             <p class="card-text text-muted"><?= $item['descripcion'] ?></p>
                         </div>
                         <a href="<?= $item['repositorio'] ?>" target="_blank" class="btn btn-primary">Repositorio</a>
-                        <a href="<?= base_url(); ?>/home/verProyecto/<?= $item['id_proyecto'] ?> " target="_blank" class="btn btn-info">Ver mas..</a>
                     </div>
                 </div>
             </div>
@@ -57,7 +56,7 @@
     <div class="row row-cols-1 row-cols-md-3 g-4 ">
         <?php foreach ($data["articulos"] as $item) { ?>
             <div class="col">
-                <div class="card">
+                <div class="card shadow">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-3 d-flex flex-column justify-content-center align-items-center">
@@ -69,7 +68,7 @@
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-2">
-                            <a href="<?= base_url(); ?>/home/verProyecto/<?= $item['id_proyecto'] ?> " target="_blank" class="btn btn-outline-primary">Ver mas..</a>
+                            <a href="<?= base_url(); ?>home/verArticulo/<?= $item['id_articulo'] ?> " class="btn btn-outline-primary">Ver mas..</a>
                         </div>
                     </div>
                 </div>

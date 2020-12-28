@@ -36,4 +36,15 @@ class HomeModel extends Mysql
             echo $e->getMessage();
         }
     }
+    public function getArticulo(int $id)
+    {
+        try {
+            $sql = "SELECT articulos.*, usuarios.nick FROM articulos, usuarios WHERE id_articulo = $id 
+                AND articulos.usuario_id = usuarios.id_usuario";
+            $request = $this->select($sql);
+            return $request;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }
