@@ -16,6 +16,7 @@
                             <p class="card-text text-muted"><?= $item['descripcion'] ?></p>
                         </div>
                         <a href="<?= $item['repositorio'] ?>" target="_blank" class="btn btn-primary">Repositorio</a>
+                        <a href="<?= base_url(); ?>home/verProyecto/<?= $item['id_proyecto'] ?> " class="btn btn-outline-primary">Ver mas..</a>
                     </div>
                 </div>
             </div>

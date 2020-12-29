@@ -76,14 +76,14 @@ CREATE TABLE comentarios (
   -- id_comentario INT NOT NULL UNIQUE AUTO_INCREMENT,
   contenido TEXT CHARACTER SET utf8 NOT NULL,
   accion_id INT NOT NULL,
-  -- PRIMARY KEY (id_comentario),
+  PRIMARY KEY (accion_id),
   FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 CREATE TABLE calificaciones (
   -- id_calificacion INT NOT NULL UNIQUE AUTO_INCREMENT,
   accion_id INT NOT NULL,
   estrellas FLOAT NOT NULL,
-  -- PRIMARY KEY (id_calificacion),
+  PRIMARY KEY (accion_id),
   FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 -- DATA
@@ -152,3 +152,9 @@ INSERT INTO proyecto_lenguaje(proyecto_id, lenguaje_id) VALUES ('2','10');
 
 -- ARTICULOS
 INSERT INTO articulos(titulo, contenido, usuario_id) VALUES ("Octocat", 'Articulo de Octocats', 1);
+
+INSERT INTO acciones(usuario_id, proyecto_id) VALUES(1,1);
+INSERT INTO acciones(usuario_id, proyecto_id) VALUES(2,1);
+
+INSERT INTO comentarios(accion_id, contenido) VALUES(1,'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente harum laudantium soluta sunt, modi quas, saepe quis maiores inventore cum, nostrum veniam accusantium. Quos dolorem consequatur similique explicabo enim? Esse.');
+INSERT INTO comentarios(accion_id, contenido) VALUES(2,'Holier');

@@ -29,6 +29,13 @@ headerAdmin($data);
                                     <label class="control-label">Contenido</label>
                                     <textarea class="form-control" id="txtContenido" name="txtContenido" rows="10" placeholder="Contenido del articulo" required></textarea>
                                 </div>
+                                <div class="form-group col-md-6">
+                                    <label for="listStatus">Estado</label>
+                                    <select class="form-control" id="listStatus" name="listStatus" required>
+                                        <option value="Borrador">Borrador</option>
+                                        <option value="Publicar">Publicar</option>
+                                    </select>
+                                </div>
                             </div>
 
                         </div>

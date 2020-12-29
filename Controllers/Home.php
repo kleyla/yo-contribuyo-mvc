@@ -59,4 +59,18 @@ class Home extends Controllers
             $this->views->getView($this, "articulos/verArticulo", $data);
         }
     }
+    public function verProyecto($id)
+    {
+        if (intval($id) > 0) {
+            session_start();
+            $data["tag_name"] = "Proyecto";
+            $data["page_title"] = "Ver Proyecto";
+            $data["page_name"] = "proyectos";
+            $data['script'] = 'js/functions_acciones.js';
+            $arrData = $this->model->getProyecto($id);
+            $data["proyecto"] = $arrData;
+            // dep($data);
+            $this->views->getView($this, "proyectos/verProyecto", $data);
+        }
+    }
 }
