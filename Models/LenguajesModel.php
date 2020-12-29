@@ -2,11 +2,11 @@
 
 class LenguajesModel extends Mysql
 {
-    public $intId;
-    public $strNombre;
-    public $strLink;
-    public $intEstado;
-    public $fecha;
+    private $intId;
+    private $strNombre;
+    private $strLink;
+    private $intEstado;
+    private $fecha;
 
     public function __construct()
     {

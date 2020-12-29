@@ -2,10 +2,10 @@
 
 class ArticulosModel extends Mysql
 {
-    public $intId;
-    public $strTitulo;
-    public $strContenido;
-    public $intEstado;
+    private $intId;
+    private $strTitulo;
+    private $strContenido;
+    private $intEstado;
     private $intUsuarioId;
 
     public function __construct()

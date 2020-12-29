@@ -2,13 +2,13 @@
 
 class ProyectosModel extends Mysql
 {
-    public $intId;
-    public $strNombre;
-    public $strDescripcion;
-    public $strRepositorio;
-    public $intEstado;
-    public $strTags;
-    public $arrayLenguajes;
+    private $intId;
+    private $strNombre;
+    private $strDescripcion;
+    private $strRepositorio;
+    private $intEstado;
+    private $strTags;
+    private $arrayLenguajes;
     private $intUsuarioId;
 
     public function __construct()

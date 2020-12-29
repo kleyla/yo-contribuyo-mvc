@@ -2,13 +2,13 @@
 
 class UsuariosModel extends Mysql
 {
-    public $intId;
-    public $strNick;
-    public $strEmail;
-    public $strPassword;
-    public $intEstado;
-    public $strRol;
-    public $fecha;
+    private $intId;
+    private $strNick;
+    private $strEmail;
+    private $strPassword;
+    private $intEstado;
+    private $strRol;
+    private $fecha;
 
     public function __construct()
     {
