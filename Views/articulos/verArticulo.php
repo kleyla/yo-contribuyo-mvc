@@ -14,9 +14,15 @@
             </div>
         </div>
         <div class="col">
-            <p>
-                <?= $data['articulo']['contenido'] ?>
-            </p>
+
+            <div>
+                <?php
+                require_once 'Libraries/Parsedown.php';
+                $parsedown = new Parsedown();
+                echo $parsedown->text($data['articulo']['contenido'])
+                ?>
+            </div>
+
         </div>
     </div>
     <div class="row mt-5">

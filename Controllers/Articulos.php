@@ -37,6 +37,13 @@ class Articulos extends Controllers
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulos/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
                         <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
+            } else if ($arrData[$i]["estado"] == 2) {
+                $arrData[$i]["estado"] = '<span class="badge badge-info">Borrador</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-secondary btn-sm btnShowArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulos/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                    </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
@@ -66,16 +73,17 @@ class Articulos extends Controllers
     {
         $intIdArticulo = intval($_POST['idArticulo']);
         $strTitulo = strClean($_POST["txtTitulo"]);
-        $strContenido = strClean($_POST["txtContenido"]);
+        $strContenido = $_POST["txtContenido"];
+        $intStatus = strClean($_POST["listStatus"]);
 
         if ($intIdArticulo == 0) {
             // Crear
-            $request_articulos = $this->model->insertArticulo($strTitulo, $strContenido);
+            $request_articulos = $this->model->insertArticulo($strTitulo, $strContenido, $intStatus);
             $option = 1;
             // echo json_encode($request_articulos);
         } else {
             // Update
-            $request_articulos = $this->model->updateArticulo($intIdArticulo, $strTitulo, $strContenido);
+            $request_articulos = $this->model->updateArticulo($intIdArticulo, $strTitulo, $strContenido, $intStatus);
             $option = 2;
         }
         // dep($_POST);

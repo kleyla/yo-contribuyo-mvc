@@ -26,16 +26,17 @@ class ArticulosModel extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
-    public function insertArticulo(string $titulo, string $contenido)
+    public function insertArticulo(string $titulo, string $contenido, int $estado)
     {
         try {
             $return = "";
             $this->strTitulo = $titulo;
             $this->strContenido = $contenido;
             $this->intUsuarioId = $_SESSION['idUser'];
+            $this->intEstado = $estado;
 
-            $query_insert = "INSERT INTO articulos(titulo, contenido, usuario_id ) VALUES (?,?,?)";
-            $arrData = array($this->strTitulo, $this->strContenido, $this->intUsuarioId);
+            $query_insert = "INSERT INTO articulos(titulo, contenido, usuario_id, estado) VALUES (?,?,?,?)";
+            $arrData = array($this->strTitulo, $this->strContenido, $this->intUsuarioId, $this->intEstado);
             $request_insert = $this->insert($query_insert, $arrData);
             $return = $request_insert;
             return $return;
@@ -50,15 +51,16 @@ class ArticulosModel extends Mysql
         $request = $this->select($sql);
         return $request;
     }
-    public function updateArticulo(int $id, string $titulo, string $contenido)
+    public function updateArticulo(int $id, string $titulo, string $contenido, int $estado)
     {
         try {
             $this->intId = $id;
             $this->strTitulo = $titulo;
             $this->strContenido = $contenido;
+            $this->intEstado = $estado;
 
-            $sql = "UPDATE articulos SET titulo = ?, contenido = ? WHERE id_articulo = $this->intId";
-            $arrData = array($this->strTitulo, $this->strContenido);
+            $sql = "UPDATE articulos SET titulo = ?, contenido = ?, estado = ? WHERE id_articulo = $this->intId";
+            $arrData = array($this->strTitulo, $this->strContenido, $this->intEstado);
             $request = $this->update($sql, $arrData);
             return $request;
         } catch (Exception $e) {

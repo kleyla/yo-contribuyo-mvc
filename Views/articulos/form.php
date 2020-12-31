@@ -26,14 +26,14 @@ headerAdmin($data);
                                     <input value="" class="form-control" id="txtTitulo" name="txtTitulo" type="text" placeholder="Nombre" required>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label class="control-label">Contenido</label>
-                                    <textarea class="form-control" id="txtContenido" name="txtContenido" rows="10" placeholder="Contenido del articulo" required></textarea>
+                                    <label class="control-label">Contenido <small>(use Markdown)</small></label>
+                                    <textarea class="form-control" id="txtContenido" name="txtContenido" rows="15" placeholder="Contenido del articulo" required></textarea>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="listStatus">Estado</label>
                                     <select class="form-control" id="listStatus" name="listStatus" required>
-                                        <option value="Borrador">Borrador</option>
-                                        <option value="Publicar">Publicar</option>
+                                        <option value="2">Borrador</option>
+                                        <option value="1">Publicar</option>
                                     </select>
                                 </div>
                             </div>
