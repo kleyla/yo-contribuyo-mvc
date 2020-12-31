@@ -27,9 +27,4 @@
         <?php } ?>
     </div>
 </div>
-<footer>
-    <div class="py-4">
-        <p class="text-center">&copy; Karen Rodriguez</p>
-    </div>
-</footer>
 <?php footerPublic($data); ?>

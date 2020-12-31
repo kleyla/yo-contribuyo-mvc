@@ -13,8 +13,9 @@
 <!-- Data table plugin-->
 <script type="text/javascript" src="<?= media(); ?>js/plugins/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="<?= media(); ?>js/plugins/dataTables.bootstrap.min.js"></script>
-
-<script src="<?= media(); ?><?= $data['script']; ?> "></script>
+<?php if ($data['script']) { ?>
+    <script src="<?= media(); ?><?= $data['script']; ?> "></script>
+<?php } ?>
 
 </body>
 

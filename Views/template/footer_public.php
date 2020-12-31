@@ -1,3 +1,8 @@
+<footer>
+    <div class="py-4">
+        <p class="text-center">&copy; Karen Rodriguez</p>
+    </div>
+</footer>
 <script>
     const base_url = "<?= base_url(); ?>";
 </script>

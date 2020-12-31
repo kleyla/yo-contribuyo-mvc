@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
             formUsuario.reset();
             swal("Usuario", objData.msg, "success");
             tableUsuarios.api().ajax.reload(function () {
-              EditarUsuario();
+              editarUsuario();
               DeleteUsuario();
               enableUsuario();
             });
@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-$("#tableUsuarios").DataTable();
+// $("#tableUsuarios").DataTable();
 
 function openModalUsuario() {
   console.log("open Modal Usuario");
@@ -102,18 +102,65 @@ function stylesFromRegisterToUpdate() {
 window.addEventListener(
   "load",
   function () {
-    EditarUsuario();
+    console.log("LOAD");
+    editarUsuario();
     DeleteUsuario();
     enableUsuario();
+    // exa();
   },
   false
 );
-function EditarUsuario() {
-  //   console.log("Editing..");
+
+// function editarUsuario() {
+//   $(".btnEditUsuario").each(function (index) {
+//     $(this).on("click", function () {
+//       console.log($(this).attr("rl"));
+//       stylesFromRegisterToUpdate();
+
+//       var idUsuario = $(this).attr("rl");
+//       var request = window.XMLHttpRequest
+//         ? new XMLHttpRequest()
+//         : new ActiveXObject("Microsoft.XMLHTTP");
+//       var ajaxUrl = base_url + "usuarios/getUsuario/" + idUsuario;
+//       request.open("GET", ajaxUrl, true);
+//       request.send();
+
+//       request.onreadystatechange = function () {
+//         if (request.readyState == 4 && request.status == 200) {
+//           //   console.log(request.responseText);
+//           var objData = JSON.parse(request.responseText);
+//           if (objData.status) {
+//             document.querySelector("#idUsuario").value =
+//               objData.data.id_usuario;
+//             document.querySelector("#txtNick").value = objData.data.nick;
+//             document.querySelector("#txtEmail").value = objData.data.email;
+//             if (objData.data.rol == "Administrador") {
+//               var optionSelect =
+//                 '<option value="Administrador" selected class="notBlock">Administrador</option>';
+//             } else {
+//               var optionSelect =
+//                 '<option value="Contribuidor" selected class="notBlock">Contribuidor</option>';
+//             }
+//             var htmlSelect = `${optionSelect}
+//                                 <option value="Administrador">Administrador</option>
+//                                 <option value="Contribuidor">Contribuidor</option>`;
+//             document.querySelector("#listaRol").innerHTML = htmlSelect;
+//             $("#modalFormUsuario").modal("show");
+//           } else {
+//             swal("Error", objData.msg, "error");
+//           }
+//         }
+//       };
+//     });
+//   });
+// }
+
+function editarUsuario() {
+  console.log("Editing..");
   var btnEditUsuario = document.querySelectorAll(".btnEditUsuario");
   btnEditUsuario.forEach(function (btn) {
+    console.log("Editando");
     btn.addEventListener("click", function () {
-      //   console.log("Editando");
       stylesFromRegisterToUpdate();
 
       var idUsuario = this.getAttribute("rl");
@@ -191,7 +238,7 @@ function DeleteUsuario() {
                 if (objData.status) {
                   swal("Eliminar!", objData.msg, "success");
                   tableUsuarios.api().ajax.reload(function () {
-                    EditarUsuario();
+                    editarUsuario();
                     DeleteUsuario();
                     enableUsuario();
                   });
@@ -244,7 +291,7 @@ function enableUsuario() {
                 if (objData.status) {
                   swal("Habilitar!", objData.msg, "success");
                   tableUsuarios.api().ajax.reload(function () {
-                    EditarUsuario();
+                    editarUsuario();
                     DeleteUsuario();
                     enableUsuario();
                   });

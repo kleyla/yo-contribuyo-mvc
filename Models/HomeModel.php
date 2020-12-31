@@ -61,10 +61,42 @@ class HomeModel extends Mysql
                 WHERE p.id_proyecto = $id AND a.proyecto_id = p.id_proyecto AND a.usuario_id = u.id_usuario AND a.id_accion = c.accion_id AND a.estado = true";
             $request_comentarios = $this->select_all($sql);
             $request["comentarios"] = $request_comentarios;
+            $sql = "SELECT count(f.accion_id) as cantidad
+            FROM proyectos p, acciones a, favoritos f, usuarios u 
+            WHERE p.id_proyecto = $id AND a.proyecto_id = p.id_proyecto AND a.usuario_id = u.id_usuario AND a.id_accion = f.accion_id AND a.estado = true";
+            $request_corazones = $this->select($sql);
+            $request["favoritos"] = $request_corazones;
+            if (empty($_SESSION['login'])) {
+                $request['favorito'] = false;
+            } else {
+                $idUsuario = $_SESSION['idUser'];
+                $sql = "SELECT f.accion_id
+                FROM proyectos p, acciones a, favoritos f, usuarios u 
+                WHERE p.id_proyecto = $id AND a.proyecto_id = p.id_proyecto AND a.usuario_id = u.id_usuario AND a.id_accion = f.accion_id AND a.estado = true AND u.id_usuario = $idUsuario";
+                $request_favorito = $this->select($sql);
+                if (intval($request_favorito['accion_id']) > 0) {
+                    $request['favorito'] = true;
+                } else {
+                    $request['favorito'] = false;
+                }
+            }
             // dep($request);
             return $request;
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+    public function exa()
+    {
+        $idUsuario = 2;
+        $idProyecto = 1;
+        $sql = "SELECT a.id_accion FROM acciones a, favoritos f
+                WHERE a.id_accion = f.accion_id AND a.usuario_id = $idUsuario AND a.proyecto_id = $idProyecto";
+        $request = $this->select($sql);
+        $id_accion = $request['id_accion'];
+        $sql = "SELECT * FROM favoritos WHERE accion_id = $id_accion";
+        $request = $this->select($sql);
+        echo $id_accion;
+        // dep($request);
     }
 }

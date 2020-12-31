@@ -1,8 +1,29 @@
-<?php headerPublic($data); ?>
+<?php
+headerPublic($data);
+getModal("modalFavorito", $data);
+?>
 
 <div class="container-md my-2 py-4">
     <div class="row">
-        <h2 class="text-center "><?= $data['proyecto']['nombre'] ?></h2>
+        <div class="col-lg-10">
+            <h2 class="text-center "><?= $data['proyecto']['nombre'] ?></h2>
+        </div>
+        <div class="col">
+            <!-- Button trigger modal -->
+            <?php if ($_SESSION['login']) { ?>
+                <?php if (intval($data['proyecto']['favorito']) > 0) { ?>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <span class="fa fa-heart-o"></span>
+                    </button>
+                <?php } else { ?>
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <span class="fa fa-heart-o"></span>
+                    </button>
+                <?php } ?>
+            <?php } ?>
+            <span class="fa fa-heart c-checked"></span>
+            <span><?= $data['proyecto']['favoritos']['cantidad'] ?></span>
+        </div>
     </div>
     <div class="row mt-4">
         <div class=" col-lg-3 col-md-3 col-sm-4 ">
@@ -63,16 +84,16 @@
                     </div>
                 </div>
                 <div class="col">
-                    <button id="btnActionForm" class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>
+                    <button id="btnActionForm" class="btn btn-primary" type="submit">
                         <span id="btnText">Enviar</span></button>
                 </div>
             </div>
         </form>
+    <?php } else { ?>
+        <div class="mt-3">
+            <p class="text-center">Registrate para comentar</p>
+        </div>
     <?php } ?>
 </div>
-<footer>
-    <div class="py-4">
-        <p class="text-center">&copy; Karen Rodriguez</p>
-    </div>
-</footer>
+
 <?php footerPublic($data); ?>

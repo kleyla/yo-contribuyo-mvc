@@ -73,4 +73,8 @@ class Home extends Controllers
             $this->views->getView($this, "proyectos/verProyecto", $data);
         }
     }
+    public function exa()
+    {
+        $this->model->exa();
+    }
 }

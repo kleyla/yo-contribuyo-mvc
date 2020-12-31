@@ -12,6 +12,7 @@
     <title><?php echo $data["tag_name"] ?></title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?= media(); ?>css/styles.css">
     <style>
         .avatar {
@@ -19,10 +20,15 @@
             background: #ccc;
             padding: 6px;
         }
-        .avatar-big{
+
+        .avatar-big {
             width: 100px;
             background: #ccc;
             padding: 8px;
+        }
+
+        .c-checked {
+            color: red;
         }
     </style>
 </head>
