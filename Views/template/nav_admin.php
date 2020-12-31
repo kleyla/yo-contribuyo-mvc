@@ -22,6 +22,8 @@
                   <?php } ?>
                   <li><a class="app-menu__item" href="<?= base_url(); ?>articulos"><i class="app-menu__icon fa fa-newspaper-o"></i>
                                   <span class="app-menu__label">Articulos</span></a></li>
+                  <li><a class="app-menu__item" href="<?= base_url(); ?>favoritos"><i class="app-menu__icon fa fa-heart"></i>
+                                  <span class="app-menu__label">Mis favoritos</span></a></li>
                   <li><a class="app-menu__item" href="<?= base_url(); ?>dashboard"><i class="app-menu__icon fa fa-file-code-o"></i>
                                   <span class="app-menu__label">Docs</span></a></li>
 

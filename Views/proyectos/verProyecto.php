@@ -5,7 +5,7 @@ getModal("modalFavorito", $data);
 
 <div class="container-md my-2 py-4">
     <div class="row">
-        <div class="col-lg-10">
+        <div class="col-lg-10 col-md-10 col-sm-8">
             <h2 class="text-center "><?= $data['proyecto']['nombre'] ?></h2>
         </div>
         <div class="col">
@@ -21,6 +21,9 @@ getModal("modalFavorito", $data);
                     </button>
                 <?php } ?>
             <?php } ?>
+
+        </div>
+        <div class="col">
             <span class="fa fa-heart c-checked"></span>
             <span><?= $data['proyecto']['favoritos']['cantidad'] ?></span>
         </div>

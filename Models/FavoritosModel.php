@@ -9,6 +9,14 @@ class FavoritosModel extends Mysql
         parent::__construct();
         // echo "mensaje desde el modelo home!";
     }
+    public function all()
+    {
+        $idUsuario = intval($_SESSION['idUser']);
+        $sql = "SELECT p.*, u.nick FROM proyectos p, acciones a, favoritos f, usuarios u
+                WHERE p.id_proyecto = a.proyecto_id AND u.id_usuario = p.usuario_id AND a.id_accion = f.accion_id AND a.usuario_id = $idUsuario";
+        $request = $this->select_all($sql);
+        return $request;
+    }
     public function insertFavorito(int $idProyecto)
     {
         try {
