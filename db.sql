@@ -79,10 +79,10 @@ CREATE TABLE comentarios (
   PRIMARY KEY (accion_id),
   FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
 );
-CREATE TABLE calificaciones (
+CREATE TABLE favoritos (
   -- id_calificacion INT NOT NULL UNIQUE AUTO_INCREMENT,
   accion_id INT NOT NULL,
-  estrellas FLOAT NOT NULL,
+  -- estrellas FLOAT NOT NULL,
   PRIMARY KEY (accion_id),
   FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -231,3 +231,11 @@ INSERT INTO acciones(usuario_id, proyecto_id) VALUES(2,1);
 
 INSERT INTO comentarios(accion_id, contenido) VALUES(1,'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente harum laudantium soluta sunt, modi quas, saepe quis maiores inventore cum, nostrum veniam accusantium. Quos dolorem consequatur similique explicabo enim? Esse.');
 INSERT INTO comentarios(accion_id, contenido) VALUES(2,'Holier');
+
+INSERT INTO acciones(usuario_id, proyecto_id) VALUES(1,1);
+INSERT INTO acciones(usuario_id, proyecto_id) VALUES(2,1);
+
+INSERT INTO favoritos(accion_id) VALUES(3);
+INSERT INTO favoritos(accion_id) VALUES(4);
+
+
