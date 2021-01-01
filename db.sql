@@ -56,10 +56,11 @@ CREATE TABLE articulos (
 CREATE TABLE detalle_denuncia (
   articulo_id INT NOT NULL,
   usuario_id INT NOT NULL,
+  razones VARCHAR(255) NOT NULL,
+  PRIMARY KEY (articulo_id, usuario_id),
   
   FOREIGN KEY (articulo_id) REFERENCES articulos(id_articulo) ON UPDATE CASCADE ON DELETE RESTRICT,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
-  
 );
 
 CREATE TABLE acciones (
