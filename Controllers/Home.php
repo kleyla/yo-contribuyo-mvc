@@ -54,6 +54,7 @@ class Home extends Controllers
             $data["tag_name"] = "Articulo";
             $data["page_title"] = "Ver Articulo";
             $data["page_name"] = "articulo";
+            $data['script'] = 'js/functions_denuncias.js';
             $arrData = $this->model->getArticulo($id);
             $data["articulo"] = $arrData;
             $this->views->getView($this, "articulos/verArticulo", $data);

@@ -88,15 +88,23 @@ class HomeModel extends Mysql
     }
     public function exa()
     {
-        $idUsuario = 2;
-        $idProyecto = 1;
-        $sql = "SELECT a.id_accion FROM acciones a, favoritos f
-                WHERE a.id_accion = f.accion_id AND a.usuario_id = $idUsuario AND a.proyecto_id = $idProyecto";
-        $request = $this->select($sql);
-        $id_accion = $request['id_accion'];
-        $sql = "SELECT * FROM favoritos WHERE accion_id = $id_accion";
-        $request = $this->select($sql);
-        echo $id_accion;
-        // dep($request);
+        try {
+            $idUsuario = 1;
+            $idArticulo = 2;
+            $razones = "hihi";
+            $sql = "SELECT * FROM detalle_denuncia WHERE articulo_id = $idArticulo AND usuario_id = $idUsuario";
+            $request = $this->select_all($sql);
+            if (empty($request)) {
+                $query_insert = "INSERT INTO detalle_denuncia(articulo_id, usuario_id, razones) VALUES (?,?,?)";
+                $arrData = array($idArticulo, $idUsuario, $razones);
+                $request = $this->insert($query_insert, $arrData);
+            } else {
+                echo "Ya existe";
+            }
+            echo $request;
+            // dep($request);
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }

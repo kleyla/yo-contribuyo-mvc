@@ -25,23 +25,17 @@
 
         </div>
     </div>
-    <div class="row mt-5">
-        <h4>Comentarios:</h4>
-    </div>
-    <div class="row">
-        <div class="card shadow">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-1 d-flex flex-column justify-content-center align-items-center">
-                        <img src="<?= media(); ?>images/uploads/usuario.svg" class="rounded-circle avatar" alt="...">
-                    </div>
-                    <div class="col">
-                        <p class="text-muted my-0"><?= $data['articulo']['nick'] ?></p>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta iusto, veniam dolor veritatis cumque perspiciatis distinctio! Asperiores natus vero dolorem facere perferendis tenetur quaerat quae error necessitatibus, laborum, ipsam voluptates.</p>
-                    </div>
-                </div>
-            </div>
+    <?php if ($_SESSION['login']) { ?>
+        <div class="text-center mt-4">
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#DenunciaModal">
+                Denunciar
+            </button>
+
         </div>
-    </div>
+    <?php } ?>
+
 </div>
+<?php if ($_SESSION['login']) {
+    getModal("modalDenuncias", $data);
+} ?>
 <?php footerPublic($data); ?>
