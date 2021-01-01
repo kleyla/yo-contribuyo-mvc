@@ -18,6 +18,7 @@ class Articulos extends Controllers
         $data["page_tag"] = "Articulos";
         $data["page_title"] = "Articulos - Yo contribuyo";
         $data["page_name"] = "articulos";
+        $data["nav_articulos"] = "active";
         $data["script"] = "js/functions_articulos.js";
         $this->views->getView($this, "articulos", $data);
     }
@@ -33,14 +34,14 @@ class Articulos extends Controllers
             if ($arrData[$i]["estado"] == 1) {
                 $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-secondary btn-sm btnShowArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulos/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
                         <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else if ($arrData[$i]["estado"] == 2) {
                 $arrData[$i]["estado"] = '<span class="badge badge-info">Borrador</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-secondary btn-sm btnShowArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulos/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
                         <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';

@@ -16,6 +16,7 @@ class Favoritos extends Controllers
         $data["page_tag"] = "Favoritos";
         $data["page_title"] = "Favoritos - Yo contribuyo";
         $data["page_name"] = "favoritos";
+        $data["nav_favoritos"] = "active";
         $data["script"] = "js/functions_favoritos.js";
         $this->views->getView($this, "favoritos", $data);
     }
@@ -24,7 +25,7 @@ class Favoritos extends Controllers
         $arrData = $this->model->all();
         for ($i = 0; $i < count($arrData); $i++) {
             $arrData[$i]["opciones"] = '<div class="text-center">
-                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" title="Ver" ><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                     </div>';
         }
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);

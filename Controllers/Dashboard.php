@@ -17,6 +17,7 @@ class Dashboard extends Controllers
         $data["page_tag"] = "Dashboard";
         $data["page_title"] = "Dashboard - Tienda";
         $data["page_name"] = "dashboard";
+        $data["nav_dash"] = "active";
         $this->views->getView($this, "dashboard", $data);
     }
 }

@@ -18,6 +18,7 @@ class Proyectos extends Controllers
         $data["page_tag"] = "Proyectos";
         $data["page_title"] = "Proyectos - Yo contribuyo";
         $data["page_name"] = "proyectos";
+        $data["nav_proyectos"] = "active";
         $data["script"] = "js/functions_proyectos.js";
         $this->views->getView($this, "proyectos", $data);
     }
@@ -33,14 +34,14 @@ class Proyectos extends Controllers
             if ($arrData[$i]["estado"] == 1) {
                 $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-secondary btn-sm btnShowProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyectos/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
                         <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-secondary btn-sm btnShowProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyectos/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
                         <button class="btn btn-warning btn-sm btnEnableProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
                     </div>';

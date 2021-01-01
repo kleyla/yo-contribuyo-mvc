@@ -5,24 +5,29 @@ function base_url()
 }
 function media()
 {
-    return BASE_URL."assets/";
+    return BASE_URL . "assets/";
 }
-function headerAdmin($data="")
+function headerAdmin($data = "")
 {
     $view_header = "Views/template/header_admin.php";
     require_once($view_header);
 }
-function footerAdmin($data="")
+function footerAdmin($data = "")
 {
     $view_footer = "Views/template/footer_admin.php";
     require_once($view_footer);
 }
-function headerPublic($data="")
+function navAdmin($data = "")
+{
+    $view_nav = "Views/template/nav_admin.php";
+    require_once($view_nav);
+}
+function headerPublic($data = "")
 {
     $view_header = "Views/template/header_public.php";
     require_once($view_header);
 }
-function footerPublic($data="")
+function footerPublic($data = "")
 {
     $view_footer = "Views/template/footer_public.php";
     require_once($view_footer);
