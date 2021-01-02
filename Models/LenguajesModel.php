@@ -13,18 +13,27 @@ class LenguajesModel extends Mysql
         parent::__construct();
         // echo "mensaje desde el modelo home!";
     }
+    public function setId(int $id)
+    {
+        $this->intId = $id;
+    }
+    public function setNombre(string $nombre)
+    {
+        $this->strNombre = $nombre;
+    }
+    public function setLink(string $link)
+    {
+        $this->strLink = $link;
+    }
     public function all()
     {
         $sql = "SELECT * FROM lenguajes";
         $request = $this->select_all($sql);
         return $request;
     }
-    public function insertLenguaje(string $nombre, string $link)
+    public function insertLenguaje()
     {
         try {
-            $return = "";
-            $this->strNombre = $nombre;
-            $this->strLink = $link;
             $sql = "SELECT * FROM lenguajes WHERE nombre = '$this->strNombre'";
             $request = $this->select_all($sql);
             if (empty($request)) {
@@ -40,19 +49,15 @@ class LenguajesModel extends Mysql
             return $return = "exist";
         }
     }
-    public function selectLenguaje(int $id)
+    public function selectLenguaje()
     {
-        $this->intId = $id;
         $sql = "SELECT * FROM lenguajes WHERE id_lenguaje = $this->intId";
         $request = $this->select($sql);
         return $request;
     }
-    public function updateLenguaje(int $id, string $nombre, string $link)
+    public function updateLenguaje()
     {
         try {
-            $this->intId = $id;
-            $this->strNombre = $nombre;
-            $this->strLink = $link;
             $sql = "SELECT * FROM lenguajes WHERE nombre = '$this->strNombre' AND id_lenguaje != $this->intId";
             $request = $this->select_all($sql);
             if (empty($request)) {
@@ -68,10 +73,9 @@ class LenguajesModel extends Mysql
         }
     }
 
-    public function disableLenguaje(int $id)
+    public function disableLenguaje()
     {
         try {
-            $this->intId = $id;
             $sql = "UPDATE lenguajes SET estado = ? WHERE id_lenguaje = $this->intId";
             $arrData = array(0);
             $request = $this->update($sql, $arrData);
@@ -84,10 +88,9 @@ class LenguajesModel extends Mysql
             return $request = "error";
         }
     }
-    public function enableLenguaje(int $id)
+    public function enableLenguaje()
     {
         try {
-            $this->intId = $id;
             $sql = "UPDATE lenguajes SET estado = ? WHERE id_lenguaje = $this->intId";
             $arrData = array(1);
             $request = $this->update($sql, $arrData);

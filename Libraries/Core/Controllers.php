@@ -17,7 +17,7 @@ class Controllers
             require_once($routClass);
             $this->model = new $model();
         }else{
-            // echo "No existe el modelo";
+            echo "No existe el modelo";
         }
     }
 }

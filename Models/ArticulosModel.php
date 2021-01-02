@@ -13,6 +13,26 @@ class ArticulosModel extends Mysql
         parent::__construct();
         // echo "mensaje desde el modelo home!";
     }
+    public function setId(int $id)
+    {
+        $this->intId = $id;
+    }
+    public function setTitulo(string $titulo)
+    {
+        $this->strTitulo = $titulo;
+    }
+    public function setContenido(string $contenido)
+    {
+        $this->strContenido = $contenido;
+    }
+    public function setEstado(int $estado)
+    {
+        $this->intEstado = $estado;
+    }
+    public function setUsuarioId(int $id)
+    {
+        $this->intUsuarioId = $id;
+    }
     public function all()
     {
         $sql = "SELECT articulos.*, usuarios.nick FROM articulos, usuarios WHERE articulos.usuario_id = usuarios.id_usuario";
@@ -26,15 +46,9 @@ class ArticulosModel extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
-    public function insertArticulo(string $titulo, string $contenido, int $estado)
+    public function insertArticulo()
     {
         try {
-            $return = "";
-            $this->strTitulo = $titulo;
-            $this->strContenido = $contenido;
-            $this->intUsuarioId = $_SESSION['idUser'];
-            $this->intEstado = $estado;
-
             $query_insert = "INSERT INTO articulos(titulo, contenido, usuario_id, estado) VALUES (?,?,?,?)";
             $arrData = array($this->strTitulo, $this->strContenido, $this->intUsuarioId, $this->intEstado);
             $request_insert = $this->insert($query_insert, $arrData);
@@ -44,21 +58,15 @@ class ArticulosModel extends Mysql
             return $return = $e->getMessage();
         }
     }
-    public function selectArticulo(int $id)
+    public function selectArticulo()
     {
-        $this->intId = $id;
         $sql = "SELECT *  FROM articulos WHERE id_articulo = $this->intId";
         $request = $this->select($sql);
         return $request;
     }
-    public function updateArticulo(int $id, string $titulo, string $contenido, int $estado)
+    public function updateArticulo()
     {
         try {
-            $this->intId = $id;
-            $this->strTitulo = $titulo;
-            $this->strContenido = $contenido;
-            $this->intEstado = $estado;
-
             $sql = "UPDATE articulos SET titulo = ?, contenido = ?, estado = ? WHERE id_articulo = $this->intId";
             $arrData = array($this->strTitulo, $this->strContenido, $this->intEstado);
             $request = $this->update($sql, $arrData);
@@ -67,10 +75,9 @@ class ArticulosModel extends Mysql
             return  $request = $e->getMessage();
         }
     }
-    public function disableArticulo(int $id)
+    public function disableArticulo()
     {
         try {
-            $this->intId = $id;
             $sql = "UPDATE articulos SET estado = ? WHERE id_articulo = $this->intId";
             $arrData = array(0);
             $request = $this->update($sql, $arrData);
@@ -83,10 +90,9 @@ class ArticulosModel extends Mysql
             return $request = "error";
         }
     }
-    public function enableArticulo(int $id)
+    public function enableArticulo()
     {
         try {
-            $this->intId = $id;
             $sql = "UPDATE articulos SET estado = ? WHERE id_articulo = $this->intId";
             $arrData = array(1);
             $request = $this->update($sql, $arrData);

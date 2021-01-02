@@ -76,15 +76,20 @@ class Articulos extends Controllers
         $strTitulo = strClean($_POST["txtTitulo"]);
         $strContenido = $_POST["txtContenido"];
         $intStatus = strClean($_POST["listStatus"]);
+        $this->model->setTitulo($strTitulo);
+        $this->model->setContenido($strContenido);
+        $this->model->setUsuarioId($_SESSION['idUser']);
+        $this->model->setEstado($intStatus);
 
         if ($intIdArticulo == 0) {
             // Crear
-            $request_articulos = $this->model->insertArticulo($strTitulo, $strContenido, $intStatus);
+            $request_articulos = $this->model->insertArticulo();
             $option = 1;
             // echo json_encode($request_articulos);
         } else {
             // Update
-            $request_articulos = $this->model->updateArticulo($intIdArticulo, $strTitulo, $strContenido, $intStatus);
+            $this->model->setId($intIdArticulo);
+            $request_articulos = $this->model->updateArticulo();
             $option = 2;
         }
         // dep($_POST);
@@ -107,7 +112,8 @@ class Articulos extends Controllers
     {
         $intId = intval(strClean($id));
         if ($intId > 0) {
-            $arrData = $this->model->selectArticulo($intId);
+            $this->model->setId($intId);
+            $arrData = $this->model->selectArticulo();
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => "Datos no encontrados.");
             } else {
@@ -121,7 +127,8 @@ class Articulos extends Controllers
     {
         if ($_POST) {
             $intId = intval($_POST["idArticulo"]);
-            $requestDelete = $this->model->disableArticulo($intId);
+            $this->model->setId($intId);
+            $requestDelete = $this->model->disableArticulo();
             if ($requestDelete === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Articulo");
             } else {
@@ -135,7 +142,8 @@ class Articulos extends Controllers
     {
         if ($_POST) {
             $intId = intval($_POST["idArticulo"]);
-            $requestDelete = $this->model->enableArticulo($intId);
+            $this->model->setId($intId);
+            $requestDelete = $this->model->enableArticulo();
             if ($requestDelete === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha habilitado el Articulo");
             } else {

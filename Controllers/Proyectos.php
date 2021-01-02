@@ -2,6 +2,8 @@
 
 class Proyectos extends Controllers
 {
+    private $proyectoLenguaje;
+
     public function __construct()
     {
         session_start();
@@ -9,6 +11,8 @@ class Proyectos extends Controllers
             header('Location: ' . base_url() . 'login');
         }
         parent::__construct();
+        require_once("Models/ProyectoLenguajeModel.php");
+        $this->proyectoLenguaje = new ProyectoLenguajeModel();
     }
 
     public function proyectos()
@@ -59,7 +63,7 @@ class Proyectos extends Controllers
         $data["page_title"] = "Proyectos - Formulario";
         $data["page_name"] = "proyectos";
         $data["script"] = "js/functions_proyectos_nuevo.js";
-        $lenguajes = $this->model->allActive();
+        $lenguajes = $this->model->getActiveLenguajes();
         $data["lenguajes"] = $lenguajes;
         $data["id_proyecto"] = $id;
         // dep($lenguajes);
@@ -74,14 +78,34 @@ class Proyectos extends Controllers
         $strTags = strClean($_POST["txtTags"]);
         $arrayLenguajes = $_POST["lenguajes"];
 
+        $this->model->setNombre($strNombre);
+        $this->model->setDescripcion($strDescripcion);
+        $this->model->setRepositorio($strRepositorio);
+        $this->model->setTags($strTags);
+        $this->model->setUsuarioId($_SESSION['idUser']);
+
         if ($intIdProyecto == 0) {
             // Crear
-            $request_proyecto = $this->model->insertProyecto($strNombre, $strDescripcion, $strRepositorio, $arrayLenguajes, $strTags);
+            $request_proyecto = $this->model->insertProyecto();
+
+            $this->proyectoLenguaje->setProyectoId($request_proyecto);
+            foreach ($arrayLenguajes as $lenguaje => $value) {
+                $this->proyectoLenguaje->setLenguajeId($value);
+                $request_proyecto_lenguaje = $this->proyectoLenguaje->insertProyectoLenguaje();
+            }
             $option = 1;
             // echo json_encode($request_proyecto);
         } else {
             // Update
-            $request_proyecto = $this->model->updateProyecto($intIdProyecto, $strNombre, $strDescripcion, $strRepositorio, $arrayLenguajes, $strTags);
+            $this->model->setId($intIdProyecto);
+            $request_proyecto = $this->model->updateProyecto();
+
+            $this->proyectoLenguaje->setProyectoId($intIdProyecto);
+            $this->proyectoLenguaje->deleteProyectoLenguaje();
+            foreach ($arrayLenguajes as $lenguaje => $value) {
+                $this->proyectoLenguaje->setLenguajeId($value);
+                $request_proyecto_lenguaje = $this->proyectoLenguaje->insertProyectoLenguaje();
+            }
             $option = 2;
         }
         // dep($_POST);
@@ -104,7 +128,12 @@ class Proyectos extends Controllers
     {
         $intId = intval(strClean($id));
         if ($intId > 0) {
-            $arrData = $this->model->selectProyecto($intId);
+            $this->model->setId($id);
+            $arrData = $this->model->selectProyecto();
+            $this->proyectoLenguaje->setProyectoId($id);
+            $arrlenguajes = $this->proyectoLenguaje->selectLenguajes();
+            $arrData["lenguajes"] = $arrlenguajes;
+
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => "Datos no encontrados.");
             } else {
@@ -118,7 +147,8 @@ class Proyectos extends Controllers
     {
         if ($_POST) {
             $intId = intval($_POST["idProyecto"]);
-            $requestDelete = $this->model->disableProyecto($intId);
+            $this->model->setId($intId);
+            $requestDelete = $this->model->disableProyecto();
             if ($requestDelete === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Proyecto");
             } else {
@@ -132,7 +162,8 @@ class Proyectos extends Controllers
     {
         if ($_POST) {
             $intId = intval($_POST["idProyecto"]);
-            $requestDelete = $this->model->enableProyecto($intId);
+            $this->model->setId($intId);
+            $requestDelete = $this->model->enableProyecto();
             if ($requestDelete === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha habilitado el Proyecto");
             } else {

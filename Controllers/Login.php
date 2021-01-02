@@ -2,6 +2,8 @@
 
 class Login extends Controllers
 {
+    private $usuario;
+
     public function __construct()
     {
         session_start();
@@ -9,11 +11,14 @@ class Login extends Controllers
             header('Location: ' . base_url() . 'dashboard');
         }
         parent::__construct();
+        require_once("Models/UsuariosModel.php");
+        $this->usuario = new UsuariosModel();
+        // echo "Desde el controlador";
     }
 
     public function login()
     {
-        // echo "mensaje desde el controlador";
+        // echo "mensaje desde el metodo";
         $data["page_tag"] = "Login - Yo Contribuyo";
         $data["page_title"] = "Login";
         $data["page_name"] = "login";
@@ -29,7 +34,10 @@ class Login extends Controllers
             } else {
                 $strEmail = strtolower(strClean($_POST['txtEmail']));
                 $strPass = hash("SHA256", $_POST['txtPass']);
-                $requestUser = $this->model->loginUser($strEmail, $strPass);
+
+                $this->usuario->setEmail($strEmail);
+                $this->usuario->setPassword($strPass);
+                $requestUser = $this->usuario->loginUser();
                 // dep($requestUser);
                 if (empty($requestUser)) {
                     $arrResponse = array('status' => false, 'msg' => "El usuario o la contrasena es incorrecto");
@@ -38,7 +46,9 @@ class Login extends Controllers
                     if ($arrData['estado'] == 1) {
                         $_SESSION['idUser'] = $arrData['id_usuario'];
                         $_SESSION['login'] = true;
-                        $arrData = $this->model->sessionLogin($_SESSION['idUser']);
+
+                        $this->usuario->setId($_SESSION['idUser']);
+                        $arrData = $this->usuario->sessionLogin();
                         $_SESSION['userData'] = $arrData;
                         $arrResponse = array('status' => true, 'msg' => "ok");
                     } else {

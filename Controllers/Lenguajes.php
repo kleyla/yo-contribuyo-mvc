@@ -55,15 +55,18 @@ class Lenguajes extends Controllers
         $intIdLenguaje = intval($_POST['idLenguaje']);
         $strNombre = strClean($_POST["txtNombre"]);
         $strLink = strClean($_POST["txtLink"]);
+        $this->model->setNombre($strNombre);
+        $this->model->setLink($strLink);
 
         if ($intIdLenguaje == 0) {
             // Crear
-            $request_lenguaje = $this->model->insertLenguaje($strNombre, $strLink);
+            $request_lenguaje = $this->model->insertLenguaje();
             $option = 1;
             // echo json_encode($request_lenguaje);
         } else {
             // Update
-            $request_lenguaje = $this->model->updateLenguaje($intIdLenguaje, $strNombre, $strLink);
+            $this->model->setId($intIdLenguaje);
+            $request_lenguaje = $this->model->updateLenguaje();
             $option = 2;
         }
         // dep($_POST);
@@ -85,7 +88,8 @@ class Lenguajes extends Controllers
     {
         $intIdLenguaje = intval(strClean($id));
         if ($intIdLenguaje > 0) {
-            $arrData = $this->model->selectLenguaje($intIdLenguaje);
+            $this->model->setId($intIdLenguaje);
+            $arrData = $this->model->selectLenguaje();
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => "Datos no encontrados.");
             } else {
@@ -99,7 +103,8 @@ class Lenguajes extends Controllers
     {
         if ($_POST) {
             $intId = intval($_POST["idlenguaje"]);
-            $requestDelete = $this->model->disableLenguaje($intId);
+            $this->model->setId($intId);
+            $requestDelete = $this->model->disableLenguaje();
             if ($requestDelete === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Lenguaje");
             } else {
@@ -113,7 +118,8 @@ class Lenguajes extends Controllers
     {
         if ($_POST) {
             $intId = intval($_POST["idlenguaje"]);
-            $requestDelete = $this->model->enableLenguaje($intId);
+            $this->model->setId($intId);
+            $requestDelete = $this->model->enableLenguaje();
             if ($requestDelete === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha habilitado el Lenguaje");
             } else {

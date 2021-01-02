@@ -2,6 +2,7 @@
 
 class Comentarios extends Controllers
 {
+    private $accion;
     public function __construct()
     {
         session_start();
@@ -9,6 +10,8 @@ class Comentarios extends Controllers
             header('Location: ' . base_url() . 'login');
         }
         parent::__construct();
+        require_once("Models/AccionesModel.php");
+        $this->accion = new AccionesModel();
     }
     public function setComentario()
     {
@@ -16,7 +19,15 @@ class Comentarios extends Controllers
             $intIdProyecto = intval($_POST["idProyecto"]);
             $strComentario = strClean($_POST["txtComentario"]);
             if ($intIdProyecto != '' && $strComentario != '') {
-                $request = $this->model->insertComentario($intIdProyecto, $strComentario);
+                // ACCION
+                $this->accion->setProyectoId($intIdProyecto);
+                $this->accion->setUsuarioId($_SESSION['idUser']);
+                $accionId = $this->accion->insertAccion();
+                // COMENTARIO
+                $this->model->setAccionId($accionId);
+                $this->model->setContenido($strComentario);
+                $request = $this->model->insertComentario();
+
                 // dep($request);
                 if ($request > 0) {
                     $arrResponse = array('status' => true, 'msg' => "Datos guardados correctamente");

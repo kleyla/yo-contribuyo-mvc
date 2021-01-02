@@ -14,21 +14,35 @@ class UsuariosModel extends Mysql
     {
         parent::__construct();
     }
-
+    public function setId(int $id)
+    {
+        $this->intId = $id;
+    }
+    public function setNick(string $nick)
+    {
+        $this->strNick = $nick;
+    }
+    public function setEmail(string $email)
+    {
+        $this->strEmail = $email;
+    }
+    public function setPassword(string $pass)
+    {
+        $this->strPassword = $pass;
+    }
+    public function setRol(string $rol)
+    {
+        $this->strRol = $rol;
+    }
     public function all()
     {
         $sql = "SELECT * FROM usuarios";
         $request = $this->select_all($sql);
         return $request;
     }
-    public function insertUsuario(string $nick, string $email, string $pass, string $rol)
+    public function insertUsuario()
     {
         try {
-            $return = "";
-            $this->strNick = $nick;
-            $this->strEmail = $email;
-            $this->strPassword = $pass;
-            $this->strRol = $rol;
             $sql = "SELECT * FROM usuarios WHERE nick = '$this->strNick' OR email = '$this->strEmail'";
             $request = $this->select_all($sql);
             if (empty($request)) {
@@ -44,21 +58,15 @@ class UsuariosModel extends Mysql
             return $return = "exist";
         }
     }
-    public function selectUsuario(int $id)
+    public function selectUsuario()
     {
-        $this->intId = $id;
         $sql = "SELECT * FROM usuarios WHERE id_usuario = $this->intId";
         $request = $this->select($sql);
         return $request;
     }
-    public function updateUsuario(int $id, string $nick, string $email, string $pass, string $rol)
+    public function updateUsuario()
     {
         try {
-            $this->intId = $id;
-            $this->strNick = $nick;
-            $this->strEmail = $email;
-            $this->strPassword = $pass;
-            $this->strRol = $rol;
             $sql = "SELECT * FROM usuarios WHERE (nick = '$this->strNick' OR email = '$this->strEmail') AND id_usuario != $this->intId";
             $request = $this->select_all($sql);
             if (empty($request)) {
@@ -73,10 +81,9 @@ class UsuariosModel extends Mysql
             return  $request = "exist";
         }
     }
-    public function disableUsuario(int $id)
+    public function disableUsuario()
     {
         try {
-            $this->intId = $id;
             $sql = "UPDATE usuarios SET estado = ? WHERE id_usuario = $this->intId";
             $arrData = array(0);
             $request = $this->update($sql, $arrData);
@@ -89,10 +96,9 @@ class UsuariosModel extends Mysql
             return $request = "error";
         }
     }
-    public function enableUsuario(int $id)
+    public function enableUsuario()
     {
         try {
-            $this->intId = $id;
             $sql = "UPDATE usuarios SET estado = ? WHERE id_usuario = $this->intId";
             $arrData = array(1);
             $request = $this->update($sql, $arrData);
@@ -104,5 +110,19 @@ class UsuariosModel extends Mysql
         } catch (Exception $e) {
             return $request = "error";
         }
+    }
+    public function loginUser()
+    {
+        $sql = "SELECT id_usuario, estado FROM usuarios 
+                WHERE email = '$this->strEmail' and pass = '$this->strPassword'";
+        $request = $this->select($sql);
+        return $request;
+    }
+    public function sessionLogin()
+    {
+        $sql = "SELECT usuarios.nick, usuarios.email, usuarios.estado, usuarios.rol, usuarios.fecha FROM usuarios
+                WHERE id_usuario = $this->intId";
+        $request = $this->select($sql);
+        return $request;
     }
 }

@@ -16,7 +16,11 @@ class Denuncias extends Controllers
             $intIdArticulo = intval($_POST["idArticulo"]);
             $strRazones = strClean($_POST["txtRazones"]);
             if ($intIdArticulo != '' && $strRazones != '') {
-                $request = $this->model->insertDenuncia($intIdArticulo, $strRazones);
+                $this->model->setArticuloId($intIdArticulo);
+                $this->model->setUsuarioId($_SESSION['idUser']);
+                $this->model->setRazones($strRazones);
+
+                $request = $this->model->insertDenuncia();
                 // dep($request);
                 if ($request == 0) {
                     $arrResponse = array('status' => true, 'msg' => "Datos guardados correctamente");

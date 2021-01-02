@@ -2,6 +2,7 @@
 
 class Favoritos extends Controllers
 {
+    private $accion;
     public function __construct()
     {
         session_start();
@@ -9,6 +10,8 @@ class Favoritos extends Controllers
             header('Location: ' . base_url() . 'login');
         }
         parent::__construct();
+        require_once("Models/AccionesModel.php");
+        $this->accion = new AccionesModel();
     }
     public function favoritos()
     {
@@ -38,9 +41,26 @@ class Favoritos extends Controllers
             $intFavorito = strClean($_POST["favorito"]);
             if ($intIdProyecto != '' && $intFavorito != '') {
                 if (intval($intFavorito) == 1) {
-                    $request = $this->model->insertFavorito($intIdProyecto);
+                    // ACCION
+                    $this->accion->setUsuarioId($_SESSION['idUser']);
+                    $this->accion->setProyectoId($intIdProyecto);
+                    $accionId = $this->accion->insertAccion();
+                    // FAVORITO
+                    $this->model->setAccionId($accionId);
+                    $request = $this->model->insertFavorito();
                 } else {
-                    $request = $this->model->deleteFavorito($intIdProyecto);
+                    $accion_id = $this->model->existeFavorito($intIdProyecto);
+                    if ($accion_id > 0) {
+                        // FAVORITO
+                        $this->model->setAccionId($accion_id);
+                        $request_delete = $this->model->deleteFavorito();
+                        // ACCION
+                        $this->accion->setId($accion_id);
+                        $request_delete = $this->accion->deleteAccion();
+                        $request = $accion_id;
+                    } else {
+                        $request = 0;
+                    }
                 }
                 // dep($request);
                 if (intval($request) > 0) {

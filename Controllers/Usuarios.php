@@ -57,15 +57,20 @@ class Usuarios extends Controllers
         $strEmail = strClean($_POST["txtEmail"]);
         $strPass = strClean($_POST["txtPass"]);
         $strRol = strClean($_POST["listaRol"]);
+        $this->model->setNick($strNick);
+        $this->model->setEmail($strEmail);
+        $this->model->setPassword($strPass);
+        $this->model->setRol($strRol);
 
         if ($intIdUsuario == 0) {
             // Crear
-            $request_usuario = $this->model->insertUsuario($strNick, $strEmail, $strPass, $strRol);
+            $request_usuario = $this->model->insertUsuario();
             $option = 1;
             // echo json_encode($request_usuario);
         } else {
             // Update
-            $request_usuario = $this->model->updateUsuario($intIdUsuario, $strNick, $strEmail, $strPass, $strRol);
+            $this->model->setId($intIdUsuario);
+            $request_usuario = $this->model->updateUsuario();
             $option = 2;
         }
         // dep($_POST);
@@ -87,7 +92,8 @@ class Usuarios extends Controllers
     {
         $intIdUsuario = intval(strClean($id));
         if ($intIdUsuario > 0) {
-            $arrData = $this->model->selectUsuario($intIdUsuario);
+            $this->model->setId($id);
+            $arrData = $this->model->selectUsuario();
             if (empty($arrData)) {
                 $arrResponse = array('status' => false, 'msg' => "Datos no encontrados.");
             } else {
@@ -101,7 +107,8 @@ class Usuarios extends Controllers
     {
         if ($_POST) {
             $intIdUsuario = intval($_POST["idusuario"]);
-            $requestDelete = $this->model->disableUsuario($intIdUsuario);
+            $this->model->setId($intIdUsuario);
+            $requestDelete = $this->model->disableUsuario();
             if ($requestDelete === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el Usuario");
             } else {
@@ -115,7 +122,8 @@ class Usuarios extends Controllers
     {
         if ($_POST) {
             $intId = intval($_POST["idusuario"]);
-            $request = $this->model->enableUsuario($intId);
+            $this->model->setId($intId);
+            $request = $this->model->enableUsuario();
             if ($request === "ok") {
                 $arrResponse = array('status' => true, 'msg' => "Se ha habilitado el Usuario");
             } else {
