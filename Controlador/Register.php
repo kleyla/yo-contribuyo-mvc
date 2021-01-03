@@ -2,6 +2,7 @@
 
 class Register extends Controlador
 {
+    private $usuario;
     public function __construct()
     {
         session_start();
@@ -9,6 +10,8 @@ class Register extends Controlador
             header('Location: ' . base_url() . 'dashboard');
         }
         parent::__construct();
+        require_once("Modelo/UsuarioModelo.php");
+        $this->usuario = new UsuarioModelo();
     }
 
     public function register()
@@ -30,14 +33,20 @@ class Register extends Controlador
                 $strEmail = strtolower(strClean($_POST['txtEmail']));
                 $strNick = strClean($_POST['txtNick']);
                 $strPass = hash("SHA256", $_POST['txtPass']);
-                $requestUser = $this->model->registerUser($strEmail, $strNick, $strPass);
+                $this->usuario->setEmail($strEmail);
+                $this->usuario->setNick($strNick);
+                $this->usuario->setPassword($strPass);
+                $this->usuario->setRol("Contribuidor");
+
+                $requestUser = $this->usuario->insertUsuario();
                 // dep($requestUser);
                 if ($requestUser === "exist") {
                     $arrResponse = array('status' => false, 'msg' => "El email o nick ya existen");
                 } else if ($requestUser > 0) {
                     $_SESSION['idUser'] = $requestUser;
                     $_SESSION['login'] = true;
-                    $arrData = $this->model->sessionLogin($_SESSION['idUser']);
+                    $this->usuario->setId($_SESSION['idUser']);
+                    $arrData = $this->usuario->sessionLogin();
                     $_SESSION['userData'] = $arrData;
                     $arrResponse = array('status' => true, 'msg' => "ok");
                 } else {
