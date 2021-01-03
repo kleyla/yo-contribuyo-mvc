@@ -2,7 +2,7 @@
 // define("BASE_URL", "http://localhost/mvc-tienda/");
 const BASE_URL = "http://localhost/yo-contribuyo-mvc/";
 const LIBS = "Libraries/";
-const VIEWS = "Views/";
+const VIEWS = "Vista/";
 
 // zona horaria
 date_default_timezone_set("America/La_Paz");

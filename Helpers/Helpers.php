@@ -9,27 +9,27 @@ function media()
 }
 function headerAdmin($data = "")
 {
-    $view_header = "Views/template/header_admin.php";
+    $view_header = "Vista/template/header_admin.php";
     require_once($view_header);
 }
 function footerAdmin($data = "")
 {
-    $view_footer = "Views/template/footer_admin.php";
+    $view_footer = "Vista/template/footer_admin.php";
     require_once($view_footer);
 }
 function navAdmin($data = "")
 {
-    $view_nav = "Views/template/nav_admin.php";
+    $view_nav = "Vista/template/nav_admin.php";
     require_once($view_nav);
 }
 function headerPublic($data = "")
 {
-    $view_header = "Views/template/header_public.php";
+    $view_header = "Vista/template/header_public.php";
     require_once($view_header);
 }
 function footerPublic($data = "")
 {
-    $view_footer = "Views/template/footer_public.php";
+    $view_footer = "Vista/template/footer_public.php";
     require_once($view_footer);
 }
 
@@ -42,7 +42,7 @@ function dep($data)
 }
 function getModal(string $nameModal, $data)
 {
-    $view_modal = "Views/template/modals/{$nameModal}.php";
+    $view_modal = "Vista/template/modals/{$nameModal}.php";
     require_once($view_modal);
 }
 function strClean($strCadena)
