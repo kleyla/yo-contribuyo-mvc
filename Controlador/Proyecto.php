@@ -13,6 +13,8 @@ class Proyecto extends Controlador
         parent::__construct();
         require_once("Modelo/ProyectoLenguajeModelo.php");
         $this->proyectoLenguaje = new ProyectoLenguajeModelo();
+        require_once("Modelo/LenguajeModelo.php");
+        $this->lenguaje = new LenguajeModelo();
     }
 
     public function proyecto()
@@ -63,7 +65,7 @@ class Proyecto extends Controlador
         $data["page_title"] = "Proyectos - Formulario";
         $data["page_name"] = "proyectos";
         $data["script"] = "proyecto_nuevo.js";
-        $lenguajes = $this->model->getActiveLenguajes();
+        $lenguajes = $this->lenguaje->getActiveLenguajes();
         $data["lenguajes"] = $lenguajes;
         $data["id_proyecto"] = $id;
         // dep($lenguajes);

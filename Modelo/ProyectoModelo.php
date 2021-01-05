@@ -53,12 +53,6 @@ class ProyectoModelo extends Mysql
         $request = $this->select_all($sql);
         return $request;
     }
-    public function getActiveLenguajes()
-    {
-        $sql = "SELECT * FROM lenguajes WHERE estado = 1";
-        $request = $this->select_all($sql);
-        return $request;
-    }
     public function insertProyecto()
     {
         try {

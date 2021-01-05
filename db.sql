@@ -1,5 +1,5 @@
 
-CREATE DATABASE yo_contribuyo
+CREATE DATABASE IF NOT EXISTS yo_contribuyo
 DEFAULT CHARACTER  SET utf8;
 USE yo_contribuyo;
 CREATE TABLE usuarios (
@@ -37,7 +37,6 @@ CREATE TABLE proyecto_lenguaje (
   proyecto_id INT NOT NULL,
   lenguaje_id INT NOT NULL,
   PRIMARY KEY (proyecto_id, lenguaje_id),
-  
   FOREIGN KEY (proyecto_id) REFERENCES proyectos(id_proyecto) ON UPDATE CASCADE ON DELETE RESTRICT,
   FOREIGN KEY (lenguaje_id) REFERENCES lenguajes(id_lenguaje) ON UPDATE CASCADE ON DELETE RESTRICT
   
@@ -59,7 +58,6 @@ CREATE TABLE detalle_denuncia (
   usuario_id INT NOT NULL,
   razones VARCHAR(255) NOT NULL,
   PRIMARY KEY (articulo_id, usuario_id),
-  
   FOREIGN KEY (articulo_id) REFERENCES articulos(id_articulo) ON UPDATE CASCADE ON DELETE RESTRICT,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
 );
@@ -75,16 +73,13 @@ CREATE TABLE acciones (
   FOREIGN KEY (proyecto_id) REFERENCES proyectos(id_proyecto) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 CREATE TABLE comentarios (
-  -- id_comentario INT NOT NULL UNIQUE AUTO_INCREMENT,
   contenido TEXT CHARACTER SET utf8 NOT NULL,
   accion_id INT NOT NULL,
   PRIMARY KEY (accion_id),
   FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 CREATE TABLE favoritos (
-  -- id_calificacion INT NOT NULL UNIQUE AUTO_INCREMENT,
   accion_id INT NOT NULL,
-  -- estrellas FLOAT NOT NULL,
   PRIMARY KEY (accion_id),
   FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
 );
