@@ -46,6 +46,17 @@ class Comentario extends Controlador
     }
     public function deleteComentario()
     {
-        # code...
+        if ($_POST) {
+            $intId = intval($_POST["idAccion"]);
+            $this->accion->setId($intId);
+            $requestDelete = $this->accion->disableAccion();
+            if ($requestDelete === "ok") {
+                $arrResponse = array('status' => true, 'msg' => "Se ha eliminado el comentario");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => "Error al eliminar el comentario.");
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
     }
 }

@@ -69,3 +69,40 @@ document.addEventListener("DOMContentLoaded", function () {
     };
   }
 });
+
+function openModalDeleteComentario(id) {
+  $("#DeleteComentarioModal").modal("show");
+  document.querySelector("#idAccion").value = id;
+  deleteComentario();
+}
+function deleteComentario() {
+  var formDeleteComentario = document.querySelector("#formDeleteComentario");
+  if (formDeleteComentario) {
+    formDeleteComentario.onsubmit = function (e) {
+      e.preventDefault();
+      var idAccion = document.querySelector("#idAccion").value;
+      var request = window.XMLHttpRequest
+        ? new XMLHttpRequest()
+        : new ActiveXObject("Microsoft.XMLHTTP");
+      var ajaxUrl = base_url + "comentario/deleteComentario";
+      var strData = "idAccion=" + idAccion;
+      request.open("POST", ajaxUrl, true);
+      request.setRequestHeader(
+        "Content-type",
+        "application/x-www-form-urlencoded"
+      );
+      request.send(strData);
+      request.onreadystatechange = function () {
+        if (request.readyState == 4 && request.status == 200) {
+          var objData = JSON.parse(request.responseText);
+          if (objData.status) {
+            // alert("Eliminado!");
+            location.reload();
+          } else {
+            alert("Error!");
+          }
+        }
+      };
+    };
+  }
+}

@@ -134,7 +134,7 @@ class ProyectoModelo extends Mysql
             $sql = "SELECT lenguajes.*  FROM proyectos, lenguajes, proyecto_lenguaje WHERE id_proyecto = $this->intId AND proyecto_lenguaje.proyecto_id = proyectos.id_proyecto AND proyecto_lenguaje.lenguaje_id = lenguajes.id_lenguaje";
             $request_lenguajes = $this->select_all($sql);
             $request["lenguajes"] = $request_lenguajes;
-            $sql = "SELECT c.*, u.nick, a.fecha
+            $sql = "SELECT c.*, u.nick, u.id_usuario, a.fecha
                 FROM proyectos p, acciones a, comentarios c, usuarios u 
                 WHERE p.id_proyecto = '$this->intId' AND a.proyecto_id = p.id_proyecto AND a.usuario_id = u.id_usuario AND a.id_accion = c.accion_id AND a.estado = true";
             $request_comentarios = $this->select_all($sql);

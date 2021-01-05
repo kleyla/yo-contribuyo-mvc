@@ -1,6 +1,7 @@
 <?php
 headerPublic($data);
 getModal("modalFavorito", $data);
+getModal("modalDeleteComentario", $data);
 ?>
 
 <div class="container-md my-2 py-4">
@@ -12,11 +13,11 @@ getModal("modalFavorito", $data);
             <!-- Button trigger modal -->
             <?php if ($_SESSION['login']) { ?>
                 <?php if (intval($data['proyecto']['favorito']) > 0) { ?>
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#FavoritoModal">
                         <span class="fa fa-heart-o"></span>
                     </button>
                 <?php } else { ?>
-                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#FavoritoModal">
                         <span class="fa fa-heart-o"></span>
                     </button>
                 <?php } ?>
@@ -63,7 +64,12 @@ getModal("modalFavorito", $data);
                                     <p class="text-muted my-0"><?= $comentario['nick'] ?></p>
                                 </div>
                                 <div class="col d-flex justify-content-end">
-                                    <small class="text-muted"><?= $comentario['fecha'] ?></small>
+                                    <small class="text-muted"><?= $comentario['fecha'] ?> </small>
+                                    <?php if ($_SESSION['login'] && intval($comentario['id_usuario'])  == intval($_SESSION['idUser'])) { ?>
+                                        <button style="margin-left: 8px;" type="button" class="btn btn-sm btn-outline-danger" onclick="openModalDeleteComentario(<?= $comentario['accion_id'] ?>)">
+                                            <span class="fa fa-trash"></span>
+                                        </button>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <p class="my-0"><?= $comentario['contenido'] ?></p>
