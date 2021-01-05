@@ -5,6 +5,10 @@ class Home extends Controlador
     public function __construct()
     {
         parent::__construct();
+        require_once("Modelo/ProyectoModelo.php");
+        $this->proyecto = new ProyectoModelo();
+        require_once("Modelo/ArticuloModelo.php");
+        $this->articulo = new ArticuloModelo();
     }
 
     public function home($params)
@@ -68,7 +72,9 @@ class Home extends Controlador
             $data["page_title"] = "Ver Proyecto";
             $data["page_name"] = "proyectos";
             $data['script'] = 'acciones.js';
-            $arrData = $this->model->getProyecto($id);
+            $this->proyecto->setId($id);
+            $arrData = $this->proyecto->getProyectoHome();
+            // $arrData = $this->model->getProyecto($id);
             $data["proyecto"] = $arrData;
             // dep($data);
             $this->views->getView($this, "proyecto/verProyecto", $data);

@@ -44,4 +44,8 @@ class Comentario extends Controlador
             echo $e->getMessage();
         }
     }
+    public function deleteComentario()
+    {
+        # code...
+    }
 }
