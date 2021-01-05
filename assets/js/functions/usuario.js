@@ -25,6 +25,11 @@ document.addEventListener("DOMContentLoaded", function () {
     order: [[0, "desc"]],
   });
   // NUEVO USUARIO
+  setUsuario();
+});
+
+// $("#tableUsuarios").DataTable();
+function setUsuario(){
   var formUsuario = document.querySelector("#formUsuario");
   if (formUsuario) {
     formUsuario.onsubmit = function (e) {
@@ -58,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tableUsuarios.api().ajax.reload(function () {
               editarUsuario();
               DeleteUsuario();
-              enableUsuario();
+              habilitarUsuario();
             });
           } else {
             swal("Error", objData.msg, "error");
@@ -67,10 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     };
   }
-});
-
-// $("#tableUsuarios").DataTable();
-
+}
 function openModalUsuario() {
   console.log("open Modal Usuario");
   stylesFromUpdateToRegister();
@@ -105,7 +107,7 @@ window.addEventListener(
     console.log("LOAD");
     editarUsuario();
     DeleteUsuario();
-    enableUsuario();
+    habilitarUsuario();
     // exa();
   },
   false
@@ -240,7 +242,7 @@ function DeleteUsuario() {
                   tableUsuarios.api().ajax.reload(function () {
                     editarUsuario();
                     DeleteUsuario();
-                    enableUsuario();
+                    habilitarUsuario();
                   });
                 } else {
                   swal("Atencion!", objData.msg, "error");
@@ -254,7 +256,7 @@ function DeleteUsuario() {
   });
 }
 
-function enableUsuario() {
+function habilitarUsuario() {
   var btnEnableUsuario = document.querySelectorAll(".btnEnableUsuario");
   btnEnableUsuario.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -293,7 +295,7 @@ function enableUsuario() {
                   tableUsuarios.api().ajax.reload(function () {
                     editarUsuario();
                     DeleteUsuario();
-                    enableUsuario();
+                    habilitarUsuario();
                   });
                 } else {
                   swal("Atencion!", objData.msg, "error");
