@@ -36,7 +36,7 @@ class HomeModelo extends Mysql
             echo $e->getMessage();
         }
     }
-    public function getArticulo(int $id)
+    public function getArticulo(int $id) 
     {
         try {
             $sql = "SELECT articulos.*, usuarios.nick FROM articulos, usuarios WHERE id_articulo = $id 

@@ -16,6 +16,7 @@ class Denuncia extends Controlador
             $intIdArticulo = intval($_POST["idArticulo"]);
             $strRazones = strClean($_POST["txtRazones"]);
             if ($intIdArticulo != '' && $strRazones != '') {
+                
                 $this->model->setArticuloId($intIdArticulo);
                 $this->model->setUsuarioId($_SESSION['idUser']);
                 $this->model->setRazones($strRazones);

@@ -59,7 +59,8 @@ class Home extends Controlador
             $data["page_title"] = "Ver Articulo";
             $data["page_name"] = "articulo";
             $data['script'] = 'denuncia.js';
-            $arrData = $this->model->getArticulo($id);
+            $this->articulo->setId($id);
+            $arrData = $this->articulo->getArticuloHome();
             $data["articulo"] = $arrData;
             $this->views->getView($this, "articulo/verArticulo", $data);
         }
