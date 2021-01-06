@@ -18,8 +18,14 @@ class FavoritoModelo extends Mysql
         $idUsuario = intval($_SESSION['idUser']);
         $sql = "SELECT p.*, u.nick FROM proyectos p, acciones a, favoritos f, usuarios u
                 WHERE p.id_proyecto = a.proyecto_id AND u.id_usuario = p.usuario_id AND a.id_accion = f.accion_id AND a.usuario_id = $idUsuario";
-        $request = $this->select_all($sql);
-        return $request;
+        $arrData = $this->select_all($sql);
+        for ($i = 0; $i < count($arrData); $i++) {
+            $arrData[$i]["opciones"] = '<div class="text-center">
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
+                    </div>';
+        }
+
+        return $arrData;
     }
     public function insertFavorito()
     {

@@ -11,16 +11,10 @@ class Articulo extends Controlador
         parent::__construct();
     }
 
-    public function articulo()
+    public function articulos()
     {
         // echo "mensaje desde el controlador";
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Articulos";
-        $data["page_title"] = "Articulos - Yo contribuyo";
-        $data["page_name"] = "articulos";
-        $data["nav_articulos"] = "active";
-        $data["script"] = "articulo.js";
-        $this->views->getView($this, "articulos", $data);
+        $this->vista->index();
     }
     public function getArticulos()
     {
@@ -30,45 +24,13 @@ class Articulo extends Controlador
             $arrData = $this->model->allByUser();
         }
         // dep($arrData);
-        for ($i = 0; $i < count($arrData); $i++) {
-            if ($arrData[$i]["estado"] == 1) {
-                $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
-                $arrData[$i]["opciones"] = '<div class="text-center">
-                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
-                    </div>';
-            } else if ($arrData[$i]["estado"] == 2) {
-                $arrData[$i]["estado"] = '<span class="badge badge-info">Borrador</span>';
-                $arrData[$i]["opciones"] = '<div class="text-center">
-                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
-                    </div>';
-            } else {
-                $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
-                $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-secondary btn-sm btnShowArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
-                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-warning btn-sm btnEnableArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-unlock"></i></button>
-                    </div>';
-            }
-        }
-        // dep($arrData);
         // FORMATO JSON
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         die();
     }
     public function form($id = 0)
     {
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Articulos";
-        $data["page_title"] = "Articulos - Formulario";
-        $data["page_name"] = "articulos";
-        $data["script"] = "articulo_nuevo.js";
-        $data["id_articulo"] = $id;
-        // dep($lenguajes);
-        $this->views->getView($this, "form", $data);
+        $this->vista->form($id);
     }
     public function setArticulo()
     {

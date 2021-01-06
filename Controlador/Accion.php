@@ -10,6 +10,5 @@ class Accion extends Controlador
     {
         $strComentario = strClean($_POST["txtComentario"]);
         $request = $this->model->insertComentario($strComentario);
-        
     }
 }

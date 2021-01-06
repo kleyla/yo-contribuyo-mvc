@@ -17,16 +17,10 @@ class Proyecto extends Controlador
         $this->lenguaje = new LenguajeModelo();
     }
 
-    public function proyecto()
+    public function proyectos()
     {
         // echo "mensaje desde el controlador";
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Proyectos";
-        $data["page_title"] = "Proyectos - Yo contribuyo";
-        $data["page_name"] = "proyectos";
-        $data["nav_proyectos"] = "active";
-        $data["script"] = "proyecto.js";
-        $this->views->getView($this, "proyectos", $data);
+        $this->vista->index();
     }
     public function getProyectos()
     {
@@ -36,40 +30,13 @@ class Proyecto extends Controlador
             $arrData = $this->model->allByUser();
         }
         // dep($arrData);
-        for ($i = 0; $i < count($arrData); $i++) {
-            if ($arrData[$i]["estado"] == 1) {
-                $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
-                $arrData[$i]["opciones"] = '<div class="text-center">
-                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
-                    </div>';
-            } else {
-                $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
-                $arrData[$i]["opciones"] = '<div class="text-center">
-                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
-                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-warning btn-sm btnEnableProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
-                    </div>';
-            }
-        }
-        // dep($arrData);
         // FORMATO JSON
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);
         die();
     }
     public function form($id = 0)
     {
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Proyectos";
-        $data["page_title"] = "Proyectos - Formulario";
-        $data["page_name"] = "proyectos";
-        $data["script"] = "proyecto_nuevo.js";
-        $lenguajes = $this->lenguaje->getActiveLenguajes();
-        $data["lenguajes"] = $lenguajes;
-        $data["id_proyecto"] = $id;
-        // dep($lenguajes);
-        $this->views->getView($this, "form", $data);
+        $this->vista->form($id);
     }
     public function setProyecto()
     {

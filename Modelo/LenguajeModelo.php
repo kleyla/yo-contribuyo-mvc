@@ -28,8 +28,24 @@ class LenguajeModelo extends Mysql
     public function all()
     {
         $sql = "SELECT * FROM lenguajes";
-        $request = $this->select_all($sql);
-        return $request;
+        $arrData = $this->select_all($sql);
+        for ($i = 0; $i < count($arrData); $i++) {
+            if ($arrData[$i]["estado"] == 1) {
+                $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-danger btn-sm btnDelLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                    </div>';
+            } else {
+                $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-warning btn-sm btnEnableLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                    </div>';
+            }
+        }
+
+        return $arrData;
     }
     public function getActiveLenguajes()
     {

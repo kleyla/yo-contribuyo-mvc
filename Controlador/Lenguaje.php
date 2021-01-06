@@ -11,17 +11,11 @@ class Lenguaje extends Controlador
         parent::__construct();
     }
 
-    public function lenguaje()
+    public function lenguajes()
     {
+        // echo "mensaje desde el controlador";
         if ($_SESSION['userData']['rol'] == "Administrador") {
-            // echo "mensaje desde el controlador";
-            $data["page_id"] = 1;
-            $data["page_tag"] = "Lenguajes";
-            $data["page_title"] = "Lenguajes - Yo contribuyo";
-            $data["page_name"] = "lenguajes";
-            $data["nav_lenguajes"] = "active";
-            $data["script"] = "lenguaje.js";
-            $this->views->getView($this, "lenguajes", $data);
+            $this->vista->index();
         } else {
             header('Location: ' . base_url() . 'dashboard');
         }
@@ -29,22 +23,6 @@ class Lenguaje extends Controlador
     public function getLenguajes()
     {
         $arrData = $this->model->all();
-        // dep($arrData);
-        for ($i = 0; $i < count($arrData); $i++) {
-            if ($arrData[$i]["estado"] == 1) {
-                $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
-                $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-danger btn-sm btnDelLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
-                    </div>';
-            } else {
-                $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
-                $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-primary btn-sm btnEditLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-warning btn-sm btnEnableLenguaje" rl="' . $arrData[$i]['id_lenguaje'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
-                    </div>';
-            }
-        }
         // dep($arrData);
         // FORMATO JSON
         echo json_encode($arrData, JSON_UNESCAPED_UNICODE);

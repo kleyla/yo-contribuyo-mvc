@@ -43,15 +43,50 @@ class ProyectoModelo extends Mysql
     public function all()
     {
         $sql = "SELECT proyectos.*, usuarios.nick FROM proyectos, usuarios WHERE proyectos.usuario_id = usuarios.id_usuario";
-        $request = $this->select_all($sql);
-        return $request;
+        $arrData = $this->select_all($sql);
+        // dep($arrData);
+        for ($i = 0; $i < count($arrData); $i++) {
+            if ($arrData[$i]["estado"] == 1) {
+                $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                    </div>';
+            } else {
+                $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-warning btn-sm btnEnableProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                    </div>';
+            }
+        }
+        return $arrData;
     }
     public function allByUser()
     {
         $this->intUsuarioId = $_SESSION['idUser'];
         $sql = "SELECT proyectos.*, usuarios.nick FROM proyectos, usuarios WHERE proyectos.usuario_id = usuarios.id_usuario AND usuarios.id_usuario = $this->intUsuarioId";
-        $request = $this->select_all($sql);
-        return $request;
+        $arrData = $this->select_all($sql);
+        for ($i = 0; $i < count($arrData); $i++) {
+            if ($arrData[$i]["estado"] == 1) {
+                $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                    </div>';
+            } else {
+                $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
+                $arrData[$i]["opciones"] = '<div class="text-center">
+                        <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
+                        <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <button class="btn btn-warning btn-sm btnEnableProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                    </div>';
+            }
+        }
+        return $arrData;
     }
     public function insertProyecto()
     {
@@ -70,7 +105,7 @@ class ProyectoModelo extends Mysql
             return $return = $e->getMessage();
         }
     }
-    public function selectProyecto() 
+    public function selectProyecto()
     {
         $sql = "SELECT *  FROM proyectos WHERE id_proyecto = $this->intId";
         $request = $this->select($sql);
@@ -124,6 +159,23 @@ class ProyectoModelo extends Mysql
             }
         } catch (Exception $e) {
             return $request = "error";
+        }
+    }
+    public function getActiveProyectos()
+    {
+        try {
+            $sql = "SELECT * FROM proyectos WHERE estado = 1";
+            $request = $this->select_all($sql);
+            for ($i = 0; $i < count($request); $i++) {
+                $id = $request[$i]['id_proyecto'];
+                $sql_lenguajes = "SELECT lenguajes.*  FROM proyectos, lenguajes, proyecto_lenguaje WHERE proyectos.id_proyecto = $id AND proyecto_lenguaje.proyecto_id = proyectos.id_proyecto AND proyecto_lenguaje.lenguaje_id = lenguajes.id_lenguaje";
+                $request_lenguajes = $this->select_all($sql_lenguajes);
+                $request[$i]["lenguajes"] = $request_lenguajes;
+            }
+            // dep($request);
+            return $request;
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
     }
     public function getProyectoHome()

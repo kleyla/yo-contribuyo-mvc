@@ -13,11 +13,7 @@ class Dashboard extends Controlador
     }
     public function dashboard()
     {
-        $data["page_id"] = 2;
-        $data["page_tag"] = "Dashboard";
-        $data["page_title"] = "Dashboard - Tienda";
-        $data["page_name"] = "dashboard";
-        $data["nav_dash"] = "active";
-        $this->views->getView($this, "dashboard", $data);
+        // echo "Desde el controlador";
+        $this->vista->index();
     }
 }
