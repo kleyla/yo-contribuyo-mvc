@@ -1,5 +1,16 @@
 // alert("hi");
 document.addEventListener("DOMContentLoaded", function () {
+  setComentario();
+
+  setFavorito();
+});
+
+function openModalDeleteComentario(id) {
+  $("#DeleteComentarioModal").modal("show");
+  document.querySelector("#idAccion").value = id;
+  deleteComentario();
+}
+function setComentario() {
   var formComentario = document.querySelector("#formComentario");
   if (formComentario) {
     formComentario.onsubmit = function (e) {
@@ -34,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     };
   }
-
+}
+function setFavorito() {
   var formFavorito = document.querySelector("#formFavorito");
   if (formFavorito) {
     formFavorito.onsubmit = function (e) {
@@ -68,12 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     };
   }
-});
-
-function openModalDeleteComentario(id) {
-  $("#DeleteComentarioModal").modal("show");
-  document.querySelector("#idAccion").value = id;
-  deleteComentario();
 }
 function deleteComentario() {
   var formDeleteComentario = document.querySelector("#formDeleteComentario");

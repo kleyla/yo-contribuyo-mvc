@@ -24,11 +24,6 @@ class Home extends Controlador
         $data["articulos"] = $arrData;
         $this->views->getView($this, "home", $data);
     }
-    public function pass(string $pass)
-    {
-        $dato = hash("SHA256", $pass);
-        echo $dato;
-    }
     public function proyectos()
     {
         session_start();

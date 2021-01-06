@@ -1,5 +1,20 @@
 document.addEventListener("DOMContentLoaded", function () {
   // NUEVO ARTICULOS
+  setArticulo();
+
+  var idArticulo = document.querySelector("#idArticulo").value;
+  console.log("Actualizar", idArticulo);
+  if (idArticulo > 0) {
+    editArticulo(idArticulo);
+  } else {
+    // console.log("Nuevo");
+  }
+});
+
+function toArticulosPage() {
+  window.location.href = base_url + "articulo/";
+}
+function setArticulo() {
   var formArticulo = document.querySelector("#formArticulo");
   formArticulo.onsubmit = function (e) {
     // console.log("IN...");
@@ -45,17 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     };
   };
-  var idArticulo = document.querySelector("#idArticulo").value;
-  console.log("Actualizar", idArticulo);
-  if (idArticulo > 0) {
-    editArticulo(idArticulo);
-  } else {
-    // console.log("Nuevo");
-  }
-});
-
-function toArticulosPage() {
-  window.location.href = base_url + "articulo/";
 }
 function editArticulo(idArticulo) {
   var request = window.XMLHttpRequest

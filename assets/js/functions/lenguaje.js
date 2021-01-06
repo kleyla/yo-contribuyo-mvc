@@ -24,44 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
     order: [[0, "desc"]],
   });
   // NUEVO LENGUAJE
-  var formLenguaje = document.querySelector("#formLenguaje");
-  formLenguaje.onsubmit = function (e) {
-    // console.log("IN...");
-    e.preventDefault();
-    var intIdLenguaje = document.querySelector("#idLenguaje").value;
-    var strNombre = document.querySelector("#txtNombre").value;
-    var strLink = document.querySelector("#txtLink").value;
-    if (strNombre == "" || strLink == "") {
-      swal("Atencion", "Todos los campos son obligatorios", "error");
-      // alert("daji");
-      return false;
-    }
-    var request = window.XMLHttpRequest
-      ? new XMLHttpRequest()
-      : new ActiveXObject("Microsoft.XMLHTTP");
-    var ajaxUrl = base_url + "lenguaje/setLenguaje";
-    var formData = new FormData(formLenguaje);
-    request.open("POST", ajaxUrl, true);
-    request.send(formData);
-    // console.log(request);
-    request.onreadystatechange = function () {
-      if (request.readyState == 4 && request.status == 200) {
-        // console.log(request.responseText);
-        var objData = JSON.parse(request.responseText);
-        if (objData.status) {
-          $("#modalFormLenguaje").modal("hide");
-          formLenguaje.reset();
-          swal("Lenguaje", objData.msg, "success");
-          tableLenguajes.api().ajax.reload(function () {
-            EditarLenguaje();
-            DeleteLenguaje();
-          });
-        } else {
-          swal("Error", objData.msg, "error");
-        }
-      }
-    };
-  };
+  setLenguaje();
 });
 
 $("#tableLenguajes").DataTable();
@@ -99,13 +62,54 @@ function stylesFromRegisterToUpdateLenguaje() {
 window.addEventListener(
   "load",
   function () {
-    EditarLenguaje();
-    DeleteLenguaje();
+    editLenguaje();
+    deleteLenguaje();
     enableLenguaje();
   },
   false
 );
-function EditarLenguaje() {
+function setLenguaje() {
+  var formLenguaje = document.querySelector("#formLenguaje");
+  formLenguaje.onsubmit = function (e) {
+    // console.log("IN...");
+    e.preventDefault();
+    var intIdLenguaje = document.querySelector("#idLenguaje").value;
+    var strNombre = document.querySelector("#txtNombre").value;
+    var strLink = document.querySelector("#txtLink").value;
+    if (strNombre == "" || strLink == "") {
+      swal("Atencion", "Todos los campos son obligatorios", "error");
+      // alert("daji");
+      return false;
+    }
+    var request = window.XMLHttpRequest
+      ? new XMLHttpRequest()
+      : new ActiveXObject("Microsoft.XMLHTTP");
+    var ajaxUrl = base_url + "lenguaje/setLenguaje";
+    var formData = new FormData(formLenguaje);
+    request.open("POST", ajaxUrl, true);
+    request.send(formData);
+    // console.log(request);
+    request.onreadystatechange = function () {
+      if (request.readyState == 4 && request.status == 200) {
+        // console.log(request.responseText);
+        var objData = JSON.parse(request.responseText);
+        if (objData.status) {
+          $("#modalFormLenguaje").modal("hide");
+          formLenguaje.reset();
+          swal("Lenguaje", objData.msg, "success");
+          tableLenguajes.api().ajax.reload(function () {
+            editLenguaje();
+            deleteLenguaje();
+            enableLenguaje();
+          });
+        } else {
+          swal("Error", objData.msg, "error");
+        }
+      }
+    };
+  };
+}
+function editLenguaje() {
   var btnEditUsuario = document.querySelectorAll(".btnEditLenguaje");
   btnEditUsuario.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -125,11 +129,7 @@ function EditarLenguaje() {
           //   console.log(request.responseText);
           var objData = JSON.parse(request.responseText);
           if (objData.status) {
-            document.querySelector("#idLenguaje").value =
-              objData.data.id_lenguaje;
-            document.querySelector("#txtNombre").value = objData.data.nombre;
-            document.querySelector("#txtLink").value = objData.data.link;
-
+            updateData(objData.data);
             $("#modalFormLenguaje").modal("show");
           } else {
             swal("Error", objData.msg, "error");
@@ -139,8 +139,13 @@ function EditarLenguaje() {
     });
   });
 }
+function updateData(data) {
+  document.querySelector("#idLenguaje").value = data.id_lenguaje;
+  document.querySelector("#txtNombre").value = data.nombre;
+  document.querySelector("#txtLink").value = data.link;
+}
 
-function DeleteLenguaje() {
+function deleteLenguaje() {
   var btnDelLenguaje = document.querySelectorAll(".btnDelLenguaje");
   btnDelLenguaje.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -176,8 +181,8 @@ function DeleteLenguaje() {
                 if (objData.status) {
                   swal("Eliminar!", objData.msg, "success");
                   tableLenguajes.api().ajax.reload(function () {
-                    EditarLenguaje();
-                    DeleteLenguaje();
+                    editLenguaje();
+                    deleteLenguaje();
                     enableLenguaje();
                   });
                 } else {
@@ -227,8 +232,8 @@ function enableLenguaje() {
                 if (objData.status) {
                   swal("Habilitar!", objData.msg, "success");
                   tableLenguajes.api().ajax.reload(function () {
-                    EditarLenguaje();
-                    DeleteLenguaje();
+                    editLenguaje();
+                    deleteLenguaje();
                     enableLenguaje();
                   });
                 } else {
