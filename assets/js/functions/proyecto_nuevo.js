@@ -1,5 +1,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   // NUEVO LENGUAJE
+  setProyecto();
+
+  var idProyecto = document.querySelector("#idProyecto").value;
+  if (idProyecto > 0) {
+    console.log("Actualizar");
+    editProyecto(idProyecto);
+  } else {
+    // console.log("Nuevo");
+  }
+});
+
+function setProyecto() {
   var formProyecto = document.querySelector("#formProyecto");
   formProyecto.onsubmit = function (e) {
     // console.log("IN...");
@@ -56,15 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     };
   };
-  var idProyecto = document.querySelector("#idProyecto").value;
-  if (idProyecto > 0) {
-    console.log("Actualizar");
-    editProyecto(idProyecto);
-  } else {
-    // console.log("Nuevo");
-  }
-});
-
+}
 function editProyecto(idProyecto) {
   var request = window.XMLHttpRequest
     ? new XMLHttpRequest()

@@ -75,6 +75,7 @@ function deleteProyecto() {
                   swal("Eliminar!", objData.msg, "success");
                   tableProyectos.api().ajax.reload(function () {
                     deleteProyecto();
+                    enableProyecto();
                   });
                 } else {
                   swal("Atencion!", objData.msg, "error");

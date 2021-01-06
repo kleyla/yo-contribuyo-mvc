@@ -28,7 +28,7 @@ headerAdmin($data);
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Repositorio oficial</label>
-                                        <input class="form-control" id="txtRepositorio" name="txtRepositorio" type="text" placeholder="Link" required>
+                                        <input class="form-control" id="txtRepositorio" name="txtRepositorio" value="https://" type="text" placeholder="Link" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12 col-lg-6">

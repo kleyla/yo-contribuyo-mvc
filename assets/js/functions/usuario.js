@@ -62,7 +62,7 @@ function setUsuario(){
             swal("Usuario", objData.msg, "success");
             tableUsuarios.api().ajax.reload(function () {
               editarUsuario();
-              DeleteUsuario();
+              deleteUsuario();
               habilitarUsuario();
             });
           } else {
@@ -106,7 +106,7 @@ window.addEventListener(
   function () {
     console.log("LOAD");
     editarUsuario();
-    DeleteUsuario();
+    deleteUsuario();
     habilitarUsuario();
     // exa();
   },
@@ -205,7 +205,7 @@ function updateData(data){
   $("#modalFormUsuario").modal("show");
 }
 
-function DeleteUsuario() {
+function deleteUsuario() {
   var btnDelUsuario = document.querySelectorAll(".btnDelUsuario");
   btnDelUsuario.forEach(function (btn) {
     btn.addEventListener("click", function () {
@@ -243,7 +243,7 @@ function DeleteUsuario() {
                   swal("Eliminar!", objData.msg, "success");
                   tableUsuarios.api().ajax.reload(function () {
                     editarUsuario();
-                    DeleteUsuario();
+                    deleteUsuario();
                     habilitarUsuario();
                   });
                 } else {
@@ -296,7 +296,7 @@ function habilitarUsuario() {
                   swal("Habilitar!", objData.msg, "success");
                   tableUsuarios.api().ajax.reload(function () {
                     editarUsuario();
-                    DeleteUsuario();
+                    deleteUsuario();
                     habilitarUsuario();
                   });
                 } else {
