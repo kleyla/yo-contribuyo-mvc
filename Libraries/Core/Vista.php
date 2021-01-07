@@ -15,23 +15,22 @@ class Vista
         // $model = ucfirst(get_class($this));
         // echo $model;
         $routClass = "Modelo/" . $model . ".php";
-        // echo $routClass;
         if (file_exists($routClass)) {
+            // echo $routClass;
             require_once($routClass);
             $this->model = new $model();
         } else {
             echo "No existe el modelo";
         }
     }
-    public function getView($controller, $view, $data = "")
+    public function getView($view, $data = "")
     {
-        $controller = get_class($controller);
-        if ($controller == "Home") {
-            $view = VIEWS . $view . ".php";
-        } else {
-            $view = VIEWS . strtolower($controller) . "/" . $view . ".php";
-        }
+        $view = VIEWS . $view . ".php";
         // echo $view;
-        require_once($view);
+        if (file_exists($view)) {
+            require_once($view);
+        }else{
+            echo "No existe la vista";
+        }
     }
 }

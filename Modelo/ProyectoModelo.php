@@ -67,7 +67,7 @@ class ProyectoModelo extends Mysql
     public function allByUser()
     {
         $this->intUsuarioId = $_SESSION['idUser'];
-        $sql = "SELECT proyectos.*, usuarios.nick FROM proyectos, usuarios WHERE proyectos.usuario_id = usuarios.id_usuario AND usuarios.id_usuario = $this->intUsuarioId";
+        $sql = "SELECT proyectos.*, usuarios.nick FROM proyectos, usuarios WHERE proyectos.usuario_id = usuarios.id_usuario AND usuarios.id_usuario = '$this->intUsuarioId'";
         $arrData = $this->select_all($sql);
         for ($i = 0; $i < count($arrData); $i++) {
             if ($arrData[$i]["estado"] == 1) {

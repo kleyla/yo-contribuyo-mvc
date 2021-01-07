@@ -11,7 +11,7 @@ class DashboardVista
     {
         $data["page_id"] = 2;
         $data["page_tag"] = "Dashboard";
-        $data["page_title"] = "Dashboard - Tienda";
+        $data["page_title"] = "Dashboard - Yo contribuyo";
         $data["page_name"] = "dashboard";
         $data["nav_dash"] = "active";
         $view = VIEWS . "dashboard/dashboard.php";

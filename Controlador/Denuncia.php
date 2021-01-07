@@ -16,7 +16,7 @@ class Denuncia extends Controlador
             $intIdArticulo = intval($_POST["idArticulo"]);
             $strRazones = strClean($_POST["txtRazones"]);
             if ($intIdArticulo != '' && $strRazones != '') {
-                
+
                 $this->model->setArticuloId($intIdArticulo);
                 $this->model->setUsuarioId($_SESSION['idUser']);
                 $this->model->setRazones($strRazones);
@@ -39,5 +39,35 @@ class Denuncia extends Controlador
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+    public function verDenuncias(int $idArticulo)
+    {
+        $this->vista->verDenuncias($idArticulo);
+    }
+    public function getDenuncias(int $idArticulo)
+    {
+        if ($idArticulo > 0) {
+            $this->model->setArticuloId($idArticulo);
+            $arrResponse =  $this->model->getDenunciasByArticulo();
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
+    }
+    public function deleteDenuncia()
+    {
+        if ($_POST) {
+            $intIdArticulo = intval($_POST["idArticulo"]);
+            $intIdUsuario = intval($_POST["idUsuario"]);
+            $this->model->setArticuloId($intIdArticulo);
+            $this->model->setUsuarioId($intIdUsuario);
+            $requestDelete = $this->model->disableDenuncia();
+            if ($requestDelete === "ok") {
+                $arrResponse = array('status' => true, 'msg' => "Se ha eliminado la denuncia");
+            } else {
+                $arrResponse = array('status' => false, 'msg' => "Error al eliminar la denuncia.");
+            }
+            echo json_encode($arrResponse, JSON_UNESCAPED_UNICODE);
+        }
+        die();
     }
 }

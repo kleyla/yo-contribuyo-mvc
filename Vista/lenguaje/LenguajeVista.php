@@ -15,8 +15,6 @@ class LenguajeVista extends Vista
         $data["page_name"] = "lenguajes";
         $data["nav_lenguajes"] = "active";
         $data["script"] = "lenguaje.js";
-
-        $view = VIEWS . "lenguaje/lenguajes.php";
-        require_once($view);
+        $this->getView("lenguaje/lenguajes", $data);
     }
 }

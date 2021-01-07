@@ -15,8 +15,7 @@ class UsuarioVista extends Vista
         $data["page_name"] = "usuarios";
         $data["nav_usuarios"] = "active";
         $data["script"] = "usuario.js";
-        $view = VIEWS . "usuario/usuarios.php";
-        require_once($view);
+        $this->getView("usuario/usuarios", $data);
     }
     public function perfil()
     {
@@ -24,7 +23,6 @@ class UsuarioVista extends Vista
         $data["page_title"] = "Perfil de usuario";
         $data["page_name"] = "perfil";
         $data["script"] = "js/functions_perfil.js";
-        $view = VIEWS . "usuario/perfil.php";
-        require_once($view);
+        $this->getView("usuario/perfil", $data);
     }
 }

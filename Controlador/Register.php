@@ -16,12 +16,7 @@ class Register extends Controlador
 
     public function register()
     {
-        // echo "mensaje desde el controlador";
-        $data["page_tag"] = "Registro - Yo Contribuyo";
-        $data["page_title"] = "Registro";
-        $data["page_name"] = "registro";
-        $data["script"] = "register.js";
-        $this->views->getView($this, "register", $data);
+        $this->vista->index();
     }
     public function registerUser()
     {

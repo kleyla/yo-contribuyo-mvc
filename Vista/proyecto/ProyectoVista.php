@@ -17,9 +17,7 @@ class ProyectoVista extends Vista
         $data["page_name"] = "proyectos";
         $data["nav_proyectos"] = "active";
         $data["script"] = "proyecto.js";
-
-        $view = VIEWS . "proyecto/proyectos.php";
-        require_once($view);
+        $this->getView("proyecto/proyectos", $data);
     }
     public function form($id)
     {
@@ -27,12 +25,12 @@ class ProyectoVista extends Vista
         $data["page_tag"] = "Proyectos";
         $data["page_title"] = "Proyectos - Formulario";
         $data["page_name"] = "proyectos";
+        $data["nav_proyectos"] = "active";
         $data["script"] = "proyecto_nuevo.js";
         $lenguajes = $this->lenguaje->getActiveLenguajes();
         $data["lenguajes"] = $lenguajes;
         $data["id_proyecto"] = $id;
         // dep($lenguajes);
-        $view = VIEWS . "proyecto/form.php";
-        require_once($view);
+        $this->getView("proyecto/form", $data);
     }
 }

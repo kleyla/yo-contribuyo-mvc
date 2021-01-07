@@ -1,10 +1,9 @@
 <?php
 
-class RegisterModelo extends Mysql
+class RegisterModelo
 {
     public function __construct()
     {
-        parent::__construct();
-        // echo "mensaje desde el modelo home!";
+        // echo "mensaje desde el modelo Register!";
     }
 }

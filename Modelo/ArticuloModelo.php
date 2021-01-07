@@ -43,6 +43,7 @@ class ArticuloModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-info btn-sm" href="' . base_url() . 'denuncia/verDenuncias/' . $arrData[$i]['id_articulo'] . '"  title="Ver denuncias" ><i class="fa fa-comment"></i></a>
                         <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else if ($arrData[$i]["estado"] == 2) {
@@ -50,6 +51,7 @@ class ArticuloModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-info btn-sm" href="' . base_url() . 'denuncia/verDenuncias/' . $arrData[$i]['id_articulo'] . '"  title="Ver denuncias" ><i class="fa fa-comment"></i></a>
                         <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else {
@@ -57,6 +59,7 @@ class ArticuloModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <button class="btn btn-secondary btn-sm btnShowArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-info btn-sm" href="' . base_url() . 'denuncia/verDenuncias/' . $arrData[$i]['id_articulo'] . '" title="Ver denuncias" ><i class="fa fa-comment"></i></a>
                         <button class="btn btn-warning btn-sm btnEnableArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-unlock"></i></button>
                     </div>';
             }
@@ -74,6 +77,7 @@ class ArticuloModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-info btn-sm" href="' . base_url() . 'denuncia/verDenuncias/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver denuncias" ><i class="fa fa-comment"></i></a>
                         <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else if ($arrData[$i]["estado"] == 2) {
@@ -81,6 +85,7 @@ class ArticuloModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verArticulo/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-info btn-sm" href="' . base_url() . 'denuncia/verDenuncias/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver denuncias" ><i class="fa fa-comment"></i></a>
                         <button class="btn btn-danger btn-sm btnDelArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else {
@@ -88,6 +93,7 @@ class ArticuloModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <button class="btn btn-secondary btn-sm btnShowArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Permisos" ><i class="fa fa-eye"></i></button>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'articulo/form/' . $arrData[$i]['id_articulo'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-info btn-sm" href="' . base_url() . 'denuncia/verDenuncias/' . $arrData[$i]['id_articulo'] . '" target="_blank" title="Ver denuncias" ><i class="fa fa-comment"></i></a>
                         <button class="btn btn-warning btn-sm btnEnableArticulo" rl="' . $arrData[$i]['id_articulo'] . '" title="Eliminar" ><i class="fa fa-unlock"></i></button>
                     </div>';
             }

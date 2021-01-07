@@ -9,7 +9,6 @@ class LoginVista extends Vista
     }
     public function index($data = "")
     {
-        $view = VIEWS . "login/login.php";
-        require_once($view);
+        $this->getView("login/login", $data);
     }
 }

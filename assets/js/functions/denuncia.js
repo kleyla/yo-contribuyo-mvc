@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
+  setDenuncia();
+});
+
+function setDenuncia() {
   var formDenuncia = document.querySelector("#formDenuncia");
   if (formDenuncia) {
     formDenuncia.onsubmit = function (e) {
@@ -34,4 +38,4 @@ document.addEventListener("DOMContentLoaded", function () {
       };
     };
   }
-});
+}

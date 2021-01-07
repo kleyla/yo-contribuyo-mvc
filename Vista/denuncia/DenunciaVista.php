@@ -9,12 +9,16 @@ class DenunciaVista extends Vista
     }
     public function index()
     {
-        $data["page_id"] = 2;
-        $data["page_tag"] = "Dashboard";
-        $data["page_title"] = "Dashboard - Tienda";
-        $data["page_name"] = "dashboard";
+    }
+    public function verDenuncias(int $idArticulo)
+    {
+        $data["page_id"] = 3;
+        $data["page_tag"] = "Denuncias";
+        $data["page_title"] = "Denuncias - Yo contribuyo";
+        $data["page_name"] = "denuncias";
         $data["nav_dash"] = "active";
-        $view = VIEWS . "dashboard/dashboard.php";
-        require_once($view);
+        $data["script"] = "denuncias.js";
+        $data["id_articulo"] = $idArticulo;
+        $this->getView("denuncia/verDenuncias", $data);
     }
 }

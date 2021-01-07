@@ -15,8 +15,6 @@ class FavoritoVista extends Vista
         $data["page_name"] = "favoritos";
         $data["nav_favoritos"] = "active";
         $data["script"] = "favorito.js";
-
-        $view = VIEWS . "favorito/favoritos.php";
-        require_once($view);
+        $this->getView("favorito/favoritos", $data);
     }
 }

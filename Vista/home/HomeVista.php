@@ -20,9 +20,7 @@ class HomeVista extends Vista
         $data["proyectos"] = $arrData;
         $arrData = $this->articulo->getActiveArticulos();
         $data["articulos"] = $arrData;
-
-        $view = VIEWS . "home/home.php";
-        require_once($view);
+        $this->getView("home/home", $data);
     }
     public function proyectos()
     {
@@ -31,9 +29,7 @@ class HomeVista extends Vista
         $data["page_name"] = "proyectos";
         $arrData = $this->proyecto->getActiveProyectos();
         $data["proyectos"] = $arrData;
-
-        $view = VIEWS . "proyecto/verProyectos.php";
-        require_once($view);
+        $this->getView("proyecto/verProyectos", $data);
     }
     public function articulos()
     {
@@ -42,9 +38,7 @@ class HomeVista extends Vista
         $data["page_name"] = "articulos";
         $arrData = $this->articulo->getActiveArticulos();
         $data["articulos"] = $arrData;
-
-        $view = VIEWS . "articulo/verArticulos.php";
-        require_once($view);
+        $this->getView("articulo/verArticulos", $data);
     }
     public function verArticulo($id)
     {
@@ -55,9 +49,7 @@ class HomeVista extends Vista
         $this->articulo->setId($id);
         $arrData = $this->articulo->getArticuloHome();
         $data["articulo"] = $arrData;
-
-        $view = VIEWS . "articulo/verArticulo.php";
-        require_once($view);
+        $this->getView("articulo/verArticulo", $data);
     }
     public function verProyecto($id)
     {
@@ -69,7 +61,6 @@ class HomeVista extends Vista
         $arrData = $this->proyecto->getProyectoHome();
         $data["proyecto"] = $arrData;
         // dep($data);
-        $view = VIEWS . "proyecto/verProyecto.php";
-        require_once($view);
+        $this->getView("proyecto/verProyecto", $data);
     }
 }
