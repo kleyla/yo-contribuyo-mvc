@@ -56,6 +56,8 @@ CREATE TABLE detalle_denuncia (
   articulo_id INT NOT NULL,
   usuario_id INT NOT NULL,
   razones VARCHAR(255) NOT NULL,
+  estado TINYINT NOT NULL DEFAULT 1,
+  fecha DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (articulo_id, usuario_id),
   FOREIGN KEY (articulo_id) REFERENCES articulos(id_articulo) ON UPDATE CASCADE ON DELETE RESTRICT,
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
@@ -233,5 +235,3 @@ INSERT INTO acciones(usuario_id, proyecto_id) VALUES(2,1);
 
 INSERT INTO favoritos(accion_id) VALUES(3);
 INSERT INTO favoritos(accion_id) VALUES(4);
-
-
