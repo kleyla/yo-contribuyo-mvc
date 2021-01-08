@@ -22,9 +22,8 @@ class Login extends Controlador
         $data["page_tag"] = "Login - Yo Contribuyo";
         $data["page_title"] = "Login";
         $data["page_name"] = "login";
-        $data["script"] = "login.js";
-        // $this->views->getView($this, "login", $data);
-        $this->vista->index($data);
+        $data["script"] = "login/login.js";
+        $this->vista->getView($this, "login", $data);
     }
     public function loginUser()
     {

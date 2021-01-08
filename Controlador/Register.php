@@ -16,7 +16,11 @@ class Register extends Controlador
 
     public function register()
     {
-        $this->vista->index();
+        $data["page_tag"] = "Registro - Yo Contribuyo";
+        $data["page_title"] = "Registro";
+        $data["page_name"] = "registro";
+        $data["script"] = "register/register.js";
+        $this->vista->getView($this, "register", $data);
     }
     public function registerUser()
     {

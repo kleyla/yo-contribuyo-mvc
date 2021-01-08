@@ -51,14 +51,14 @@ class ProyectoModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProyecto(' . $arrData[$i]['id_proyecto'] . ')" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-warning btn-sm btnEnableProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                        <button class="btn btn-warning btn-sm" onclick="enableProyecto(' . $arrData[$i]['id_proyecto'] . ')" title="Habilitar" ><i class="fa fa-unlock"></i></button>
                     </div>';
             }
         }
@@ -75,14 +75,14 @@ class ProyectoModelo extends Mysql
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-danger btn-sm btnDelProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProyecto(' . $arrData[$i]['id_proyecto'] . ')" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
                         <a class="btn btn-secondary btn-sm" href="' . base_url() . 'home/verProyecto/' . $arrData[$i]['id_proyecto'] . '" target="_blank" title="Ver" ><i class="fa fa-eye"></i></a>
                         <a class="btn btn-primary btn-sm" href="' . base_url() . 'proyecto/form/' . $arrData[$i]['id_proyecto'] . '" rl="" title="Editar" ><i class="fa fa-pencil"></i></a>
-                        <button class="btn btn-warning btn-sm btnEnableProyecto" rl="' . $arrData[$i]['id_proyecto'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                        <button class="btn btn-warning btn-sm" onclick="enableProyecto(' . $arrData[$i]['id_proyecto'] . ')" title="Habilitar" ><i class="fa fa-unlock"></i></button>
                     </div>';
             }
         }

@@ -16,7 +16,13 @@ class Usuario extends Controlador
         // echo "Desde el Controlador";
         if ($_SESSION['userData']['rol'] == "Administrador") {
             // echo "Usuarios";
-            $this->vista->index();
+            $data["page_id"] = 1;
+            $data["page_tag"] = "Usuarios";
+            $data["page_title"] = "Usuarios - Yo contribuyo";
+            $data["page_name"] = "usuarios";
+            $data["nav_usuarios"] = "active";
+            $data["script"] = "usuario/UsuarioVista.js";
+            $this->vista->getView($this, "usuarios", $data);
         } else {
             header('Location: ' . base_url() . 'dashboard');
         }
@@ -29,14 +35,14 @@ class Usuario extends Controlador
             if ($arrData[$i]["estado"] == 1) {
                 $arrData[$i]["estado"] = '<span class="badge badge-success">Activo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-danger btn-sm btnDelUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Eliminar" ><i class="fa fa-trash"></i></button>
+                        <button class="btn btn-primary btn-sm" onclick="editUsuario(' . $arrData[$i]['id_usuario'] . ')" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteUsuario(' . $arrData[$i]['id_usuario'] . ')" title="Eliminar" ><i class="fa fa-trash"></i></button>
                     </div>';
             } else {
                 $arrData[$i]["estado"] = '<span class="badge badge-danger">Inactivo</span>';
                 $arrData[$i]["opciones"] = '<div class="text-center">
-                        <button class="btn btn-primary btn-sm btnEditUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Editar" ><i class="fa fa-pencil"></i></button>
-                        <button class="btn btn-warning btn-sm btnEnableUsuario" rl="' . $arrData[$i]['id_usuario'] . '" title="Habilitar" ><i class="fa fa-unlock"></i></button>
+                        <button class="btn btn-primary btn-sm" onclick="editarUsuario(' . $arrData[$i]['id_usuario'] . ')" title="Editar" ><i class="fa fa-pencil"></i></button>
+                        <button class="btn btn-warning btn-sm" onclick="enableUsuario(' . $arrData[$i]['id_usuario'] . ')" title="Habilitar" ><i class="fa fa-unlock"></i></button>
                     </div>';
             }
         }
@@ -130,7 +136,10 @@ class Usuario extends Controlador
     }
     public function perfil()
     {
-        // $this->views->getView($this, "perfil", $data);
-        $this->vista->perfil();
+        $data["page_tag"] = "Perfil";
+        $data["page_title"] = "Perfil de usuario";
+        $data["page_name"] = "perfil";
+        $data["script"] = "usuario/functions_perfil.js";
+        $this->vista->getView($this, "perfil", $data);
     }
 }

@@ -14,6 +14,11 @@ class Dashboard extends Controlador
     public function dashboard()
     {
         // echo "Desde el controlador";
-        $this->vista->index();
+        $data["page_id"] = 2;
+        $data["page_tag"] = "Dashboard";
+        $data["page_title"] = "Dashboard - Yo contribuyo";
+        $data["page_name"] = "dashboard";
+        $data["nav_dash"] = "active";
+        $this->vista->getView($this, "dashboard", $data);
     }
 }
