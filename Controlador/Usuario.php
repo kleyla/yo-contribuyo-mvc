@@ -16,13 +16,7 @@ class Usuario extends Controlador
         // echo "Desde el Controlador";
         if ($_SESSION['userData']['rol'] == "Administrador") {
             // echo "Usuarios";
-            $data["page_id"] = 1;
-            $data["page_tag"] = "Usuarios";
-            $data["page_title"] = "Usuarios - Yo contribuyo";
-            $data["page_name"] = "usuarios";
-            $data["nav_usuarios"] = "active";
-            $data["script"] = "usuario/UsuarioVista.js";
-            $this->vista->getView($this, "usuarios", $data);
+            $this->vista->index();
         } else {
             header('Location: ' . base_url() . 'dashboard');
         }
@@ -136,10 +130,6 @@ class Usuario extends Controlador
     }
     public function perfil()
     {
-        $data["page_tag"] = "Perfil";
-        $data["page_title"] = "Perfil de usuario";
-        $data["page_name"] = "perfil";
-        $data["script"] = "usuario/functions_perfil.js";
-        $this->vista->getView($this, "perfil", $data);
+        $this->vista->perfil();
     }
 }

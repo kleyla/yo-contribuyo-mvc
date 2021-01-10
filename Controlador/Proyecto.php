@@ -20,13 +20,7 @@ class Proyecto extends Controlador
     public function proyectos()
     {
         // echo "mensaje desde el controlador";
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Proyectos";
-        $data["page_title"] = "Proyectos - Yo contribuyo";
-        $data["page_name"] = "proyectos";
-        $data["nav_proyectos"] = "active";
-        $data["script"] = "proyecto/ProyectoVista.js";
-        $this->vista->getView($this, "proyectos", $data);
+        $this->vista->index();
     }
     public function getProyectos()
     {
@@ -42,17 +36,8 @@ class Proyecto extends Controlador
     }
     public function form($id = 0)
     {
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Proyectos";
-        $data["page_title"] = "Proyectos - Formulario";
-        $data["page_name"] = "proyectos";
-        $data["nav_proyectos"] = "active";
-        $data["script"] = "proyecto/ProyectoVista.js";
-        $lenguajes = $this->lenguaje->getActiveLenguajes();
-        $data["lenguajes"] = $lenguajes;
-        $data["id_proyecto"] = $id;
         // dep($lenguajes);
-        $this->vista->getView($this, "form", $data);
+        $this->vista->form($id);
     }
     public function setProyecto()
     {

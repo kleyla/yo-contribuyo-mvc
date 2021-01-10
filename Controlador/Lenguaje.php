@@ -15,13 +15,7 @@ class Lenguaje extends Controlador
     {
         // echo "mensaje desde el controlador";
         if ($_SESSION['userData']['rol'] == "Administrador") {
-            $data["page_id"] = 1;
-            $data["page_tag"] = "Lenguajes";
-            $data["page_title"] = "Lenguajes - Yo contribuyo";
-            $data["page_name"] = "lenguajes";
-            $data["nav_lenguajes"] = "active";
-            $data["script"] = "lenguaje/LenguajeVista.js";
-            $this->vista->getView($this, "lenguajes", $data);
+            $this->vista->index();
         } else {
             header('Location: ' . base_url() . 'dashboard');
         }

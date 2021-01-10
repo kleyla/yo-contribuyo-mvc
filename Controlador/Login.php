@@ -19,11 +19,7 @@ class Login extends Controlador
     public function login()
     {
         // echo "mensaje desde el metodo";
-        $data["page_tag"] = "Login - Yo Contribuyo";
-        $data["page_title"] = "Login";
-        $data["page_name"] = "login";
-        $data["script"] = "login/login.js";
-        $this->vista->getView($this, "login", $data);
+        $this->vista->index();
     }
     public function loginUser()
     {

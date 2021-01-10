@@ -14,13 +14,7 @@ class Articulo extends Controlador
     public function articulos()
     {
         // echo "mensaje desde el controlador";
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Articulos";
-        $data["page_title"] = "Articulos - Yo contribuyo";
-        $data["page_name"] = "articulos";
-        $data["nav_articulos"] = "active";
-        $data["script"] = "articulo/ArticuloVista.js";
-        $this->vista->getView($this, "articulos", $data);
+        $this->vista->index();
     }
     public function getArticulos()
     {
@@ -36,14 +30,7 @@ class Articulo extends Controlador
     }
     public function form($id = 0)
     {
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Articulos";
-        $data["page_title"] = "Articulos - Formulario";
-        $data["page_name"] = "articulos";
-        $data["nav_articulos"] = "active";
-        $data["script"] = "articulo/ArticuloVista.js";
-        $data["id_articulo"] = $id;
-        $this->vista->getView($this, "form", $data);
+        $this->vista->form($id);
     }
     public function setArticulo()
     {

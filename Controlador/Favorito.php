@@ -15,13 +15,7 @@ class Favorito extends Controlador
     }
     public function favoritos()
     {
-        $data["page_id"] = 1;
-        $data["page_tag"] = "Favoritos";
-        $data["page_title"] = "Favoritos - Yo contribuyo";
-        $data["page_name"] = "favoritos";
-        $data["nav_favoritos"] = "active";
-        $data["script"] = "favorito/FavoritoVista.js";
-        $this->vista->getView($this, "favoritos", $data);
+        $this->vista->index();
     }
     public function getFavoritos()
     {

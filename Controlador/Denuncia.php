@@ -42,14 +42,7 @@ class Denuncia extends Controlador
     }
     public function verDenuncias(int $idArticulo)
     {
-        $data["page_id"] = 3;
-        $data["page_tag"] = "Denuncias";
-        $data["page_title"] = "Denuncias - Yo contribuyo";
-        $data["page_name"] = "denuncias";
-        $data["nav_dash"] = "active";
-        $data["script"] = "denuncia/DenunciaVista.js";
-        $data["id_articulo"] = $idArticulo;
-        $this->vista->getView($this, "verDenuncias", $data);
+        $this->vista->index($idArticulo);
     }
     public function getDenuncias(int $idArticulo)
     {
