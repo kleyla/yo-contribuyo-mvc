@@ -21,7 +21,7 @@ class UsuarioVista extends Vista
     {
         $data["page_tag"] = "Perfil";
         $data["page_title"] = "Perfil de usuario";
-        $data["page_name"] = "perfil";
+        $data["page_name"] = "usuario/perfil";
         // $data["script"] = "js/functions_perfil.js";
         $this->getView("usuario/perfil", $data);
     }
