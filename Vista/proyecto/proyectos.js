@@ -103,29 +103,7 @@ function editProyecto(idProyecto) {
           //   console.log(request.responseText);
           var objData = JSON.parse(request.responseText);
           if (objData.status) {
-            document.querySelector("#idProyecto").value =
-              objData.data.id_proyecto;
-            document.querySelector("#txtNombre").value = objData.data.nombre;
-            document.querySelector("#txtDescripcion").value =
-              objData.data.descripcion;
-            document.querySelector("#txtRepositorio").value =
-              objData.data.repositorio;
-            document.querySelector("#txtTags").value = objData.data.tags;
-            // console.log(objData.data);
-
-            var arrayIdLanguajes = [];
-            objData.data.lenguajes.forEach(function (lenguaje) {
-              arrayIdLanguajes.push(lenguaje.id_lenguaje);
-            });
-
-            var checkboxLenguajes = document.querySelectorAll(
-              "input[type=checkbox]"
-            );
-            checkboxLenguajes.forEach(function (checkbox) {
-              if (arrayIdLanguajes.includes(checkbox.value)) {
-                checkbox.checked = true;
-              }
-            });
+            updateData(objData.data);
           } else {
             swal("Error", objData.msg, "error");
           }
@@ -133,6 +111,26 @@ function editProyecto(idProyecto) {
       };
     }
   }
+}
+function updateData(data) {
+  document.querySelector("#idProyecto").value = data.id_proyecto;
+  document.querySelector("#txtNombre").value = data.nombre;
+  document.querySelector("#txtDescripcion").value = data.descripcion;
+  document.querySelector("#txtRepositorio").value = data.repositorio;
+  document.querySelector("#txtTags").value = data.tags;
+  // console.log(data);
+
+  var arrayIdLanguajes = [];
+  data.lenguajes.forEach(function (lenguaje) {
+    arrayIdLanguajes.push(lenguaje.id_lenguaje);
+  });
+
+  var checkboxLenguajes = document.querySelectorAll("input[type=checkbox]");
+  checkboxLenguajes.forEach(function (checkbox) {
+    if (arrayIdLanguajes.includes(checkbox.value)) {
+      checkbox.checked = true;
+    }
+  });
 }
 function deleteProyecto(id) {
   var idProyecto = id;
