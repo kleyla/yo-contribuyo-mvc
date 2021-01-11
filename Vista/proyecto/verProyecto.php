@@ -11,7 +11,7 @@ getModal("modalDeleteComentario", $data);
         </div>
         <div class="col">
             <!-- Button trigger modal -->
-            <?php if ($_SESSION['login']) { ?>
+            <?php if (array_key_exists("login", $_SESSION)) { ?>
                 <?php if (intval($data['proyecto']['favorito']) > 0) { ?>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#FavoritoModal">
                         <span class="fa fa-heart-o"></span>
@@ -79,7 +79,7 @@ getModal("modalDeleteComentario", $data);
             </div>
         <?php } ?>
     </div>
-    <?php if ($_SESSION['login']) { ?>
+    <?php if (array_key_exists("login", $_SESSION)) { ?>
         <form action="" id="formComentario" name="formComentario">
             <div class="row my-3">
                 <div class="col-lg-1 col-sm-3 d-flex flex-column justify-content-center align-items-center">
