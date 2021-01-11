@@ -5,11 +5,7 @@ headerAdmin($data);
 <main class="app-content">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-users"></i> <?php echo $data["page_title"]; ?>
-                <a class="btn btn-primary" type="button" href="<?= base_url(); ?>articulo/form">
-                    <i class="fa fa-plus"></i>
-                    Nuevo</a>
-            </h1>
+            <h1><i class="fa fa-users"></i> <?php echo $data["page_title"]; ?></h1>
         </div>
         <ul class="app-breadcrumb breadcrumb">
             <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>

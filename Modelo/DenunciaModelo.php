@@ -27,10 +27,10 @@ class DenunciaModelo extends Mysql
     public function insertDenuncia()
     {
         try {
-            $sql = "SELECT * FROM detalle_denuncia WHERE articulo_id = '$this->intArticuloId' AND usuario_id = '$this->intUsuarioId'";
+            $sql = "SELECT * FROM denuncias WHERE articulo_id = '$this->intArticuloId' AND usuario_id = '$this->intUsuarioId'";
             $request = $this->select_all($sql);
             if (empty($request)) {
-                $query_insert = "INSERT INTO detalle_denuncia(articulo_id, usuario_id, razones) VALUES (?,?,?)";
+                $query_insert = "INSERT INTO denuncias(articulo_id, usuario_id, razones) VALUES (?,?,?)";
                 $arrData = array($this->intArticuloId, $this->intUsuarioId, $this->strRazones);
                 $request = $this->insert($query_insert, $arrData);
                 return $request;
@@ -45,7 +45,7 @@ class DenunciaModelo extends Mysql
     public function getDenunciasByArticulo()
     {
         try {
-            $sql = "SELECT d.*, u.nick FROM detalle_denuncia d, usuarios u 
+            $sql = "SELECT d.*, u.nick FROM denuncias d, usuarios u 
                 WHERE d.articulo_id = '$this->intArticuloId' AND d.usuario_id = u.id_usuario AND d.estado = 1";
             $arrData = $this->select_all($sql);
             for ($i = 0; $i < count($arrData); $i++) {
@@ -62,7 +62,7 @@ class DenunciaModelo extends Mysql
     public function disableDenuncia()
     {
         try {
-            $sql = "UPDATE detalle_denuncia SET estado = ? 
+            $sql = "UPDATE denuncias SET estado = ? 
                 WHERE articulo_id = '$this->intArticuloId' AND usuario_id = '$this->intUsuarioId'";
             $arrData = array(0);
             $request = $this->update($sql, $arrData);

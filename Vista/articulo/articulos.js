@@ -206,11 +206,3 @@ document.addEventListener("DOMContentLoaded", function () {
   setArticulo();
   editArticulo();
 });
-
-function deleteArticulo(id) {
-  deleteArticulo(id);
-}
-function enableArticulo(id) {
-  console.log("Enable");
-  enableArticulo(id);
-}
