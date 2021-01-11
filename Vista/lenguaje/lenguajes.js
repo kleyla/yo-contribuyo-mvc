@@ -76,15 +76,18 @@ function editLenguaje(id) {
       //   console.log(request.responseText);
       var objData = JSON.parse(request.responseText);
       if (objData.status) {
-        document.querySelector("#idLenguaje").value = objData.data.id_lenguaje;
-        document.querySelector("#txtNombre").value = objData.data.nombre;
-        document.querySelector("#txtLink").value = objData.data.link;
+        updateData(objData.data);
         $("#modalFormLenguaje").modal("show");
       } else {
         swal("Error", objData.msg, "error");
       }
     }
   };
+}
+function updateData(data) {
+  document.querySelector("#idLenguaje").value = data.id_lenguaje;
+  document.querySelector("#txtNombre").value = data.nombre;
+  document.querySelector("#txtLink").value = data.link;
 }
 function deleteLenguaje(id) {
   var idLenguaje = id;

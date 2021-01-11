@@ -80,26 +80,29 @@ function editUsuario(id) {
       //   console.log(request.responseText);
       var objData = JSON.parse(request.responseText);
       if (objData.status) {
-        document.querySelector("#idUsuario").value = objData.data.id_usuario;
-        document.querySelector("#txtNick").value = objData.data.nick;
-        document.querySelector("#txtEmail").value = objData.data.email;
-        if (objData.data.rol == "Administrador") {
-          var optionSelect =
-            '<option value="Administrador" selected class="notBlock">Administrador</option>';
-        } else {
-          var optionSelect =
-            '<option value="Contribuidor" selected class="notBlock">Contribuidor</option>';
-        }
-        var htmlSelect = `${optionSelect}
-                        <option value="Administrador">Administrador</option>
-                        <option value="Contribuidor">Contribuidor</option>`;
-        document.querySelector("#listaRol").innerHTML = htmlSelect;
+        updateData(objData.data);
         $("#modalFormUsuario").modal("show");
       } else {
         swal("Error", objData.msg, "error");
       }
     }
   };
+}
+function updateData(data) {
+  document.querySelector("#idUsuario").value = data.id_usuario;
+  document.querySelector("#txtNick").value = data.nick;
+  document.querySelector("#txtEmail").value = data.email;
+  if (data.rol == "Administrador") {
+    var optionSelect =
+      '<option value="Administrador" selected class="notBlock">Administrador</option>';
+  } else {
+    var optionSelect =
+      '<option value="Contribuidor" selected class="notBlock">Contribuidor</option>';
+  }
+  var htmlSelect = `${optionSelect}
+                        <option value="Administrador">Administrador</option>
+                        <option value="Contribuidor">Contribuidor</option>`;
+  document.querySelector("#listaRol").innerHTML = htmlSelect;
 }
 function deleteUsuario(id) {
   var idUsuario = id;
