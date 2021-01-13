@@ -1,6 +1,6 @@
 <?php
 
-class UsuarioModelo extends Mysql
+class UsuarioModelo extends Conexion
 {
     private $intId;
     private $strNick;

@@ -1,6 +1,6 @@
 <?php
 
-class DenunciaModelo extends Mysql
+class DenunciaModelo extends Conexion
 {
     private $strRazones;
     private $intUsuarioId;

@@ -1,6 +1,6 @@
 <?php
 
-class AccionModelo extends Mysql
+class AccionModelo extends Conexion
 {
     private $intId;
     private $intUsuarioId;

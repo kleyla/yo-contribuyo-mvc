@@ -1,6 +1,6 @@
 <?php
 
-class LoginModelo extends Mysql
+class LoginModelo extends Conexion
 {
     public function __construct()
     {

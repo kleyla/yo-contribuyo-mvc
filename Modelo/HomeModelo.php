@@ -1,6 +1,6 @@
 <?php
 
-class HomeModelo extends Mysql
+class HomeModelo extends Conexion
 {
     public function __construct()
     {

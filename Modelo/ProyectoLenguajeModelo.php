@@ -1,6 +1,6 @@
 <?php
 
-class ProyectoLenguajeModelo extends Mysql
+class ProyectoLenguajeModelo extends Conexion
 {
     private $intProyectoId;
     private $intLenguajeId;

@@ -1,6 +1,6 @@
 <?php
 
-class FavoritoModelo extends Mysql
+class FavoritoModelo extends Conexion
 {
     private $intAccionId;
 
