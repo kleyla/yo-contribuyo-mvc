@@ -9,9 +9,10 @@ class Vista
     }
     public function loadModel()
     {
+        // echo get_class($this);
         $dato = explode('Vista', get_class($this));
-        // echo $dato[0];
-        if ($dato != "Dashboard") {
+        // echo "-" . $dato[0] . "-";
+        if ($dato != "Dashboard" && $dato != "Errors") {
             $model = $dato[0] . "Modelo";
             // $model = ucfirst(get_class($this));
             // echo $model;

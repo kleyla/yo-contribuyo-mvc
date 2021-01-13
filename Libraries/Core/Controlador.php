@@ -12,7 +12,7 @@ class Controlador
         // HomeMode.php
         $controlador = get_class($this);
         // echo $controlador;
-        if ($controlador != "Dashboard" && $controlador != "Register") {
+        if ($controlador != "Dashboard" && $controlador != "Register" && $controlador != "Errors") {
             $model = get_class($this) . "Modelo";
             // $model = ucfirst(get_class($this));
             // echo $model;
