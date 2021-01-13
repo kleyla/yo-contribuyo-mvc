@@ -41,8 +41,8 @@ class Favorito extends Controlador
                     $accion_id = $this->model->existeFavorito($intIdProyecto);
                     if ($accion_id > 0) {
                         // FAVORITO
-                        $this->model->setAccionId($accion_id);
-                        $request_delete = $this->model->deleteFavorito();
+                        // $this->model->setAccionId($accion_id);
+                        // $request_delete = $this->model->deleteFavorito(); 
                         // ACCION
                         $this->accion->setId($accion_id);
                         $request_delete = $this->accion->deleteAccion();

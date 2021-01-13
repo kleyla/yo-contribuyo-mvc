@@ -1,4 +1,3 @@
-
 CREATE DATABASE IF NOT EXISTS yo_contribuyo
 DEFAULT CHARACTER  SET utf8;
 USE yo_contribuyo;
@@ -12,7 +11,6 @@ CREATE TABLE usuarios (
   fecha DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (id_usuario)
 );
-
 CREATE TABLE proyectos (
   id_proyecto INT NOT NULL UNIQUE AUTO_INCREMENT,
   usuario_id INT NOT NULL,
@@ -23,7 +21,7 @@ CREATE TABLE proyectos (
   estado TINYINT NOT NULL DEFAULT 1,
   fecha DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (id_proyecto),
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE lenguajes (
   id_lenguaje INT NOT NULL UNIQUE AUTO_INCREMENT,
@@ -37,10 +35,9 @@ CREATE TABLE proyecto_lenguaje (
   proyecto_id INT NOT NULL,
   lenguaje_id INT NOT NULL,
   PRIMARY KEY (proyecto_id, lenguaje_id),
-  FOREIGN KEY (proyecto_id) REFERENCES proyectos(id_proyecto) ON UPDATE CASCADE ON DELETE RESTRICT,
-  FOREIGN KEY (lenguaje_id) REFERENCES lenguajes(id_lenguaje) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (proyecto_id) REFERENCES proyectos(id_proyecto) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (lenguaje_id) REFERENCES lenguajes(id_lenguaje) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
 CREATE TABLE articulos (
   id_articulo INT NOT NULL UNIQUE AUTO_INCREMENT,
   usuario_id INT NOT NULL,
@@ -49,9 +46,8 @@ CREATE TABLE articulos (
   estado TINYINT NOT NULL DEFAULT 1,
   fecha DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (id_articulo),
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
 CREATE TABLE denuncias (
   articulo_id INT NOT NULL,
   usuario_id INT NOT NULL,
@@ -59,10 +55,9 @@ CREATE TABLE denuncias (
   estado TINYINT NOT NULL DEFAULT 1,
   fecha DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (articulo_id, usuario_id),
-  FOREIGN KEY (articulo_id) REFERENCES articulos(id_articulo) ON UPDATE CASCADE ON DELETE RESTRICT,
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (articulo_id) REFERENCES articulos(id_articulo) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE
 );
-
 CREATE TABLE acciones (
   id_accion INT NOT NULL UNIQUE AUTO_INCREMENT,
   usuario_id INT NOT NULL,
@@ -70,22 +65,22 @@ CREATE TABLE acciones (
   estado TINYINT NOT NULL DEFAULT 1,
   fecha DATETIME NOT NULL DEFAULT now(),
   PRIMARY KEY (id_accion),
-  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE RESTRICT,
-  FOREIGN KEY (proyecto_id) REFERENCES proyectos(id_proyecto) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id_usuario) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (proyecto_id) REFERENCES proyectos(id_proyecto) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE comentarios (
   contenido TEXT CHARACTER SET utf8 NOT NULL,
   accion_id INT NOT NULL,
   PRIMARY KEY (accion_id),
-  FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE CASCADE
 );
 CREATE TABLE favoritos (
   accion_id INT NOT NULL,
   PRIMARY KEY (accion_id),
-  FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE RESTRICT
+  FOREIGN KEY (accion_id) REFERENCES acciones(id_accion) ON UPDATE CASCADE ON DELETE CASCADE
 );
--- DATA
 
+-- DATA
 -- USUARIOS
 INSERT INTO usuarios(nick, email, pass, rol) VALUES ('leyla','leyla@live.com','96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', 'Administrador');
 INSERT INTO usuarios(nick, email, pass, rol) VALUES ('Noemy','noe@live.com','96cae35ce8a9b0244178bf28e4966c2ce1b8385723a96a6b838858cdd6ca0a1e', 'Administrador');
