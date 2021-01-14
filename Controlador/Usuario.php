@@ -11,7 +11,7 @@ class Usuario extends Controlador
         }
         parent::__construct();
     }
-    public function usuarios()
+    public function index()
     {
         // echo "Desde el Controlador";
         if ($_SESSION['userData']['rol'] == "Administrador") {

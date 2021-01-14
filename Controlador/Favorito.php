@@ -13,7 +13,7 @@ class Favorito extends Controlador
         require_once("Modelo/AccionModelo.php");
         $this->accion = new AccionModelo();
     }
-    public function favoritos()
+    public function index()
     {
         $this->vista->index();
     }

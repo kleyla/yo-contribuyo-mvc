@@ -11,7 +11,7 @@ class Articulo extends Controlador
         parent::__construct();
     }
 
-    public function articulos()
+    public function index()
     {
         // echo "mensaje desde el controlador";
         $this->vista->index();

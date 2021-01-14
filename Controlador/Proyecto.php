@@ -17,7 +17,7 @@ class Proyecto extends Controlador
         $this->lenguaje = new LenguajeModelo();
     }
 
-    public function proyectos()
+    public function index()
     {
         // echo "mensaje desde el controlador";
         $this->vista->index();

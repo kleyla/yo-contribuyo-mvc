@@ -11,7 +11,7 @@ class Lenguaje extends Controlador
         parent::__construct();
     }
 
-    public function lenguajes()
+    public function index()
     {
         // echo "mensaje desde el controlador";
         if ($_SESSION['userData']['rol'] == "Administrador") {
